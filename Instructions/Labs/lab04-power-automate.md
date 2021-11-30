@@ -1,519 +1,519 @@
 ---
-lab:
-    title: 'Lab 04: Power Automate'
-    module: 'Module 04: Power Automate'
+Лабораторный практикум:
+ заголовок: 'Лабораторная работа 04: Power Automate'
+ модуль: 'Модуль 04: Power Automate'
 ---
 
-> [!NOTE]
-> Effective November 2020:
-> - Common Data Service has been renamed to Microsoft Dataverse. [Learn more](https://aka.ms/PAuAppBlog)
-> - Some terminology in Microsoft Dataverse has been updated. For example, *entity* is now *table* and *field* is now *column*. [Learn more](https://go.microsoft.com/fwlink/?linkid=2147247)
+> [!ПРИМЕЧАНИЕ]
+> С ноября 2020 г .:
+> - Common Data Service переименована в Microsoft Dataverse. [Подробнее…](https://aka.ms/PAuAppBlog)
+> - Обновлена некоторая терминология в Microsoft Dataverse. Например, *entity/объект* теперь *table/таблица*, а *field/поле* теперь *column/столбец*. [Подробнее…](https://go.microsoft.com/fwlink/?linkid=2147247)
 >
 
 
-# Lab 04: Power Automate
+# Лабораторная работа 04: Power Automate
 
-In this lab, you will create Power Automate cloud flows to automate various parts of the Company 311 solution.
+В этой лабораторной работе вы создадите облачные потоки Power Automate для автоматизации различных частей решения Компании 311.
 
-The following have been identified as requirements you must implement to complete the project: 
+Следующее было определено как требования, которые вы должны выполнить для завершения проекта: 
 
-  - Escalation, approval, and execution process for urgent maintenance issues 
+ - Процесс эскалации, утверждения и исполнения для срочных вопросов обслуживания 
 
-  - Notify reporting user about the issue status changes 
+ - Уведомление сообщающего пользователя об изменении статуса проблемы 
 
-  - How to use a business rule to implement logic.
+ - Как использовать бизнес-правило для реализации логики.
 
-## What you will learn
+## Что вы узнаете
 
-  - How to design data columns (in the data model) to support automation 
+ - Как спроектировать столбцы данных (в модели данных) для поддержки автоматизации 
 
-  - How to build a flow using Microsoft Dataverse Connector
+ - Как построить поток с помощью Microsoft Dataverse Connector
 
-  - How to use approvals 
+ - Как пользоваться разрешениями 
 
-## High-level lab steps
+## Лабораторные этапы высокого уровня
 
-  - Add columns to support escalation 
-  - Build flow to approve escalation  
-  - Build flow to notify user of status change
-  - Build approval as an adaptive card in Microsoft Teams 
+ - Добавьте столбцы для поддержки эскалации 
+ - Создайте поток для утверждения эскалации 
+ - Постройте поток для уведомления пользователя об изменении статуса
+ - Утверждение сборки в виде адаптивной карты в Microsoft Teams. 
 
-## Prerequisites
+## Предварительные требования
 
-* Must have completed **Lab 02.1: Data model and model-driven app**
-* Must have completed **Lab 02.2: Business Process Flows and Business Rules**
+* Должно быть выполнено **Лабораторная работа 02.1: Модель данных и приложение на основе модели**
+* Необходимо пройти **Лабораторная работа 02.2: Потоки бизнес-процессов и бизнес-правила**
 
-## Things to consider before you begin
+## Что следует учесть перед началом
 
-  - What is the most efficient way to identify urgent maintenance issues and escalate them
+ - Каков наиболее эффективный способ выявления срочных проблем с техническим обслуживанием и их эскалацией?
 
-## Detailed steps  
+## Подробные шаги 
 
-### Exercise 1: Build notify flow
+### Упражнение 1. Создание потока уведомлений
 
-In this exercise, you create a flow that will notify the creator of a problem when the status changes.
+В этом упражнении вы создадите поток, который будет уведомлять создателя о проблеме при изменении статуса.
 
-#### Task 1: Create flow
+#### Задача 1: Создание поток
 
-In this task, you will create a flow that send notification when the status of problem report row changes.
+В этой задаче вы создадите поток, который будет отправлять уведомление при изменении статуса строки отчета о проблеме.
 
-1.  Navigate to the [Power Apps maker portal](https://make.powerapps.com/) and make sure you are in the correct environment.
+1. Перейдите на [портал разработчика Power Apps](https://make.powerapps.com/) и убедитесь, что вы находитесь в правильной среде.
 
-2.  Select **Solutions** and click to open the **Company 311** solution.
+2. Выберите **Решения** и щелкните, чтобы открыть решение **Компания 311**.
 
-3.  Click **+ New** and select **Cloud Flow**.
+3. Нажмите **+ Создать** и выберите **Облачный Поток**.
 
-![A screenshot with an arrow pointing to the + New button with a red border around the Cloud Flow link](04/media/image1.png)
+![Снимок экрана со стрелкой, указывающей на кнопку + Создать, с красной рамкой вокруг ссылки Облачный Поток](04/media/image1.png)
 
-4.  Select **Microsoft Dataverse** connector. If **Microsoft Dataverse** connector is not visible, select **Connectors** tab then select **Microsoft Dataverse**.
+4. Выберите коннектор **Microsoft Dataverse**. Если соединитель **Microsoft Dataverse** не отображается, выберите вкладку **Коннекторы**, затем выберите **Microsoft Dataverse**.
 
-5.  Select **When a row is added, modified or deleted**.
+5. Выберите **При добавлении, изменении или удалении строки**.
 
-![A screenshot of a border around the when a row is added, modified, or deleted option](04/media/image2.png)
+![Снимок экрана с рамкой вокруг параметра добавления, изменения или удаления строки](04/media/image2.png)
 
-6.  Select **Modified** for **Change type**, select **Problem Reports** for **Table name**, **Organization** for **Scope** and click **Show advanced options**.
+6. Выберите **Изменено** для **Тип изменения**, выберите **Отчеты о проблемах** для **Имя таблицы**, **Организация** для **Объем** и нажмите **Показать дополнительные параметры**.
 
-7.  Enter **statuscode** for **Select columns** and **… Menu** button of the trigger step.
+7. Введите **код состояния** для **Выбрать столбцы** и кнопку **… меню** шага триггера.
 
-![A Screenshot with an arrow pointing to the ellipses icon for more options and a border around the select columns statuscode](04/media/image3.png)
+![Снимок экрана со стрелкой, указывающей на значок эллипса для дополнительных параметров и рамкой вокруг кода состояния для выбранных столбцов](04/media/image3.png)
 
-8.  Select **Rename**.
+8. Выберите **Переименовать**.
 
-9.  Rename the trigger step **When problem report status changes**.
+9. Переименуйте шаг триггера **При изменении статуса отчета о проблеме**.
 
-10.  Click **+ New step**.
+10. Нажмите **+ Новый шаг**.
 
-![A Screenshot with an arrow pointing to the add new step button](04/media/image4.png)
+![Снимок экрана со стрелкой, указывающей на кнопку добавления нового шага](04/media/image4.png)
 
-11. Select **Connectors** tab and then select **Microsoft Dataverse**. Select **Get a Row by ID**.
+11. Выберите вкладку **Коннекторы**, а затем выберите **Microsoft Dataverse**. Выберите **Получить строку по идентификатору**.
 
-12. Select **Users** for **Table name**.
+12. Выберите **Пользователи** для **Имя таблицы**.
 
-13. Click on the **Row ID** field, go to the Dynamic pane, search for **created** and click once on **Created By (Value)** to add it.
+13. Щелкните поле **ID Ряда**, перейдите на динамическую панель, найдите **Создано** и один раз щелкните **Создано (Значение)**, чтобы добавить его.
 
-14. Click **Show advanced options** of the new step.
+14. Щелкните **Показать дополнительные параметры** нового шага.
 
-15. Enter **internalemailaddress** for **Select columns**.
+15. Введите **internalemailaddress** для **Выбор столбца**.
 
-16. Click on the **… Menu** button of the new step and select **Rename**.
+16. Нажмите кнопку **… Меню** нового шага и выберите **Переименовать**.
 
-17. Rename the step **Get problem creator**.
+17. Переименуйте шаг **Получить создателя задачи**.
 
-18. Click **+ New step**.
+18. Нажмите **+ Новый шаг**.
 
-19. Search for **send email** and select **Send an email (V2).**
+19. Найдите **Отправить электронное письмо** и выберите **Отправить электронное письмо (V2).**
 
-20. Click to select the **To** Column and click **Switch to advanced mode**. Click on this button toggles show/hide of the dynamic pane.
+20. Щелкните, чтобы выбрать столбец **Кому**, а затем щелкните **Перейти в расширенный режим**. Нажатие на эту кнопку переключает отображение / скрытие динамической панели.
 
-![A Screenshot with an arrow pointing to the switch to advanced mode icon](04/media/image5.png)
+![Снимок экрана со стрелкой, указывающей на значок переключения в расширенный режим](04/media/image5.png)
 
-21. Select the **Primary Email** Column from the **Get problem creator** step.
+21. Выберите столбец **Основной адрес электронной почты** на шаге **Получить создателя проблемы**.
 
-22. Enter **Problem report status change notification** for **Subject**.
+22. Введите **Уведомление об изменении статуса отчета о проблеме** для **Тема**.
 
-23. Click to select the **Body** Column.
+23. Щелкните, чтобы выбрать столбец **Body**.
 
-24. Type **The status of the problem you reported has changed.** and press the **[ENTER]** key.
+24. Введите **Статус проблемы, о которой вы сообщили, изменился.** и нажмите клавишу **[ENTER]**.
 
-25. Type **Problem Title:** go to the Dynamic pane, search for **title** and select **Title**.
+25. Введите **Заголовок проблемы:** перейдите на динамическую панель, найдите **заголовок** и выберите **Заголовок**.
 
-26. Press the **[ENTER]** key.
+26. Нажмите клавишу **[ENTER]**.
 
-27. Type **Current Status:** go to the Dynamic pane, select the **Expression** tab, paste the expression below, and click **OK**. This expression will show the label of the choice instead of the value.
+27. Введите **Текущее состояние:** перейдите на панель «Динамическая», выберите вкладку **Выражение**, вставьте выражение ниже и нажмите **ОК**. Это выражение покажет метку выбора вместо значения.
 
 `triggerOutputs()?['body/_statuscode_label']`
 
-![A Screenshot with an arrow pointing to the ok button under the expression tab with the relevant expression pasted into it](04/media/image6.png)
+![Снимок экрана со стрелкой, указывающей на кнопку ОК под вкладкой выражения, в которую вставлено соответствующее выражение](04/media/image6.png)
 
-28. Click on the **… Menu** button of the new step and select **Rename**.
+28. Нажмите кнопку **… Меню** нового шага и выберите **Переименовать**.
 
-29. Rename the **Notify problem creator**.
+29. Переименуйте **Уведомить создателя проблемы**.
 
-30. The step should now look like the image below.
+30. Шаг должен теперь выглядеть как на изображении ниже.
 
-![A screenshot of the modify problem creator window being to primary email, the subject being problem report status change notification, and the body being "The status of the problem you reported has changed" with the problem title and current status as trigger outputs below that](04/media/image7.png)
+![Снимок экрана окна изменения проблемы, относящейся к основному электронному письму, тема - уведомление об изменении статуса отчета о проблеме, а наполнение - «Статус проблемы, о которой вы сообщили, изменился» с названием проблемы и текущим статусом в качестве выходных данных триггера ниже](04/media/image7.png)
 
-31. Scroll up change the flow name from Untitled to **Notify Problem Creator.**
+31. Прокрутите вверх и измените имя потока с Без названия на **Уведомить создателя проблемы**.
 
-32. Click **Save** and wait for the flow to be saved.
+32. Нажмите **Сохранить** и дождитесь сохранения потока.
 
-![A screenshot of the current flow](04/media/image8.png)
+![Скриншот текущего потока](04/media/image8.png)
 
-33. **Close** the flow designer browser window or tab.
+33. **Закройте** окно или вкладку браузера дизайнера потока.
 
-34. Click **Done** on the popup window.
+34. Нажмите **Готово** во всплывающем окне.
 
-#### Task 2: Test the flow
+#### Задача 2: Тестировка потока
 
-In this task, you will test the notify problem creator flow.
+В этой задаче вы протестируете поток уведомления создателя проблемы.
 
-1.  Make sure you are still on the [Power Apps maker portal](https://make.powerapps.com/) site and you are in the correct environment.
+1. Убедитесь, что вы по-прежнему находитесь на сайте [портал разработчиков Power Apps](https://make.powerapps.com/) и находитесь в правильной среде.
 
-2.  Select **Apps**, and then select the **Company 311 Admin** Model-driven application. Click **Play**.
+2. Выберите **Приложения**, а затем выберите приложение **Администратор компании 311** на основе модели. Нажмите **Играть**.
 
-3.  Click **+ New**.
+3. Нажмите **+ Создать**.
 
-4.  Enter **Flow test** for **Title**, select **London Paddington** for **building**, enter **This is a flow test** for **Details**, and click **Save**.
+4. Введите **Тест потока** для **Заголовка**, выберите **Лондонский Паддингтон** для **Здание**, введите **Это тест потока** для **Деталей** и нажмите **Сохранить**.
 
-5.  Scroll down and change the **Status Reason** value to **In Progress** and save again.
+5. Прокрутите вниз и измените значение **Причина состояния** на **Выполняется** и снова сохраните.
 
-6.  Close the application browser window or tab.
+6. Закройте окно или вкладку браузера приложения.
 
-7.  You should now be back to the [Power Apps maker portal](https://make.powerapps.com/)
+7. Теперь вы должны вернуться на [портал разработчиков Power Apps](https://make.powerapps.com/)
 
-8.  Select **Solutions** and click to open the **Company 311** solution.
+8. Выберите **Решения** и щелкните, чтобы открыть решение **Компания 311**.
 
-9.  Locate and click to open the **Notify Problem Creator** flow you created.
+9. Найдите и щелкните, чтобы открыть созданный вами поток **Уведомить создателя проблем**.
 
-10. You should see a succeeded flow run in the **28-day run history section**. Click to open the run.
+10. Вы должны увидеть успешный запуск потока в **разделе 28-дневной истории запусков**. Щелкните, чтобы открыть пробег.
 
-![A Screenshot with an arrow pointing to the start date of the 28-day run history section](04/media/image9.png)
+![Снимок экрана со стрелкой, указывающей на дату начала раздела 28-дневной истории запусков](04/media/image9.png)
 
-11. All the flow steps should have a **green** check mark.
+11. Все этапы потока должны иметь **зеленую** галочку.
 
-12. Click **App launcher** and select **Outlook**.
+12. Щелкните **Средство запуска приложений** и выберите **Outlook**.
 
-![A Screenshot with an arrow pointing to the app launcher and a border around outlook](04/media/image10.png)
+![Снимок экрана со стрелкой, указывающей на средство запуска приложений, и рамкой вокруг Outlook](04/media/image10.png)
 
-13. You should get an email from the flow. Click to open the email.
+13. Вы должны получить электронное письмо от потока. Щелкните, чтобы открыть электронное письмо.
 
-14. The email should look like the image below.
+14. Электронное письмо должно выглядеть как на изображении ниже.
 
-![A screenshot of the email you should receive with the status of the problem, problem title, and its current status](04/media/image11.png)
+![Снимок экрана электронного письма, которое вы должны получить со статусом проблемы, названием проблемы и ее текущим статусом](04/media/image11.png)
 
-### Exercise 2: Build escalation flow
+### Упражнение 2: Построение потока эскалации
 
-In this exercise, you create add two new Columns to the problem report Table and create escalation flow.
+В этом упражнении вы добавите два новых столбца в таблицу отчета о проблемах и создите поток эскалации.
 
-#### Task 1: Add Columns
+#### Задача 1: Добавление столбцов
 
-In this task, you add a new Columns to the problem report Table.
+В этой задаче вы добавите новые столбцы в таблицу отчета о проблемах.
 
-1.  Navigate to the [Power Apps maker portal](https://make.powerapps.com/) and make sure you are in the correct environment.
+1. Перейдите на [портал разработчика Power Apps](https://make.powerapps.com/) и убедитесь, что вы находитесь в правильной среде.
 
-2.  Select **Solutions** and click to open the **Company 311** solution.
+2. Выберите **Решения** и щелкните, чтобы открыть решение **Компания 311**.
 
-3.  Locate and click to open the **Problem Report** Table.
+3. Найдите и щелкните, чтобы открыть таблицу **Отчет о проблеме**.
 
-4.  Make sure you have the **Columns** tab selected and click **+ Add Column**.
+4. Убедитесь, что у вас выбрана вкладка **Столбцы**, и нажмите **+ Добавить столбец**.
 
-5.  Enter **Estimated Cost** for **Display name**, select **Currency** for **Data type** and click **Done**.
+5. Введите **Ориентировочная стоимость** для **Отображаемое имя**, выберите **Валюта** для **Тип данных** и нажмите **Готово**.
 
-6.  Click the **Save Table** located on bottom right of the screen.
+6. Щелкните **Сохранить таблицу** в правом нижнем углу экрана.
 
-7.  Select the **Forms** tab.
+7. Выберите вкладку **Формы**.
 
-8.  Click to open the **Information** form of type **Main**.
+8. Щелкните, чтобы открыть форму **Информация** типа **Основная**.
 
-9.  Add **Estimated Cost** Column to the form and place it below the **Status Reason** Column.
+9. Добавьте в форму столбец **Расчетная стоимость** и поместите его под столбцом **Причина состояния**.
 
-10. Add the **Assign to** Column and place it below the **Estimated Cost** Column.
+10. Добавьте столбец **Назначить** и поместите его под столбцом **Расчетная стоимость**.
 
-11. The **Resolution details** section of the form should now look like the image below. Click **Save**.
+11. Раздел формы **Сведения о разрешении** должен теперь выглядеть, как показано на рисунке ниже. Нажмите **Сохранить**.
 
-![A Screenshot with a border around estimated cost and assign to placed correctly and an arrow pointing to the save button](04/media/image12.png)
+![Снимок экрана с рамкой вокруг ориентировочной стоимости и назначением для правильного размещения и стрелкой, указывающей на кнопку сохранения](04/media/image12.png)
 
-12. Click on the **Back** button located on the top left of the screen.
+12. Нажмите кнопку **Назад**, расположенную в верхнем левом углу экрана.
 
-13. Select **Solution**, click **Publish all customizations**, and wait for the publishing to complete.
+13. Выберите **Решение**, нажмите **Опубликовать все настройки** и дождитесь завершения публикации.
 
-#### Task 2: Build escalation flow
+#### Задача 2. Построение потока эскалации
 
-In this task, you will create the escalation flow.
+В этой задаче вы создадите поток эскалации.
 
-1.  Navigate to the [Power Apps maker portal](https://make.powerapps.com/) and make sure you are in the correct environment.
+1. Перейдите на [портал разработчика Power Apps](https://make.powerapps.com/) и убедитесь, что вы находитесь в правильной среде.
 
-2.  Select **Solutions** and click to open the **Company 311** solution.
+2. Выберите **Решения** и щелкните, чтобы открыть решение **Компания 311**.
 
-3.  Click **+ New** and select **Cloud flow**.
+3. Нажмите **+ Создать** и выберите **Облако**.
 
-4.  Search for **when a row is added** and select **When a row is added, modified, or deleted**  from **Microsoft Dataverse** connector.
+4. Найдите **при добавлении строки** и выберите **При добавлении, изменении или удалении строки** из коннектора **Microsoft Dataverse**.
 
-5.  Select **Added or Modified** for **Change type**, select **Problem Reports** for **Table name**, select **Organization** for **Scope** and click **Show advanced options**.
+5. Выберите **Добавлено или Изменено** для **Тип изменения**, выберите **Отчеты о проблемах** для **Имя таблицы**, выберите **Организация** для **Объем** и нажмите **Показать. расширенные настройки**.
 
-6.  Enter **lh_estimatedcost,lh_assignto** for **Select columns** and click **Hide advanced options**.
+6. Введите **lh_estimatedcost, lh_assignto** для **Выбрать столбцы** и нажмите **Скрыть дополнительные параметры**.
 
-7.  Click on the **… Menu** button of the trigger step and select **Rename**.
+7. Нажмите кнопку **… Меню** шага триггера и выберите **Переименовать**.
 
-8.  Rename the trigger step **When a problem report is created or updated**.
+8. Переименуйте шаг триггера на **При создании или обновлении отчета о проблеме**.
 
-9.  Click **+ New step**.
+9. Нажмите **+ Новый шаг**.
 
-10. Search for **Condition** and Select **Condition** control.
+10. Найдите **Состояние** и выберите **Контроль состояния**.
 
-11. Click to select the first **Choose a value** Column.
+11. Щелкните, чтобы выбрать первый столбец **Выбора значения**.
 
-12. Go to the Dynamic content pane, search for **estimated** and select **Estimated Cost**.
+12. Перейдите на панель «Динамическое содержимое», выполните поиск **ориентировочно** и выберите **Расчетная стоимость**.
 
-![A screenshot of the dynamic content pane with the word estimated in the search bar](04/media/image13.png)
+![Снимок экрана панели динамического содержимого со словом, оцененным в строке поиска](04/media/image13.png)
 
-13. Select **is greater than** in the second field and enter **1000** in the third field.
+13. Выберите **больше** во втором поле и введите **1000** в третьем поле.
 
-14. Rename the condition step to **Check if cost is greater than 1000**.
+14. Переименуйте шаг условия на **Проверить, не превышает ли стоимость 1000**.
 
-15. Go to the **If yes** branch and click **Add an action**.
+15. Перейдите в ветку **Если да** и нажмите **Добавить действие**.
 
-16. Search for **Get a row** and select **Get a row by ID** from **Microsoft Dataverse**.
+16. Найдите **Получить строку** и выберите **Получить строку по идентификатору** из **Microsoft Dataverse**.
 
-17. Select **Users** for **Table name**.
+17. Выберите **Пользователи** для **Имя таблицы**.
 
-18. Click to select the **Row ID** Column and select **Assign to (Value)** from the **Dynamic content** pane.
+18. Щелкните, чтобы выбрать столбец **ID строки**, и выберите **Назначить (Значение)** на панели **Динамическое содержимое**.
 
-19. Click **Show advanced options**.
+19. Щелкните **Показать дополнительные параметры**.
 
-20. Enter **internalemailaddress** for **Select columns**.
+20. Введите **internalemailaddress** для **Выбора столбца**.
 
-21. Click **Hide advanced option**.
+21. Щелкните **Скрыть расширенный параметр**.
 
-22. Rename the **Get a Row by ID** step **Get user**.
+22. Переименуйте шаг **Получить строку по идентификатору** в **Получить пользователя**.
 
-23. Click **Add and action**.
+23. Щелкните **Добавить и действие**.
 
-24. Search for **approval** and select **Start and wait for an approval**.
+24. Найдите **утверждение** и выберите **Начать и дождаться утверждения**.
 
-25. Select **Approve/Reject - Everyone must approve** for **Approval type**.
+25. Выберите **Утвердить / Отклонить - все должны одобрить** для **Тип утверждения**.
 
-26. Enter **Cost approval required** for **Title**.
+26. Введите **Требуется утверждение стоимости** для **Заголовок**.
 
-27. Click to select the **Assigned to** Column.
+27. Щелкните, чтобы выбрать **Назначено** столбцу.
 
-28. Go to the **Dynamic content** pane and select **Primary Email** from the **Get user** step.
+28. Перейдите на панель **Динамическое содержимое** и выберите **Основной адрес электронной почты** на шаге **Получить пользователя**.
 
-29. Paste the markdown text below in the **Details** Column.
+29. Вставьте текст уценки ниже в столбец **Подробности**.
 
-> \#\# URGENT Approval Required
+>\#\#Требуется СРОЧНОЕ одобрение
 >
-> This is \*\*very\*\* expensive item with the estimated cost of
+>Это\*\*очень\*\*дорогая вещь по ориентировочной стоимости
 
-30. Place your cursor after cost of, go to the Dynamic content pave, select the Expression tab, paste the expression below, and click **OK**.
+30. Поместите курсор после стоимости, перейдите к панели «Динамическое содержимое», выберите вкладку «Выражение», вставьте выражение ниже и нажмите **ОК**.
 
 `formatNumber(triggerOutputs()?['body/lh_estimatedcost'], 'C2')`
 
-![A Screenshot with an arrow pointing to the ok button in the expression tab under the pasted expression](04/media/image14.png)
+![Снимок экрана со стрелкой, указывающей на кнопку ОК на вкладке выражения под вставленным выражением](04/media/image14.png)
 
-31. Click **Add an action**.
+31. Щелкните **Добавить действие**.
 
-32. Search for **condition** and select **Condition** control.
+32. Найдите **условие** и выберите управление **условием**.
 
-33. Click to select the first **Choose a value** Column.
+33. Щелкните, чтобы выбрать первый Столбец **Выбора значения**.
 
-34. Go to the **Dynamic content** pane, search for **Outcome** and select **Outcome**.
+34. Перейдите на панель **Динамическое содержимое**, найдите **Результат** и выберите **Результат**.
 
-35. Select **equals to** in the second field and type **Reject** for value in the third field.
+35. Выберите **равно** во втором поле и введите **Отклонить** для значения в третьем поле.
 
-36. Go to the **If yes** branch and click **Add an action**.
-37. Search for **update a Row** and select **Update a Row** from **Microsoft Dataverse**.
+36. Перейдите в ветку **Если да** и нажмите **Добавить действие**.
+37. Найдите **обновить строку** и выберите **Обновить строку** из **Microsoft Dataverse**.
 
-38. Select **Problem Reports** for **Table name**.
+38. Выберите **Отчеты о проблемах** для **Имя таблицы**.
 
-39. Click to select the **Row ID** Column.
+39. Щелкните, чтобы выбрать столбец **ID строки**.
 
-40. Go to the **Dynamic content** pane, search for **problem report** and select **Problem Report**.
+40. Перейдите на панель **Динамическое содержимое**, найдите **отчет о проблеме** и выберите **Отчет о проблеме**.
 
-41. Click **Show advanced options**.
+41. Щелкните **Показать дополнительные параметры**.
 
-42. Click to select the **Resolution** Column, go to the **Dynamic content** pane and select **Response summary**.
+42. Щелкните, чтобы выбрать столбец **Разрешение**, перейдите на панель **Динамическое содержимое** и выберите **Сводка ответа**.
 
-43. Select **Won’t fix** for **Status Reason**.
+43. Выберите **Не исправлять** для **Причина состояния**.
 
-44. Rename the step **Update problem report**.
+44. Переименуйте шаг **Обновить отчет о проблеме**.
 
-45. Scroll up and rename the flow **Escalate Expense Approval**.
+45. Прокрутите вверх и переименуйте поток **Подтвердить утверждение расходов**.
 
-46. Click **Save**.
+46. Нажмите **Сохранить**.
 
-![A screenshot of the current flow](04/media/image15.png)
+![Скриншот текущего потока](04/media/image15.png)
 
-47. Close the flow designer browser window or tab.
+47. Закройте окно или вкладку браузера дизайнера потока.
 
-48. Click **Done** on the popup.
+48. Во всплывающем окне нажмите **Готово**.
 
-#### Task 3: Test flow
+#### Задача 3: Порядок выполнения теста
 
-In this task, you will test the escalation flow
+В этой задаче вы протестируете поток эскалации.
 
-1.  Navigate to the [Power Apps maker portal](https://make.powerapps.com/) and make sure you are in the correct environment.
+1. Перейдите на [портал разработчика Power Apps](https://make.powerapps.com/) и убедитесь, что вы находитесь в правильной среде.
 
-2.  Select **Apps** and click to open the **Company 311 Admin** application.
+2. Выберите **Приложения** и щелкните, чтобы открыть приложение **Администратор компании 311**.
 
-3.  Click to open one of the **Problem Report** rows.
+3. Щелкните, чтобы открыть одну из строк **Отчетов о проблемах**.
 
-4.  Scroll down, enter **2500** for **Estimated Cost**, assign it to **yourself** (for test purposes) and click **Save**.
+4. Прокрутите вниз, введите **2500** в поле **Ориентировочная стоимость**, назначьте **себе** (в целях тестирования) и нажмите **Сохранить**.
 
-5.  Navigate to [Power Automate](https://us.flow.microsoft.com/en-us/)
+5. Перейдите к [Power Automate](https://us.flow.microsoft.com/en-us/).
 
-6.  Expand **Action Items** and select **Approvals**.
+6. Разверните **Действия** и выберите **Утверждения**.
 
-7.  You should see at least one approval in the received tab. Click to open the approval. It can take around 10-15 minutes for approvals to show up here on the first run.
+7. В полученной вкладке вы должны увидеть хотя бы одно одобрение. Щелкните, чтобы открыть утверждение. Утверждения появятся здесь при первом запуске примерно через 10–15 минут.
 
-![A Screenshot with an arrow pointing to the cost approval required request](04/media/image16.png)
+![Снимок экрана со стрелкой, указывающей на запрос об утверждении стоимости](04/media/image16.png)
 
-8.  Select **Reject**, enter **We don't have the funds for this item** for **comment**, and click **Confirm**.
+8. Выберите **Отклонить**, введите **У нас нет средств на этот элемент** для **комментария** и нажмите **Подтвердить**.
 
-![A screenshot of the details of the request with the relevant text in each field](04/media/image17.png)
+![Снимок экрана с подробной информацией о запросе с соответствующим текстом в каждом поле](04/media/image17.png)
 
-9.  Go back to the **Company 311 Admin** application.
+9. Вернитесь в приложение **Администратор компании 311**.
 
-10. Change the view to **My Reports** and click to open the same row you change the estimated cost.
+10. Измените представление на **Мои отчеты** и щелкните, чтобы открыть ту же строку, в которой вы меняете расчетную стоимость.
 
-11. The **Status Reason** should be set to **Won’t fix** and the **Resolution** should contain the details of Approver, Response, Request Date and Response Date.
+11. ** Причина состояния** должна иметь значение **Не исправлять**, а **Решение** должно содержать сведения об утверждающем, ответе, дате запроса и дате ответа.
 
-12. Click **Save**, if you have not done so previously.
+12. Нажмите **Сохранить**, если вы не сделали этого ранее.
 
-![A screenshot of the status reason and resolution matching the values and text you put into the request](04/media/image18.png)
+![Снимок экрана с причиной статуса и разрешением, соответствующими значениям и тексту, которые вы указали в запросе](04/media/image18.png)
 
-### Exercise 3: Send approval requests as adaptive card in Microsoft Teams
+### Упражнение 3. Отправка запросов на утверждение в виде адаптивной карточки в Microsoft Teams
 
-In this exercise, you will setup a team in Microsoft Teams dedicated to the Company 311 applications. You will modify the flow to send the approval request as an adaptive card in Teams chat instead of an approval message.
+В этом упражнении вы создадите команду в Microsoft Teams, посвященную приложениям компании 311. Вы измените поток, чтобы отправить запрос на утверждение как адаптивную карточку в чате Teams вместо сообщения об утверждении.
 
-* Task 1: Setup Company 311 Team
-* Task 2: Modify flow to send adaptive card in Teams chat
-* Task 3: Test adaptive card
+* Задача 1: Настроить команду компании 311
+* Задача 2: Изменить поток для отправки адаптивной карты в чат Teams.
+* Задача 3: Проверить адаптивную карту
 
-#### Task 1: Setup Company 311 Team
+#### Задача 1: Настройка команды компании 311
 
-In this task you will setup a Microsoft Teams team for the Lamna Healthcare Company, if you have not done so in previous exercises.
+В этой задаче вы настроите команду Microsoft Teams для компании Lamna Healthcare, если вы не сделали этого в предыдущих упражнениях.
 
-1.  Navigate to [Microsoft Teams](https://teams.microsoft.com) and sign in with the same credentials you have been using previously.
+1. Перейдите в [Microsoft Teams](https://teams.microsoft.com) и войдите в систему с теми же учетными данными, которые вы использовали ранее.
 
-2.  Select **Use the web app instead** on the welcome screen.
+2. Выберите **Использовать веб-приложение вместо** на экране приветствия.
 
-![A screenshot of the Microsoft Teams landing page with a border around the use the web app instead button](04/media/image-5-teams.png)
+![Снимок экрана целой страницы Microsoft Teams с рамкой вокруг кнопки использования веб-приложения вместо](04/media/image-5-teams.png)
 
-3.  When the Microsoft Teams window opens, dismiss the welcome messages.
+3. Когда откроется окно Microsoft Teams, закройте приветственные сообщения.
 
-4.  On the bottom left corner, choose **Join or create a team**.
+4. В нижнем левом углу выберите **Присоединиться или создать команду**.
 
-5.  Select **Create a team**.
+5. Выберите **Создать команду**.
 
-![A screenshot with a box around the join or create a team button at the bottom of the window and a border around the create a team button](04/media/image-5-createteam.png)
+![Снимок экрана с рамкой вокруг кнопки присоединения или создания группы в нижней части окна и рамкой вокруг кнопки создания группы](04/media/image-5-createteam.png)
 
-6.  Press **From scratch**.
+6. Нажмите **С нуля**.
 
-7.  Select **Public**.
+7. Выберите **Публикация**.
 
-8.  For the Team name choose **Company 311** and select **Create**.
+8. В качестве названия команды выберите **Компания 311** и выберите **Создать**.
 
-9.  Select **Skip** adding members to Company 311.
+9. Выберите **Пропустить** добавление участников в компанию 311.
 
 
-#### Task 2: Modify flow to send adaptive card in Teams chat
+#### Задача 2. Измените поток для отправки адаптивной карточки в чате Teams.
 
-In this task you will replace the approval sent by email with the adaptive card.
+В этой задаче вы замените подтверждение, отправленное по электронной почте, на адаптивную карточку.
 
-1. Locate **Start and wait for an approval** step created earlier in **Exercise 2, Task 2**.
-2. Select **...** then select **Delete**.
-3. Click **+** between the steps to insert a new step then select **Add an action**.
-4. Search for **approval** and select **Create an approval**.
-5. Select **Approve/Reject - Everyone must approve** for **Approval type**.
-6. Enter **Cost approval required** for **Title**.
-7. Click to select the **Assigned to** Column.
-8. Go to the **Dynamic content** pane and select **Primary Email** from the **Get user** step.
-9. Paste the markdown text below in the **Details** Column.
+1. Найдите **Начать и дождаться шага утверждения**, созданного ранее в **Упражнении 2, Задаче 2**.
+2. Выберите **...**, затем выберите **Удалить**.
+3. Щелкните **+** между шагами, чтобы вставить новый шаг, затем выберите **Добавить действие**.
+4. Найдите **утверждение** и выберите **Создать утверждение**.
+5. Выберите **Утвердить / Отклонить - все должны одобрить** для **Тип утверждения**.
+6. Введите **Требуется утверждение стоимости** для **Заголовок**.
+7. Щелкните, чтобы выбрать столбец **Назначено**.
+8. Перейдите на панель **Динамическое содержимое** и выберите **Основной адрес электронной почты** на шаге **Получить пользователя**.
+9. Вставьте текст уценки ниже в столбец **Подробности**.
 
-> \*\*{title}\*\*
+> \*\*{заголовок}\*\*
 >
 > 
 >
-> {details}
+> {подробности}
 >
 > 
 >
-> This is a \_very\_ expensive item with the estimated cost of
+> Это\ _очень\ _ по ориентировочной стоимости дорогая вещь
 
-10. Select **{title}** placeholder, go to the **Dynamic content** pane, locate and select **Title** Column from **When a problem report is created or updated** step.
+10. Выберите заполнитель **{заголовок}**, перейдите на панель **Динамическое содержимое**, найдите и выберите **Заголовок** Столбец из шага **При создании или обновлении отчета о проблеме**.
 
-11. Select **{details}** placeholder, go to the **Dynamic content** pane, locate and select **Details** Column from **When a problem report is created or updated** step.
+11. Выберите заполнитель **{подробности}**, перейдите на панель **Динамическое содержимое**, найдите и выберите **Подробности** Столбец из шага **При создании или обновлении отчета о проблеме**.
 
-12. Place your cursor after **cost of** , go to the **Dynamic content** pane, select the **Expression** tab, paste the expression below, and click OK.
+12. Поместите курсор после **стоимости**, перейдите на панель **Динамическое содержимое**, выберите вкладку **Выражение**, вставьте выражение ниже и нажмите ОК.
 
 `formatNumber(triggerOutputs()?['body/lh_estimatedcost'], 'C2')`
 
-13. Your step should look like the following:
+13. Ваш шаг должен выглядеть следующим образом:
 
-![A screenshot of the create an approval window with the following. Approval type as approve/reject - everyone must approve, title as cost approval required, assigned to primary email, details as title, details, some text and format number, item link, and item link description](04/media/image-5-create-approval.png)
+![Скриншот создания окна утверждения со следующим. Тип одобрения, как одобрение / отклонение - все должны одобрить, заголовок должен соответствовать требованию утверждения стоимости, назначение основному адресу электронной почты, подробности - заголовок, детали, некоторый текст и номер формата, ссылка на элемент и описание ссылки на элемент](04/media/image-5 -create-Approval.png)
 
-14. Click **+** then select **Add an action**.
+14. Нажмите **+**, затем выберите **Добавить действие**.
 
-15. Search for **teams** and select **Post adaptive card in a chat or channel** action.
+15. Найдите **команды** и выберите действие **Опубликовать адаптивную карточку в чате или канале**.
 
-16. Select **Flow bot** for Post as and select **Chat with Flow bot** for Post in.
-17. Click to select the **Recipient** field.
+16. Выберите **Бот потока** для Опубликовать как и выберите **Чат с ботом потока** для Опубликовать в.
+17. Щелкните, чтобы выбрать поле **Получатель**.
 
-18. Go to the **Dynamic content** pane and select **Primary Email** from the **Get user** step.
+18. Перейдите на панель **Динамическое содержимое** и выберите **Основной адрес электронной почты** на шаге **Получить пользователя**.
 
-19. Click to select **Adaptive Card** field.
+19. Щелкните, чтобы выбрать поле **Адаптивная карта**.
 
-20. Go to the **Dynamic content** pane and select **Teams Adaptive Card** from the **Create an approval** step.
-21. Post adaptive card in chat or channel should look like the image below.
+20. Перейдите на панель **Динамическое содержимое** и выберите **Адаптивная карта Teams** на шаге **Создать утверждение**.
+21. Публикация адаптивной карточки в чате или канале должна выглядеть как на картинке ниже.
 
-![A screenshot of the post adaptive card in a chat or channel pane](04/media/image-5-post-adaptive-card.png)
+![Снимок экрана постадаптивной карточки в чате или на панели канала](04/media/image-5-post-adaptive-card.png)
 
-22. Select **+** then select **Add an action**.
+22. Выберите **+**, затем выберите **Добавить действие**.
 
-23. Search for **approval** and select **Wait for an approval** action.
+23. Найдите **утверждение** и выберите действие **Ждать утверждения**.
 
-24. Select **Approval ID** Column.
+24. Выберите столбец **Идентификатор утверждения**.
 
-25. Go to the **Dynamic content** pane and select **Approval ID** from the **Create an approval** step.
+25. Перейдите на панель **Динамическое содержимое** и выберите **Идентификатор утверждения** на шаге **Создать утверждение**.
 
-    ![A screenshot of the wait for an approval panel with approval ID in the approval ID field](04/media/image-5-wait-for-approval.png)
+ ![Снимок экрана ожидания панели утверждения с идентификатором утверждения в поле идентификатора утверждения](04/media/image-5-wait-for-approval.png)
 
-26. You now have replaced **Start and wait for an approval** step with the following:
+26. Теперь вы заменили шаг **Начать и ждать подтверждения** следующим:
 
-![A screenshot of the current flow with: create an approval, post adaptive card in a chat or channel, and wait for an approval](04/media/image-5-replaced-approval.png)
+![Снимок экрана текущего потока с: создать утверждение, опубликовать адаптивную карточку в чате или канале и дождаться утверждения](04/media/image-5-replaced-approval.png)
 
-25. Expand **Condition 2** step. The left side of the condition should be empty because it was referring the step which is now removed. 
-26. Go to the **Dynamic content** pane, search for **outcome,** and select **Outcome** from **Wait for an approval** step. 
-27. Locate **Update problem report** step under **If yes** branch.
-28. Click **Show advanced options**.
-29. Click to select the **Resolution** Column, go to the **Dynamic content** pane, and select **Response summary** from **Wait for an approval** step.
-30. Click **Save**.
-31. Close the flow designer browser window or tab.
-32. Click **Done** on the popup.
+25. Разверните шаг **Условие 2**. Левая часть условия должна быть пустой, потому что она ссылалась на шаг, который теперь удален.
+26. Перейдите на панель **Динамическое содержимое**, найдите **результат** и выберите **Результат** из шага **Ждать утверждения**. 
+27. Найдите шаг **Обновить отчет о проблеме** в ветви **Если да**.
+28. Щелкните **Показать дополнительные параметры**.
+29. Щелкните, чтобы выбрать столбец **Разрешение**, перейдите на панель **Динамическое содержимое** и выберите **Сводка ответа** из шага **Ждать утверждения**.
+30. Нажмите **Сохранить**.
+31. Закройте окно или вкладку браузера Дизайнера Потока.
+32. Нажмите **Готово** во всплывающем окне.
 
-#### Task 3: Test flow
+#### Задача 3: Порядок выполнения теста
 
-In this task, you will test the escalation flow with the Teams and adaptive cards.
+В этой задаче вы протестируете поток эскалации с помощью команд и адаптивных карточек.
 
-1.  Navigate to the [Power Apps maker portal](https://make.powerapps.com/) and make sure you are in the correct environment.
+1. Перейдите на [портал разработчика Power Apps](https://make.powerapps.com/) и убедитесь, что вы находитесь в правильной среде.
 
-2.  Select **Apps** and click to open the **Company 311 Admin** application.
+2. Выберите **Приложения** и щелкните, чтобы открыть приложение **Администратор компании 311**.
 
-3.  Click to open one of the **Problem Report** Rows.
+3. Щелкните, чтобы открыть одну из строк **Отчетов о проблемах**.
 
-4.  Scroll down, enter any amount greater than **1000** for **Estimated Cost**, assign it to **yourself** (for test purposes) and click **Save**.
+4. Прокрутите вниз, введите любую сумму, превышающую **1000** для **Расчетной стоимости**, назначьте ее **себе** (в целях тестирования) и нажмите **Сохранить**.
 
-5.  Navigate to [Microsoft Teams](https://teams.microsoft.com)
+5. Перейдите в [Microsoft Teams](https://teams.microsoft.com).
 
-6.  Select **Chat**.
+6. Выберите **Чат**.
 
-7. You should see the Cost Approval Required Adaptive Card.
+7. Вы должны увидеть адаптивную карточку «Требуется утверждение стоимости».
 
-![A screen shot of the request for cost approval pane](04/media/image-5-sample-adaptive-card.png)  
+![Снимок экрана панели запроса на утверждение стоимости](04/media/image-5-sample-adaptive-card.png) 
 
-8. Press **Reject** button and enter a comment of your choice in the Comments area, for example **The item is too expensive**.
+8. Нажмите кнопку **Отклонить** и введите комментарий по вашему выбору в области комментариев, например **Товар слишком дорогой**.
 
-9. Select **Submit**.  The card will become read-only.
+9. Выберите **Отправить**. Карта станет доступной только для чтения.
 
-![A screenshot of the request once you have rejected it](04/media/image-5-readonly-card.png)
+![Скриншот запроса после того, как вы его отклонили](04/media/image-5-readonly-card.png)
 
-10. Go back to the **Company 311 Admin** application.
+10. Вернитесь в приложение **Администратор компании 311**.
 
-11. Change the view to **My Reports** and click to open the same Row you change the estimated cost.
+11. Измените представление на **Мои отчеты** и щелкните, чтобы открыть ту же строку, в которой вы меняете оценочную стоимость.
 
-12. The **Status Reason** should be set to **Won’t fix** and the **Resolution** should contain the details of Approver, Response, Request Date and Response Date.
+12. **Причина состояния** должна иметь значение **Не исправлять**, а **Решение** должно содержать сведения об утверждающем, ответе, дате запроса и дате ответа.
 
-![A screenshot of the status reason and resolution matching the details of your response to the request](04/media/problemreportadaptivecard.png)
+![Снимок экрана с причиной статуса и разрешением, соответствующими деталям вашего ответа на запрос](04/media/problemreportadaptivecard.png)
 
-## **Discussion**
+## **Обсуждение**
 
-  - Would creating a bool Column for Approved/Rejected be better?
-  - What are the pros and cons of using Microsoft Teams over regular email?
+ - Будет ли лучше создать столбец типа bool для утвержденных / отклоненных?
+ - Каковы плюсы и минусы использования Microsoft Teams вместо обычной электронной почты?
 
-## **Bonus exercises**
+## **Бонусные упражнения**
 
-  - Add ability for the users to subscribe to the reported problems and only notify if there is a subscription. 
-  - Auto-subscribe creator of the problem report.
-  - How to find out previous value of status reason?
-  - Create your own adaptive card using [Adaptive Cards Designer](https://adaptivecards.io/designer/).
+ - Добавлена возможность пользователям подписываться на сообщения о проблемах и уведомлять только о наличии подписки. 
+ - Автоматическая подписка создателя отчета о проблеме.
+ - Как узнать предыдущее значение причины статуса?
+ - Создайте свою собственную адаптивную карту с помощью [Adaptive Cards Designer](https://adaptivecards.io/designer/).
