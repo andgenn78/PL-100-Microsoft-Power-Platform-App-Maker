@@ -1,287 +1,286 @@
 ---
-lab:
-    title: 'Lab 02.2: Business Process Flows and Business Rules'
-    module: 'Module 02: Building model-driven apps'
+Лабораторный практикум:
+ заголовок: 'Лабораторная работа 02.2: Потоки бизнес-процессов и бизнес-правила'
+ модуль: 'Модуль 02: Создание приложений на основе моделей'
 ---
 
-> [!NOTE]
-> Effective November 2020:
-> - Common Data Service has been renamed to Microsoft Dataverse. [Learn more](https://aka.ms/PAuAppBlog)
-> - Some terminology in Microsoft Dataverse has been updated. For example, *entity* is now *table* and *field* is now *column*. [Learn more](https://go.microsoft.com/fwlink/?linkid=2147247)
+> [!ПРИМЕЧАНИЕ]
+> С ноября 2020 г .:
+> - Common Data Service переименована в Microsoft Dataverse. [Подробнее…](https://aka.ms/PAuAppBlog)
+> - Обновлена некоторая терминология в Microsoft Dataverse. Например, *entity/объект* теперь *table/таблица*, а *field/поле* теперь *column/столбец*. [Подробнее…](https://go.microsoft.com/fwlink/?linkid=2147247)
 >
 
 
-# Lab 02.2: Business Process Flows and Business Rules
+# Лабораторная работа 02.2: Потоки бизнес-процессов и бизнес-правила
 
-In this lab you will enhance the data model and improve the app behavior by adding a business process flow and a business rule.
+В этой лабораторной работе вы усовершенствуете модель данных и улучшите поведение приложения, добавив последовательность бизнес-процессов и бизнес-правила.
 
-## What you will learn
+## Что вы узнаете
 
-  - How to identify stages in a Business Process Flow (BPF)
+ - Как определить этапы в потоке бизнес-процессов (BPF)
 
-  - How to create and use a BPF
+ - Как создать и использовать BPF
 
-  - How to use a business rule to implement logic
+ - Как использовать бизнес-правила для реализации логики
 
-## High-level lab steps
+## Лабораторные этапы высокого уровня
 
-  - Exercise 1 – Create BPF lifecycle of problem report
-    
-      - Route 
-      
-      - Fix 
-      
-      - Resolved 
+ - Упражнение 1. Создание отчета о жизненном цикле BPF для отчета о проблеме.
+ 
+ - Маршрут 
+ 
+ - Исправление 
+ 
+ - Решение 
 
-  - Exercise 2 – Business rule to not allow close without resolution
+ - Упражнение 2 - Бизнес-правило, запрещающее закрытие без разрешения
 
-## Prerequisites
+## Предварительные требования
 
-* Must have completed **Lab 02.1: Data model and model-driven app**
+* Должно быть выполнено **Лабораторная работа 02.1: Модель данных и приложение на основе модели**
 
-## Detailed steps
+## Подробные шаги
 
-### Exercise 1: Create business process flow
+### Упражнение 1. Создание последовательности бизнес-процессов
 
-In this exercise, you will create a business process flow for the problem report table.
+В этом упражнении вы создадите последовательность бизнес-процессов для таблицы отчетов о проблемах.
 
-#### Task 1: Customize Table
+#### Задача 1. Настроить таблицу
 
-In this task, you will add a lookup Column to the problem report table.
+В этой задаче вы добавите столбец подстановки в таблицу отчета о проблеме.
 
-1.  Navigate to the [Power Apps maker portal](https://make.powerapps.com/) page and make sure you are in the correct environment.
+1. Перейдите на страницу [Портал разработчика Power Apps](https://make.powerapps.com/) и убедитесь, что вы находитесь в правильной среде.
 
-2.  Select **Solutions** and click to open the **Company 311** solution.
+2. Выберите **Решения** и щелкните, чтобы открыть решение **Компания 311**.
 
-3.  Locate and click to open the **Problem Report** Table.
+3. Найдите и щелкните, чтобы открыть таблицу **Отчет о проблеме**.
 
-4.  Make sure you have the **Columns** tab and click **+ Add Column**.
+4. Убедитесь, что у вас есть вкладка **Столбцы**, и нажмите **+ Добавить столбец**.
 
-5.  Enter **Assign to** for **Display name**, select **Lookup** for **Data type**, select **User** for **Related table**, and click **Done**.
+5. Введите **Назначить** для **Отображаемое имя**, выберите **Поиск** для **Тип данных**, выберите **Пользователь** для **Связанная таблица** и нажмите **Готово**.
 
-![A screenshot of the assign to panel with all relevant values in each field](02-2/media/image1.png)
+![Снимок экрана панели назначения со всеми соответствующими значениями в каждом поле](02-2/media/image1.png)
 
-6.  Click **Save Table**.
+6. Щелкните **Сохранить таблицу**.
 
-7.  Go back to the solution by clicking on the solution name.
+7. Вернитесь к решению, щелкнув имя решения.
 
-![A Screenshot with an arrow pointing to the solution name](02-2/media/image2.png)
+![Снимок экрана со стрелкой, указывающей на название решения](02-2/media/image2.png)
 
-8.  Click **Publish all customizations** and wait for the publishing to complete.
+8. Щелкните **Опубликовать все настройки** и дождитесь завершения публикации.
 
-#### Task 2: Create business process flow
+#### Задача 2: Создание последовательности бизнес-процессов
 
-In this task, you will create a business process flow for the problem report Table.
+В этой задаче вы создадите последовательность бизнес-процессов для таблицы отчетов о проблемах.
 
-1.  Navigate to the [Power Apps maker portal](https://make.powerapps.com/) page and make sure you are in the correct environment.
+1. Перейдите на страницу [Портал разработчика Power Apps](https://make.powerapps.com/) и убедитесь, что вы находитесь в правильной среде.
 
-2.  Select **Flows**.
+2. Выберите **Потоки**.
 
-3.  Select the **Business process flows** tab and click **+ New**.
+3. Выберите вкладку **Потоки бизнес-процессов** и нажмите **+ Создать**.
 
-![A Screenshot with an arrow pointing to the new button](02-2/media/image3.png)
+![Снимок экрана со стрелкой, указывающей на новую кнопку](02-2/media/image3.png)
 
-4.  Enter **Problem resolution process** for **Flow Name**, select **Problem Report** for **Table**, and click **Create**.
+4. Введите **Процесс разрешения проблемы** для **Имя потока**, выберите **Отчет о проблеме** для **Таблица** и нажмите **Создать**.
 
-5.  Select the **New stage**, go to the **Properties** pane, change the **Display Name** to **Route**, and click **Apply**.
+5. Выберите **Новый этап**, перейдите на панель **Свойства**, измените **Отображаемое имя** на **Маршрут** и нажмите **Применить**.
 
-![A screenshot of the new stage and properties pane](02-2/media/image4.png)
+![Снимок экрана нового этапа и панели свойств](02-2/media/image4.png)
 
-6.  Expand **Details** of the **Route** stage.
+6. Разверните **Подробности** этапа **Маршрут**.
 
-![A Screenshot with an arrow pointing to the details button](02-2/media/image5.png)
+![Снимок экрана со стрелкой, указывающей на кнопку подробностей](02-2/media/image5.png)
 
-7.  Select **Data Step \#1**, go to the **Properties** pane, select **Building** for **Data Field**, and click **Apply**.
+7. Выберите **Шаг данных \#1**, перейдите на панель **Свойства**, выберите **Здание** для **Поле данных** и нажмите **Применить**.
 
-![A screenshot of the new stage with data step one selected and the properties pane open](02-2/media/image6.png)
+![Снимок экрана нового этапа с выбранным первым этапом данных и открытой панелью свойств](02-2/media/image6.png)
 
-8.  Click **+ Add** and select **Add Data Step**.
+8. Нажмите **+ Добавить** и выберите **Добавить шаг данных**.
 
-![A Screenshot with an arrow pointing to the add button and a border around add data step button](02-2/media/image7.png)
+![Снимок экрана со стрелкой, указывающей на кнопку добавления, и рамкой вокруг кнопки шага добавления данных](02-2/media/image7.png)
 
-9. Select the **+** option to add the data step below the **Building** data step.
+9. Выберите параметр **+**, чтобы добавить шаг данных ниже шага данных **Строительство**.
 
-   ![A screenshot of a data step being about to be added to the process stage](02-2/media/image27.png)
+ ![Скриншот шага данных, который будет добавлен в стадию процесса](02-2/media/image27.png)
 
-10. Select the new data step, go to the **Properties** pane, select **Location** for **Data Field**, and click **Apply**.
+10. Выберите новый шаг данных, перейдите на панель **Свойства**, выберите **Местоположение** для **Поле данных** и нажмите **Применить**.
 
-11. Click **+ Add** again and select **Add Data Step**.
+11. Снова нажмите **+ Добавить** и выберите **Добавить шаг данных**.
 
-12. Select the new data step, go to the **Properties** pane, select **Department** for **Data Field**, and click **Apply**.
+12. Выберите новый шаг данных, перейдите на панель **Свойства**, выберите **Отдел** для **Поле данных** и нажмите **Применить**.
 
-13. The **Route** stage should now look like the image below.
+13. Этап **Маршрут** теперь должен выглядеть как на изображении ниже.
 
-![A screenshot of the completed route stage with three data steps: building, location, and department](02-2/media/image8.png)
+![Снимок экрана завершенного этапа маршрута с тремя этапами данных: здание, местоположение и отдел](02-2/media/image8.png)
 
-14. Click **+ Add** and select **Add Stage**.
+14. Нажмите **+ Добавить** и выберите **Добавить этап**.
 
-15. Add the new stage after the **Route** stage.
+15. Добавьте новый этап после этапа **Маршрут**.
 
-16. Select the stage, go to the **Properties** pane, enter **Fix** for **Display Name**, and click **Apply**.
+16. Выберите этап, перейдите на панель **Свойства**, введите **Исправить** для **Отображаемое имя** и нажмите **Применить**.
 
-17. Expand **Details** of the **Fix** stage.
+17. Разверните **Подробности** этапа **Исправление**.
 
-18. Select **Data Step \#1** of the **Fix** stage.
+18. Выберите **Шаг данных \#1** на стадии **Исправление**.
 
-19. Go to the **Properties** pane, select **Assign to** for **Data Field** and click **Apply**.
+19. Перейдите на панель **Свойства**, выберите **Назначить** для **Поле данных** и нажмите **Применить**.
 
-20. Click **+ Add** and select **Add Stage**.
+20. Нажмите **+ Добавить** и выберите **Добавить этап**.
 
-21. Add the new stage after the **Fix** stage.
+21. Добавьте новый этап после этапа **Исправить**.
 
-22. Select the new stage, go to the **Properties** pane, enter **Resolve** for **Display Name** and click **Apply**.
+22. Выберите новый этап, перейдите на панель **Свойства**, введите **Разрешение** для **Отображаемое имя** и нажмите **Применить**.
 
-23. Expand **Details** of the **Resolve** stage.
+23. Разверните **Подробности** этапа **Разрешение**.
 
-24. Select **Data Step \#1** of the **Resolve** stage.
+24. Выберите **Шаг данных \#1** на стадии **Разрешение**.
 
-25. Go to the **Properties** pane, select **Resolution** for **Data Field** and click **Apply**.
+25. Перейдите на панель **Свойства**, выберите **Разрешение** для **Поле данных** и нажмите **Применить**.
 
-26. Click **+ Add** and select **Add Data Step**.
+26. Нажмите **+ Добавить** и выберите **Добавить шаг данных**.
 
-27. Add the new data step below the **Resolution** data step.
+27. Добавьте новый шаг данных под шагом данных **Разрешение**.
 
-28. Select the new data step, go to the **Properties** pane, select **Resolved on** for **Date Field** and click **Apply**.
+28. Выберите новый шаг данных, перейдите на панель **Свойства**, выберите **Разрешено** для **Поле даты** и нажмите **Применить**.
 
-29. The Business process flow should now look like the image below. Click **Save**.
+29. Теперь последовательность бизнес-процессов должна выглядеть, как показано на рисунке ниже. Нажмите **Сохранить**.
 
-![A Screenshot of a Business Process Designer with an arrow pointing to the save button](02-2/media/image9.png)
+![Снимок экрана конструктора бизнес-процессов со стрелкой, указывающей на кнопку сохранения](02-2/media/image9.png)
 
-30. Click **Activate**.
+30. Щелкните **Активировать**.
 
-31. Click **Activate** again on the pop-up.
+31. Еще раз нажмите **Активировать** во всплывающем окне.
 
-32. Confirm that **Status: Active** on the bottom-left side of the screen.
+32. Убедитесь, что **Статус: активен** в нижнем левом углу экрана.
 
-    ![A screeshot of a high-level overview of a business process with the words "Status: Active" highlighted in the left bottom corner](02-2/media/image28.png)
+ ![Скриншот общего обзора бизнес-процесса со словами «Статус: активен», выделенными в левом нижнем углу](02-2/media/image28.png)
 
-33. Close the process editor browser window or tab.
+33. Закройте окно или вкладку браузера редактора процессов.
 
-#### Task 3: Add business process flow to solution
+#### Задача 3: Добавление последовательности бизнес-процессов в решение
 
-In this task, you will add the business process flow you created to the Company 311 solution.
+В этой задаче вы добавите созданную вами последовательность бизнес-процессов в решение «Компания 311».
 
-1.  Navigate to the [Power Apps maker portal](https://make.powerapps.com/) page and make sure you are in the correct environment.
+1. Перейдите на страницу [Портал разработчика Power Apps](https://make.powerapps.com/) и убедитесь, что вы находитесь в правильной среде.
 
-2.  Select **Solutions** and click to open the **Company 311** solution.
+2. Выберите **Решения** и щелкните, чтобы открыть решение **Компания 311**.
 
-3.  Click **+ Add existing** and select **Process**.
+3. Нажмите **+ Добавить существующее** и выберите **Обработка**.
 
-![A Screenshot with an arrow pointing to the drop down icon next to the add existing button and a border around the process button](02-2/media/image10.png)
+![Снимок экрана со стрелкой, указывающей на значок раскрывающегося списка рядом с кнопкой добавления существующего и рамкой вокруг кнопки процесса](02-2/media/image10.png)
 
-4.  Search for problem, select **Problem resolution process**, and click **Add**.
+4. Найдите проблему, выберите **Процесс решения проблемы** и нажмите **Добавить**.
 
-![A screenshot of the add existing processes window with problem resolution process selected](02-2/media/image11.png)
+![Скриншот окна добавления существующих процессов с выбранным процессом решения проблемы](02-2/media/image11.png)
 
-5.  Click **Publish all customizations** and wait for the publishing to complete.
+5. Щелкните **Опубликовать все настройки** и дождитесь завершения публикации.
 
-### Exercise 2: Create business rule
+### Упражнение 2: Создание бизнес-правила
 
-In this exercise, you will create a business rule that will block completion of problems without resolution.
+В этом упражнении вы создадите бизнес-правило, которое будет блокировать выполнение проблем без разрешения.
 
-#### Task 1: Create business rule
+#### Задача 1. Создание бизнес-правила
 
-1.  Navigate to the [Power Apps maker portal](https://make.powerapps.com/) page and make sure you are in the correct environment.
+1. Перейдите на страницу [Портал разработчика Power Apps](https://make.powerapps.com/) и убедитесь, что вы находитесь в правильной среде.
 
-2.  Select **Solutions** and click to open the **Company 311** solution.
+2. Выберите **Решения** и щелкните, чтобы открыть решение **Компания 311**.
 
-3.  Locate and click to open the **Problem Report** Table.
+3. Найдите и щелкните, чтобы открыть таблицу **Отчет о проблеме**.
 
-4.  Select the **Business rules** tab and click **Add business rule**.
+4. Выберите вкладку **Бизнес-правила** и нажмите **Добавить бизнес-правило**.
 
-![A screenshot of the business rules tab](02-2/media/image12.png)
+![Скриншот вкладки бизнес-правил](02-2/media/image12.png)
 
-5.  Make sure the **Scope** is set to **Entity** and click **Show details** chevron.
+5. Убедитесь, что для **Область** установлено значение **Объект**, и нажмите **Показать подробности** шеврона.
 
-![A Screenshot with an arrow pointing to the drop down icon next to the text problem report: new business rule and a border around the scope set to entity on the right hand side of the page](02-2/media/image13.png)
+![Снимок экрана со стрелкой, указывающей на значок раскрывающегося списка рядом с текстовым отчетом о проблеме: новое бизнес-правило и граница вокруг области действия, установленная для объекта в правой части страницы](02-2/media/image13.png)
 
-6. Change **Business rule name** to **Completion rule** and click **Hide details** chev
+6. Измените **Название бизнес-правила** на **Завершение правила** и нажмите **Скрыть подробности** шеврона
 
-![A screenshot of a business rules property pane with an arrow pointing to the shevron that collapses the entire property pane](02-2/media/image29.png)
+![Снимок экрана панели свойств бизнес-правил со стрелкой, указывающей на шеврон, который сворачивает всю панель свойств](02-2/media/image29.png)
 
-7. Select the **Condition**.
+7. Выберите **Условие**.
 
-8. Go to the **Properties** pane and change the **Display name** to **Resolution required**.
+8. Перейдите на панель **Свойства** и измените **Отображаемое имя** на **Требуемое разрешение**.
 
-9. Scroll down to **Rule 1**, select **Status Reason** for **Field**, select **Equals** for **Operator**, select **Value** for **Type**, select **Completed** for **Value**, and click **Apply**.
+9. Прокрутите вниз до **Правило 1**, выберите **Причина состояния** для **Поле**, выберите **Равно** для **Оператор**, выберите **Значение** для **Тип**, выберите **Завершено** для **Значение** и нажмите **Применить**.
 
-![A screenshot of the rules panel](02-2/media/image14.png)
+![Скриншот панели правил](02-2/media/image14.png)
 
-10. Click **+ New**.
+10. Нажмите **+ Создать**.
 
-![A Screenshot with an arrow pointing to the new button](02-2/media/image15.png)
+![Снимок экрана со стрелкой, указывающей на новую кнопку](02-2/media/image15.png)
 
-11. Scroll down to **Rule 2**, select **Resolution** for **Field**, select **Does not contain data** for **Operator**, make sure **And** is selected for **Rule Logic**, and click **Apply**.
+11. Прокрутите вниз до **Правило 2**, выберите **Разрешение** для **Поле**, выберите **Не содержит данных** для **Оператор**, убедитесь, что выбрано **И**. для **Логика правил** и нажмите **Применить**.
 
-![A screenshot of the rules panel if you scroll further down with the relevant text in each field](02-2/media/image16.png)
+![Снимок экрана панели правил, прокрученного вниз с соответствующим текстом в каждом поле](02-2/media/image16.png)
 
-12. Click **+ Add**.
+12. Нажмите **+ Добавить**.
 
-![A Screenshot with an arrow pointing to the add button](02-2/media/image17.png)
+![Снимок экрана со стрелкой, указывающей на кнопку добавления](02-2/media/image17.png)
 
-13. Select **Add show error message**.
+13. Выберите **Добавить показывать сообщение об ошибке**.
 
-14. Add the action on the **true** path of the condition.
+14. Добавьте действие на **истинный** путь условия.
 
-![A Screenshot with an arrow pointing to the add button on the true path of the condition](02-2/media/image18.png)
+![Снимок экрана со стрелкой, указывающей на кнопку добавления на истинном пути условия](02-2/media/image18.png)
 
-15. Select the new action, go to the **Properties** pane, enter **Show message** for **Display Name**, select **Status Reason** for **Field**, enter **The Problem must have a resolution before it can be closed** for **Message**, and click **Apply**.
+15. Выберите новое действие, перейдите на панель **Свойства**, введите **Показать сообщение** для **Отображаемое имя**, выберите **Причина состояния** для **Поле**, введите **Проблема должна быть решена, прежде чем ее можно будет закрыть** для **Сообщение** и нажмите **Применить**.
 
-![A screenshot of the properties panel with the relevant text in the fields](02-2/media/image19.png)
+![Скриншот панели свойств с соответствующим текстом в полях](02-2/media/image19.png)
 
-16. The business rule should now look like the image below. Click **Save**.
+16. Бизнес-правило должно выглядеть так, как показано на рисунке ниже. Нажмите **Сохранить**.
 
-![A Screenshot with an arrow pointing to the save button](02-2/media/image20.png)
+![Снимок экрана со стрелкой, указывающей на кнопку сохранения](02-2/media/image20.png)
 
-17. Click **Activate**.
-18. Click **Activate** again on the pop-up.
-19. Confirm activation.
-20. Close the process editor browser window or tab.
-21. Click **Done**.
+17. Щелкните **Активировать**.
+18. Еще раз нажмите **Активировать** во всплывающем окне.
+19. Подтвердите активацию.
+20. Закройте окно или вкладку обозревателя редактора процессов.
+21. Нажмите **Готово**.
 
-### Exercise 3: Test processes
+### Упражнение 3: Процессы тестирования
 
-In this exercise, you will test the business process flow and the business rule you created.
+В этом упражнении вы протестируете последовательность бизнес-процессов и созданное вами бизнес-правило.
 
-#### Task 1: Test processes
+#### Задача 1. Тестовые процессы
 
-1.  Navigate to the [Power Apps maker portal](https://make.powerapps.com/) page and make sure you are in the correct environment.
+1. Перейдите на страницу [Портал разработчика Power Apps](https://make.powerapps.com/) и убедитесь, что вы находитесь в правильной среде.
 
-2.  Select **Apps** and click to open the **Company 311 Admin** application.
+2. Выберите **Приложения** и щелкните, чтобы открыть приложение **Администратор компании 311**.
 
-![A Screenshot with an arrow pointing to the company 311 admin option in apps](02-2/media/image21.png)
+![Снимок экрана со стрелкой, указывающей на параметр администратора компании 311 в приложениях](02-2/media/image21.png)
 
-3.  Select **Problem Reports** and click **+ New**.
+3. Выберите **Отчеты о проблемах** и нажмите **+ Создать**.
 
-4.  You should see the business process flow stages. Enter **Dark parking lot** for **Title**, select **London Paddington** for **Building**, enter **There are no lights at the north end of the parking lot** for **Details**, and click **Save**.
+4. Вы должны увидеть этапы бизнес-процесса. Введите **Темная парковка** для **Заголовок**, выберите **Лондонский Паддингтон** для **Здание**, введите **В северной части парковки нет света** для **Подробности** и нажмите **Сохранить**.
 
-![A screenshot of the new problem report](02-2/media/image22.png)
+![Снимок экрана с новым отчетом о проблеме](02-2/media/image22.png)
 
-5.  Click on the **Route** stage.
+5. Щелкните на этап **Маршрут**.
 
-![A Screenshot with an arrow pointing to the route stage at the top of the page](02-2/media/image23.png)
+![Снимок экрана со стрелкой, указывающей на этап маршрута вверху страницы](02-2/media/image23.png)
 
-6. Enter **North-end** for **Location**, select **Facility Maintenance** for **Department** and select the **Next stage** stage.
+6. Введите **Северный конец** для **Местоположение**, выберите **Техническое обслуживание объекта** для **Департамент** и выберите **Следующий этап**.
 
-   > [!NOTE]
-   >
-   > If the Next Stage option is not visible, then refresh the page.
-  
-   ![A screenshot of the drop down from the route stage with the relevant options selected and typed in](02-2/media/image24.png)
+ > [!ПРИМЕЧАНИЕ]
+ >
+ > Если параметр «Следующий этап» не отображается, обновите страницу.
+ 
+ ![Снимок экрана раскрывающегося списка со стадии маршрута с соответствующими выбранными и введенными опциями](02-2/media/image24.png)
 
-7. Select a user for **Assign to** and click **Next stage**.
+7. Выберите пользователя для **Назначить** и нажмите **Следующий этап**.
 
-8. Select date and time for the **Resolved on** and leave the **Resolution** value empty.
+8. Выберите дату и время для **Разрешено** и оставьте значение **Разрешение** пустым.
 
-9. Scroll down to the resolution details section and select **Completed** for **Status Reason**. You should see the business rule error message.
+9. Прокрутите вниз до раздела сведений о разрешении и выберите **Завершено** для **Причина состояния**. Вы должны увидеть сообщение об ошибке бизнес-правила.
 
-![A screenshot of the error message under status reason](02-2/media/image25.png)
+![Скриншот сообщения об ошибке в разделе "Причина состояния"](02-2/media/image25.png)
 
-10. Provide **Resolution**. The error message should go away.
+10. Предоставьте **Разрешение**. Сообщение об ошибке должно исчезнуть.
 
-![A screenshot of the form without the error message after resolution](02-2/media/image26.png)
+![Скриншот формы без сообщения об ошибке после разрешения](02-2/media/image26.png)
 
-11. **Save** the Row.
+11. **Сохраните** строку.
 
-Click **Next** to advance to the next lab.
-
+Нажмите **Далее**, чтобы перейти к следующей лабораторной работе.
