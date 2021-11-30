@@ -1,482 +1,482 @@
 ---
-lab:
-    title: 'Lab 06: Create Power Virtual Agents in Teams'
-    module: 'Module 06: AI builder and Power Virtual Agents'
+Лабораторный практикум:
+ заголовок: 'Лабораторная работа 06: Создание Power Virtual Agents в Teams'
+ модуль: 'Модуль 06: AI Builder и Power Virtual Agents'
 ---
 
-> [!NOTE]
-> Effective November 2020:
-> - Common Data Service has been renamed to Microsoft Dataverse. [Learn more](https://aka.ms/PAuAppBlog)
-> - Some terminology in Microsoft Dataverse has been updated. For example, *entity* is now *table* and *field* is now *column*. [Learn more](https://go.microsoft.com/fwlink/?linkid=2147247)
+> [!ПРИМЕЧАНИЕ]
+> С ноября 2020 г .:
+> - Common Data Service переименована в Microsoft Dataverse. [Подробнее…](https://aka.ms/PAuAppBlog)
+> - Обновлена некоторая терминология в Microsoft Dataverse. Например, *entity/объект* теперь *table/таблица*, а *field/поле* теперь *column/столбец*. [Подробнее…](https://go.microsoft.com/fwlink/?linkid=2147247)
 >
 
-# Lab 06: Power Virtual Agents in Teams
+# Лабораторная работа 06: Virtual Agents в Teams
 
-## Scenario
+## Сценарий
 
- Your organization is trying to recycle E-waste and decided to schedule a quarterly E-waste pickup service. Facilities department created an Excel file in OneDrive for business and want employees to be able to add their name and information about the item they want to get picked up to the list.
- In this exercise, you will create a Power Virtual Agents bot that will get the information from users and add them to the pickup list.
+Ваша организация пытается перерабатывать электронные отходы и решила запланировать ежеквартальную услугу вывоза электронных отходов. Отдел обслуживания создал файл Excel в OneDrive для бизнеса и хочет, чтобы сотрудники могли добавлять свое имя и информацию об элементе, который они хотят добавить, в список.
+ В этом упражнении вы создадите бота Power Virtual Agents, который будет получать информацию от пользователей и добавлять их в список.
 
-## Requirement
+## Требование
 
- 1. Bot should be able to get information about the item.
- 2. Bot should be able to get information about the user.
- 3. Bot should be able to add the new item to the list.
+ 1. Бот должен иметь возможность получать информацию о предмете.
+ 2. Бот должен иметь возможность получать информацию о пользователе.
+ 3. Бот должен иметь возможность добавлять новый элемент в список.
 
-## What you will learn
+## Что вы узнаете
 
- 1.	How to create a Power Virtual Agents in Teams.
- 2. How to publish Power Virtual Agents.
- 3. How to use Power Virtual Agents flow template.
+ 1.	Как создать Power Virtual Agents в Teams.
+ 2. Как опубликовать Power Virtual Agents.
+ 3. Как использовать шаблон потока Power Virtual Agents.
 
-## Detailed steps
+## Подробные шаги
 
-### Exercise 1 – Create PVA bot
+### Упражнение 1 - Создание бота PVA
 
-#### Task 1 - Add Excel file to OneDrive
-In this task, you will add an Excel file to your OneDrive for business and add new rows to this file using PVA and Power Automate.
+#### Задача 1. Добавить файл Excel в OneDrive
+В этой задаче вы добавите файл Excel в свой OneDrive для бизнеса и добавите в этот файл новые строки с помощью PVA и Power Automate.
 
-1. Navigate to [Microsoft Teams](https://teams.microsoft.com)
-2. Click on the **App launcher** and select **OneDrive**.
+1. Перейдите в [Microsoft Teams](https://teams.microsoft.com).
+2. Щелкните **Средство запуска приложений** и выберите **OneDrive**.
 
-![A Screenshot with an arrow pointing to the app launcher icon and a box around the Onedrive option in the app launcher](06/media/ex1-t1-image1.png)
+![Снимок экрана со стрелкой, указывающей на значок средства запуска приложения и рамкой вокруг параметра OneDrive в средстве запуска приложений](06/media/ex1-t1-image1.png)
 
-3. Click **Upload** and select **Files**.
+3. Нажмите **Загрузить** и выберите **Файлы**.
 
-![A screenshot with a box around the files option in the dropdown from the upload button](06/media/ex1-t1-image2.png)
+![Снимок экрана с рамкой вокруг параметра файлов в раскрывающемся списке кнопки загрузки](06/media/ex1-t1-image2.png)
 
-4. Browse to the lab resources folder, select the **Recycle.xlsx** file, and click Open.
-5. Click to open the file you just added.
+4. Перейдите в папку ресурсов лабораторных работ, выберите файл **Recycle.xlsx** и нажмите «Открыть».
+5. Щелкните, чтобы открыть только что добавленный файл.
 
 
-![A Screenshot with an arrow pointing to the recycle.xlsx file](06/media/ex1-t1-image3.png)
+![Снимок экрана со стрелкой, указывающей на файл recycle.xlsx](06/media/ex1-t1-image3.png)
 
-6. The should have just headers. Close the file and OneDrive browser tabs.
+6. Должны быть только заголовки. Закройте вкладки файла и браузера OneDrive.
 
-![A screenshot of an excel spreadsheet with four headers in the first row: name, email, location, and description](06/media/ex1-t1-image4.png)
+![Снимок экрана таблицы Excel с четырьмя заголовками в первой строке: имя, адрес электронной почты, местоположение и описание](06/media/ex1-t1-image4.png)
 
 
 
-#### Task 2 - Install PVA
+#### Задача 2 - Установить PVA
 
-In this task, you will install PVA.
+В этой задаче вы установите PVA.
 
-1. Navigate to [Microsoft Teams](https://teams.microsoft.com)
-2. Click on the **...More added apps**, search for **power virtual**, and select **Power Virtual Agents**.
+1. Перейдите в [Microsoft Teams](https://teams.microsoft.com).
+2. Щелкните **... Дополнительные добавленные приложения**, найдите **power virtual** и выберите **Power Virtual Agents**.
 
-![A Screenshot with an arrow pointing to the ellipsis icon on the left side of the window and a box around the power virtual agents option](06/media/ex1-t2-image1.png)
+![Снимок экрана со стрелкой, указывающей на значок с многоточием в левой части окна и рамкой вокруг опции Power Virtual Agents](06/media/ex1-t2-image1.png)
 
-3. Click **Add**.
-4. Right click on the **Power Virtual Agents** and select **Pin**. (If the **Power Virtual Agents** menu is not coming on the left menu, then click again on **...More added aaps** and pin it from the recents.)
+3. Щелкните **Добавить**.
+4. Щелкните правой кнопкой мыши **Power Virtual Agents** и выберите **Закрепить**. (Если меню **Power Virtual Agents** не появляется в левом меню, нажмите еще раз на **... Больше добавленных приложений** и закрепите его из списка последних.)
 
-![A Screenshot with an arrow pointing to the power virtual agents icon and a box around the pin button](06/media/ex1-t2-image2.png)
+![Снимок экрана со стрелкой, указывающей на значок Power Virtual Agents и рамкой вокруг кнопки закрепления](06/media/ex1-t2-image2.png)
 
-5. Do not navigate away from this page.
+5. Не уходите с этой страницы.
 
-#### Task 3 - Create bot
+#### Задача 3 - Создание бота
 
-In this task, you will create the bot.
+В этой задаче вы создадите бота.
 
-1. Select **Power Virtual Agents** and click **Start now**.
+1. Выберите **Power Virtual Agents** и нажмите **Начать сейчас**.
 
-![A Screenshot with an arrow pointing to the start now button](06/media/ex1-t3-image1.png)
+![Снимок экрана со стрелкой, указывающей на кнопку Начать сейчас](06/media/ex1-t3-image1.png)
 
-2. Select the **Green** team you created and click **Continue**.
-3. Enter **Green Bot** for name and click **Create**.
-4. Wait for the bot to be created.
-5. Click **Explore bot**.
-6. Type **Hello** in the text box located in the bottom left and click **Send**. If you don't see the textbox click the **Test your bot** button located in the bottom left.
-7. The bot should respond with the default greeting. You will edit this greeting in the next task.
+2. Выберите **Зеленую** команду, которую вы создали, и нажмите **Продолжить**.
+3. Введите **Зеленый Бот** в качестве имени и нажмите **Создать**.
+4. Дождитесь создания бота.
+5. Нажмите **Исследовать бота**.
+6. Введите **Привет** в текстовом поле, расположенном в левом нижнем углу, и нажмите **Отправить**. Если вы не видите текстовое поле, нажмите кнопку **Проверить своего бота**, расположенную в левом нижнем углу.
+7. Бот должен ответить приветствием по умолчанию. Вы отредактируете это приветствие в следующем задании.
 
-![A screenshot with a box around the bot's default greeting reading: "Hi! I'm a virtual agent. I can help with account questions, orders, store information and more. If you'd like to speak to a human agent, let me know at any time. So what can I help you with today?"](06/media/ex1-t3-image2.png)
+![Снимок экрана с рамкой вокруг приветствия бота по умолчанию: "Привет! Я виртуальный агент. Я могу помочь с вопросами по аккаунту, заказами, информацией о магазине и т. д. Если вы хотите поговорить с агентом-человеком, дайте мне знать в любое время. Итак, чем я могу вам помочь сегодня?"](06/media/ex1-t3-image2.png)
 
-8. You can show/hide the bot by clicking on the bot icon located in the bottom left. This will give the authoring canvas more room.
+8. Вы можете показать / скрыть бота, щелкнув значок бота в нижнем левом углу. Это даст больше места для авторского полотна.
 
-![A Screenshot with an arrow pointing to the hide bot button](06/media/ex1-t3-image3.png)
+![Снимок экрана со стрелкой, указывающей на кнопку скрытия бота](06/media/ex1-t3-image3.png)
 
-9. Do not navigate away from this page.
+9. Не уходите с этой страницы.
 
 
-#### Task 4 - Edit greeting
-In this task, you will edit the default greeting.
+#### Задача 4 - Редактирование приветствия
+В этой задаче вы измените приветствие по умолчанию.
 
-1. Select **Topics** and click to open the **Greeting** topic
+1. Выберите **Темы** и нажмите, чтобы открыть тему **Приветствие**.
 
-![A Screenshot with an arrow pointing to the greeting topic in the topics menu](06/media/ex1-t4-image1.png)
+![Снимок экрана со стрелкой, указывающей на тему приветствия в меню тем](06/media/ex1-t4-image1.png)
 
-2. Take a look and see the trigger phrases for this topic.
-3. Click on the **Go to authoring canvas** button.
+2. Взгляните и увидите триггерные фразы для этой темы.
+3. Нажмите кнопку **Перейти к холсту разработки**.
 
-![A Screenshot with an arrow pointing to the go to authoring canvas button](06/media/ex1-t4-image2.png)
+![Снимок экрана со стрелкой, указывающей на кнопку перехода к холсту разработки](06/media/ex1-t4-image2.png)
 
-4. Go to the first **Message** and replace the message with the text below.
+4. Перейдите к первому **сообщению** и замените сообщение приведенным ниже текстом.
 
-```Hi! I'm a virtual agent. I can help you recycle e-waste by posting items to the Upcycle application or add them to the quarterly e-waste pickup list.```
+''Привет! Я виртуальный агент. Я могу помочь вам переработать электронные отходы, разместив элементы в приложении Upcycle или добавив их в ежеквартальный список вывоза электронных отходов''.
 
-![A screenshot of the greeting message replaced with the aforementioned text](06/media/ex1-t4-image3.png)
+![Скриншот приветственного сообщения заменен вышеупомянутым текстом](06/media/ex1-t4-image3.png)
 
-5. Click **Save**.
-6. Click **Test your bot** to show the bot.
-7. Type **Hey** and click **Send**.
-8. The bot should now use your updated message.
+5. Нажмите **Сохранить**.
+6. Нажмите **Проверить своего бота**, чтобы показать бота.
+7. Введите **Привет** и нажмите **Отправить**.
+8. Теперь бот должен использовать ваше обновленное сообщение.
 
-![A screenshot of the updated bot greeting message](06/media/ex1-t4-image4.png)
+![Снимок экрана с обновленным приветственным сообщением бота](06/media/ex1-t4-image4.png)
 
-9. Hide the bot.
-10. Do not navigate away from this page.
+9. Скройте бота.
+10. Не уходите с этой страницы.
 
-#### Task 5 - Create topic
-In this task, you will create a new topic for the bot so it can respond to inquiries.
+#### Задача 5 - Создание темы
+В этой задаче вы создадите новую тему для бота, чтобы он мог отвечать на запросы.
 
-1. Select **Topics** and click **+ New topic**.
+1. Выберите **Темы** и нажмите **+ Новая тема**.
 
-![A Screenshot with an arrow pointing to the new topic button](06/media/ex1-t5-image1.png)
+![Скриншот со стрелкой, указывающей на кнопку новой темы](06/media/ex1-t5-image1.png)
 
-2. Enter **Recycle Reuse Reduce** for Name.
-3. Enter **Recycle** for trigger phrase and click **Add**.
+2. Введите **Recycle Reuse Reduce** в поле Имя.
+3. Введите **Утилизация** для триггерной фразы и нажмите **Добавить**.
 
-![A Screenshot with an arrow pointing to the add button](06/media/ex1-t5-image2.png)
+![Снимок экрана со стрелкой, указывающей на кнопку добавления](06/media/ex1-t5-image2.png)
 
-4. Type **E-waste** as another trigger phrase and click **Add**.
-5. Type **Green** as another trigger phrase and click **Add**.
-6. Type **Add me** as another trigger phrase and click **Add**.
-7. Type **Upcycle** as another trigger phrase and click **Add**.
-8. Type **Reuse** as another trigger phrase and click **Add**.
-9. Type **Reduce** as another trigger phrase and click **Add**.
-10. Type **Recycle list** as another trigger phrase and click **Add**.
-11. You should now have at least 8 trigger phrases. Click **Save topic**.
+4. Введите **Электронные отходы** в качестве другой триггерной фразы и нажмите **Добавить**.
+5. Введите **Зеленый** в качестве другой триггерной фразы и нажмите **Добавить**.
+6. Введите **Добавить меня** в качестве другой триггерной фразы и нажмите **Добавить**.
+7. Введите **Upcycle ** в качестве другой триггерной фразы и нажмите **Добавить**.
+8. Введите **Повторное использование** в качестве другой триггерной фразы и нажмите **Добавить**.
+9. Введите **Уменьшить** в качестве другой триггерной фразы и нажмите **Добавить**.
+10. Введите **Список переработки** в качестве другой триггерной фразы и нажмите **Добавить**.
+11. Теперь у вас должно быть не менее 8 триггерных фраз. Нажмите **Сохранить тему**.
 
-![A Screenshot with an arrow pointing to the test bot button](06/media/ex1-t5-image3.png)
+![Скриншот со стрелкой, указывающей на кнопку тестового бота](06/media/ex1-t5-image3.png)
 
-9. Click on the **Go to authoring canvas button**.
-10. Type **I can help you with that.** for message and click on the **+ Add node** button.
+9. Нажмите кнопку **Перейти к холсту разработки**.
+10. Введите **Я могу помочь вам с этим.** для сообщения и нажмите кнопку **+ Добавить узел**.
 
-![A Screenshot with an arrow pointing to the plus icon to add a node](06/media/ex1-t5-image4.png)
+![Снимок экрана со стрелкой, указывающей на значок плюса для добавления узла](06/media/ex1-t5-image4.png)
 
-11. Select **Ask a question**.
+11. Выберите **Задайте вопрос**.
 
-![A Screenshot with an arrow pointing to the ask a question button](06/media/ex1-t5-image5.png)
+![Снимок экрана со стрелкой, указывающей на кнопку «Задать вопрос»](06/media/ex1-t5-image5.png)
 
-12. Enter the text below in the Ask a question textbox.
+12. Введите приведенный ниже текст в текстовое поле Задайте вопрос.
 
-```I can add your item to the Upcycle application or to the e-waste pick-up list. What would you like me to do?```
+''Я могу добавить ваш товар в приложение Upcycle или в список вывоза электронных отходов. Что бы вы хотели, чтобы я сделал?''
 
-13.  Make sure you have **Multiple choice options** selected for Identity, type **Add to the Upcycle app** for first option and click **+ New option**.
+13. Убедитесь, что вы выбрали **Несколько вариантов выбора** для Идентификации, введите **Добавить в приложение Upcycle** для первого варианта и нажмите **+ Новый вариант**.
 
-![A Screenshot with an arrow pointing to the new option button](06/media/ex1-t5-image6.png)
+![Снимок экрана со стрелкой, указывающей на кнопку нового параметра](06/media/ex1-t5-image6.png)
 
-14. Type **Add to the pick-up list** as another option.
-15. You should now have two conditions. Click on the **...** Options button of one of the conditions and click **Delete**.
+14. Введите **Добавить в список выбора** в качестве другого варианта.
+15. Теперь у вас должно быть два условия. Нажмите кнопку **...** Параметры одного из условий и нажмите **Удалить**.
 
-![A Screenshot with an arrow pointing to the three dots icon and a red box around the delete button](06/media/ex1-t5-image7.png)
+![Снимок экрана со стрелкой, указывающей на значок с тремя точками и красной рамкой вокруг кнопки удаления](06/media/ex1-t5-image7.png)
 
-16. Delete the other condition. We are deleting the conditions because adding item to the pick-up list and adding item to the Upcycle application required similar information.
+16. Удалите другое условие. Мы удаляем условия, потому что добавление элемента в список получения и добавление элемента в приложение Upcycle требовало аналогичной информации.
 
-17. Change the second input value in Condition menu to **has value**.
+17. Измените второе входное значение в меню «Условие» на **имеет значение**.
 
-    ![has value - screenshot](06/media/image1.png)
+ ![имеет значение - снимок экрана](06/media/image1.png)
 
-18. Click on the edit variable icon.
+18. Щелкните значок редактирования переменной.
 
-![A Screenshot with an arrow pointing to the pencil icon in the box under the text save response as](06/media/ex1-t5-image8.png)
+![Снимок экрана со стрелкой, указывающей на значок карандаша в поле под текстом, сохранить ответ как](06/media/ex1-t5-image8.png)
 
-18. Change the variable name to **UserOption** and close the variable properties pane.
+18. Измените имя переменной на **UserOption** и закройте панель свойств переменной.
 
-![A Screenshot with an arrow pointing to the cross icon in the top right corner of the pane](06/media/ex1-t5-image9.png)
+![Снимок экрана со стрелкой, указывающей на крестик в правом верхнем углу панели](06/media/ex1-t5-image9.png)
 
-19. Click **+ Add node** and select **Ask a question**
-20. Enter the text below in the Ask a question textbox.
+19. Нажмите **+ Добавить узел** и выберите **Задать вопрос**.
+20. Введите приведенный ниже текст в текстовое поле Задайте вопрос.
 
-```What is the name of the item?```
+''Как называется предмет?''
 
-21.   Click on the **Identify** dropdown and select **User's entire response**.
+21. Щелкните раскрывающееся меню **Определить** и выберите **Полный ответ пользователя**.
 
-![A Screenshot with an arrow pointing to the drop down icon in the identify field and a box around the user's entire response button](06/media/ex1-t5-image10.png)
+![Снимок экрана со стрелкой, указывающей на раскрывающийся значок в поле идентификации, и рамкой вокруг кнопки ответа пользователя](06/media/ex1-t5-image10.png)
 
-22.  Click on the **Edit variable** icon.
+22. Щелкните значок **Изменить переменную**.
 
-![A Screenshot with an arrow pointing to the pencil icon in the box under the text save response as](06/media/ex1-t5-image11.png)
+![Снимок экрана со стрелкой, указывающей на значок карандаша в поле под текстом, сохранить ответ как](06/media/ex1-t5-image11.png)
 
-23. Change the variable Name to **ItemName** and close the variable properties pane.
-24. Click **+ Add node** after the question.
-25. Select **Ask a question** again.
-26. Enter the text below in the Ask a question textbox.
+23. Измените имя переменной на **ИмяЭлемента** и закройте панель свойств переменной.
+24. Щелкните **+ Добавить узел** после вопроса.
+25. Еще раз выберите **Задать вопрос**.
+26. Введите приведенный ниже текст в текстовое поле Задайте вопрос.
 
-```What is the description of this item?```
+''Каково описание этого предмета?''
 
-27. Click on the **Identify** dropdown and select **User's entire response** again.
-28. Click on the **Edit variable** icon again.
-29. Change the variable Name to **Description** and close the variable properties pane.
-30. Click **+ Add node** after the question.
-31. Select **Ask a question** one more time.
-32. Enter the text below in the Ask a question textbox.
+27. Щелкните раскрывающееся меню **Определить** и снова выберите **Весь ответ пользователя**.
+28. Щелкните значок **Изменить переменную** еще раз.
+29. Измените Имя переменной на **Описание** и закройте панель свойств переменной.
+30. Щелкните **+ Добавить узел** после вопроса.
+31. Выберите **Задайте вопрос** еще раз.
+32. Введите приведенный ниже текст в текстовое поле Задайте вопрос.
 
-```What is the location of this item?```
+''Где находится этот предмет?''
 
-33. Click on the **Identify** dropdown and select **User's entire response** again.
-34. Click on the **Edit variable** icon again.
-35. Change the variable Name to **Location** and close the variable properties pane.
-36. The three questions should now look like the image below. Click **Save**
+33. Щелкните раскрывающееся меню **Определить** и снова выберите **Весь ответ пользователя**.
+34. Щелкните значок **Изменить переменную** еще раз.
+35. Измените Имя переменной на **Местоположение** и закройте панель свойств переменной.
+36. Теперь три вопроса должны выглядеть, как показано на рисунке ниже. Нажмите **Сохранить**.
 
-![A Screenshot with an arrow pointing to the save button in the top right corner](06/media/ex1-t5-image12.png)
+![Снимок экрана со стрелкой, указывающей на кнопку сохранения в правом верхнем углу](06/media/ex1-t5-image12.png)
 
-37. Do not navigate away from this page.
+37. Не уходите с этой страницы.
 
 
-#### Task 6 - Create flow
+#### Задача 6 - Создание потока
 
-In this task, you will create a flow that will add the item to the recycle list or to the Upcycle application depending on the user option.
+В этой задаче вы создадите поток, который добавит элемент в список повторного использования или в приложение Upcycle в зависимости от выбора пользователя.
 
-1.  Go to the last question, click **+ Add node** and select **Call an action**.
+1. Перейдите к последнему вопросу, нажмите **+ Добавить узел** и выберите **Вызвать действие**.
 
-![A screenshot of a box around the call an action button](06/media/ex1-t6-image1.png)
+![Скриншот рамки вокруг кнопки призыва к действию](06/media/ex1-t6-image1.png)
 
-2.  Click **Create a flow**.
-3.  Select **Power Virtual Agents Flow Template**
+2. Щелкните **Создать поток**.
+3. Выберите **Шаблон потока Power Virtual Agents**.
 
-![A screenshot of a box around the power virtual agents flow template option](06/media/ex1-t6-image2.png)
+![Снимок экрана с рамкой вокруг параметра шаблона потока Power Virtual Agents](06/media/ex1-t6-image2.png)
 
-4.  Rename the flow **Add item to app or list** and click **+ Add an input**.
+4. Переименуйте поток **Добавить элемент в приложение или список** и нажмите **+ Добавить вход**.
 
-![A screenshot of a box around the add item to app or list button and an arrow pointing to the add an input button under power virtual agents](06/media/ex1-t6-image3.png)
+![Снимок экрана с рамкой вокруг кнопки добавления элемента или списка и стрелкой, указывающей на кнопку добавления ввода под Power Virtual Agents](06/media/ex1-t6-image3.png)
 
-5.  Select **Text**.
-6.  Enter **User ID** and click **+ Add an input** again.
+5. Выберите **Текст**.
+6. Введите **ID пользователя** и снова нажмите **+ Добавить ввод**.
 
-![A Screenshot with an arrow pointing to the add an input button](06/media/ex1-t6-image4.png)
+![Снимок экрана со стрелкой, указывающей на кнопку добавления ввода](06/media/ex1-t6-image4.png)
 
-7.  Select **Text**.
-8.  Enter **UserOption** and click **+ Add an input** one more time.
-9.  Select **Text**.
-10. Enter **ItemName** and click **+ Add an input** one more time.
-11. Select **Text**.
-12. Enter **Description** and click **+ Add an input** one more time.
-13. Select **Text**.
-14. Enter **Location**.
-15. You should now have five inputs.
-16. Click **+ Insert a new step** and select **Add an action**.
+7. Выберите **Текст**.
+8. Введите **ВыборПользователя** и нажмите **+ Добавить ввод** еще раз.
+9. Выберите **Текст**.
+10. Введите **ИмяЭлемента** и нажмите **+ Добавить ввод** еще раз.
+11. Выберите **Текст**.
+12. Введите **Описание** и нажмите **+ Добавить ввод** еще раз.
+13. Выберите **Текст**.
+14. Введите **Местоположение**.
+15. Теперь у вас должно быть пять входов.
+16. Нажмите **+ Вставить новый шаг** и выберите **Добавить действие**.
 
-![A Screenshot with an arrow pointing to the plus icon at the bottom of the power virtual agents pane and a box around the add an action button](06/media/ex1-t6-image5.png)
+![Снимок экрана со стрелкой, указывающей на значок плюса в нижней части панели виртуальных агентов, и рамкой вокруг кнопки добавления действия](06/media/ex1-t6-image5.png)
 
-17.  Search for initialize and select **Initialize variable**.
+17. Найдите инициализацию и выберите **Инициализировать переменную**.
 
-![A screenshot with a box around the initialize variable button](06/media/ex1-t6-image6.png)
+![Снимок экрана с рамкой вокруг кнопки инициализации переменной](06/media/ex1-t6-image6.png)
 
-18.  Enter **Response to bot** for Name, select **String** for Type.
-19.  Click Insert a new step and select **Add an action**.
+18. Введите **Ответ Боту** в поле Имя, выберите **Строка** в поле Тип.
+19. Щелкните Вставить новый шаг и выберите **Добавить действие**.
 
-![A Screenshot with an arrow pointing to the plus icon at the bottom of the initialize variable pane and a box around the add an action button](06/media/ex1-t6-image7.png)
+![Снимок экрана со стрелкой, указывающей на значок плюса в нижней части панели инициализации переменной, и рамкой вокруг кнопки добавления действия](06/media/ex1-t6-image7.png)
 
-20.  Click  **+ Insert a new step** again and select **Add an action**.
-21.  Search for get user profile and select **Get user profile (V2)**.
+20. Снова нажмите **+ Вставить новый шаг** и выберите **Добавить действие**.
+21. Найдите Получить профиль пользователя и выберите **Получить профиль пользователя (V2)**.
 
-![A screenshot with a box around the get user profile V2 button](06/media/ex1-t6-image8.png)
+![Снимок экрана с рамкой вокруг кнопки получения профиля пользователя V2](06/media/ex1-t6-image8.png)
 
-22.  Click on the **User (UPN)** field and select **User ID** from the dynamic content pane.
+22. Щелкните поле **Пользователь (UPN)** и выберите **ID Пользователя** на панели динамического содержимого.
 
-![A screenshot with a box around the user ID box in the user UPN field. There is also an arrow pointing to the user ID option in the dynamic content pane](06/media/ex1-t6-image9.png)
+![Снимок экрана с рамкой вокруг поля идентификатора пользователя в поле UPN пользователя. Также есть стрелка, указывающая на параметр идентификатора пользователя на панели динамического содержимого](06/media/ex1-t6-image9.png)
 
-23.  Click **+ Insert a new step** again and select **Add an action**.
-24.  Search for condition and select **Condition**.
-25.  Click on the first **Choose a value** field and select **UserOption** from the dynamic content pane.
+23. Нажмите **+ Вставить новый шаг** еще раз и выберите **Добавить действие**.
+24. Найдите условие и выберите **Условие**.
+25. Щелкните первое поле **Выберите значение** и выберите **ВыборПользователя** на панели динамического содержимого.
 
-![A Screenshot with an arrow pointing to the UserOption in the dynamic content pane. There is also a box around the user option box in the condition pane](06/media/ex1-t6-image10.png)
+![Снимок экрана со стрелкой, указывающей на ВыборПользователя на панели динамического содержимого. На панели условий также есть рамка вокруг поля выбора пользователя](06/media/ex1-t6-image10.png)
 
-26.  Select **is equal to** and type **Add to the Upcycle app**.
-27.  Go to the **if no** branch and click **Add an action**.
+26. Выберите **равно** и введите **Добавить в приложение Upcycle**.
+27. Перейдите в ветку **если нет** и нажмите **Добавить действие**.
 
-![A Screenshot with an arrow pointing to the add an action button in the if no window](06/media/ex1-t6-image11.png)
+![Снимок экрана со стрелкой, указывающей на кнопку добавления действия в окне если нет](06/media/ex1-t6-image11.png)
 
-28.  Search for add a row and select **Add a row into a table** from Excel Online (Business).
+28. Найдите добавить строку и выберите **Добавить строку в таблицу** в Excel Online (Business).
 
-![A screenshot with a box around the add a row into a table button](06/media/ex1-t6-image12.png)
+![Снимок экрана с рамкой вокруг кнопки добавления строки в таблицу](06/media/ex1-t6-image12.png)
 
-29.  Select **OneDrive for Business** for Location, **OneDrive** for Document Library, **Recycle.xlsx** for File and **PickupTable** for table.
-30.   Click on the **Name** field and select **Display Name** from the dynamic content pane.
+29. Выберите **OneDrive для бизнеса** для местоположения, **OneDrive** для библиотеки документов, **Recycle.xlsx** для файла и **PickupTable** для таблицы.
+30. Щелкните поле **Имя** и выберите **Отображаемое имя** на панели динамического содержимого.
 
-![A screenshot of a box around the display name box in the name field. There is also an arrow pointing to the dynamic content pane and the display name button](06/media/ex1-t6-image13.png)
+![Снимок экрана с рамкой вокруг отображаемого имени в поле имени. Также есть стрелка, указывающая на панель динамического содержимого и кнопку отображаемого имени](06/media/ex1-t6-image13.png)
 
-31.  Click on the **Email** field and select **Mail** from the dynamic content pane.
-32.  Click on the **Location** field and select the **Location** dynamic content from the Power Virtual Agents step in the dynamic content pane.
+31. Щелкните поле **Электронная почта** и выберите **Почта** на панели динамического содержимого.
+32. Щелкните поле **Местоположение** и выберите динамическое содержимое **Местоположение** на шаге Power Virtual Agents на панели динамического содержимого.
 
-![A screenshot with a box around the power virtual agents part of the dynamic content pane and an arrow pointing to the location button. There is also a box around the location box in the location field](06/media/ex1-t6-image14.png)
+![Снимок экрана с рамкой вокруг части Power Virtual Agents на панели динамического содержимого и стрелкой, указывающей на кнопку местоположения. Также есть рамка вокруг поля местоположения в поле местоположения](06/media/ex1-t6-image14.png)
 
-33.  Click on the **Description** field and select **Description**  from the dynamic content pane.
-34.  The flow step should now look like the image below. Click **Add an action**
+33. Щелкните поле **Описание** и выберите **Описание** на панели динамического содержимого.
+34. Шаг потока теперь должен выглядеть как на изображении ниже. Нажмите **Добавить действие**.
 
-![A Screenshot with an arrow pointing to the add an action button](06/media/ex1-t6-image15.png)
+![Снимок экрана со стрелкой, указывающей на кнопку добавления действия](06/media/ex1-t6-image15.png)
 
-35.  Search for set variable and select **Set variable**.
-36.  Select **Response to bot** for name, click Value field and select **ItemName** from the dynamic content pane.
+35. Найдите заданную переменную и выберите **Установить переменную**.
+36. Выберите **Ответ Боту** для имени, щелкните поле Значение и выберите **ИмяЭлемента** на панели динамического содержимого.
 
-![A Screenshot with an arrow pointing to the item name option in the dynamic content pane](06/media/ex1-t6-image16.png)
+![Снимок экрана со стрелкой, указывающей на параметр имени элемента на панели динамического содержимого](06/media/ex1-t6-image16.png)
 
-37. Add the text below after the ItemName.
+37. Добавьте текст ниже после ИмениЭлемента.
 
-``` was added to the e-waste pick-up list.```
+''Был добавлен в список вывоза электронных отходов''.
 
-38. Go to the **If yes** branch and click **Add an action**.
+38. Перейдите в ветку **Если да** и нажмите **Добавить действие**.
 
-![A Screenshot with an arrow pointing to the add an action button](06/media/ex1-t6-image17.png)
+![Снимок экрана со стрелкой, указывающей на кнопку добавления действия](06/media/ex1-t6-image17.png)
 
-39. Search for add new row and select **Add a new row** from Microsoft Dataverse.
+39. Найдите добавление новой строки и выберите **Добавить новую строку** в Microsoft Dataverse.
 
-![A screenshot with a box around the add a new row microsoft dataverse button](06/media/ex1-t6-image18.png)
+![Снимок экрана с рамкой вокруг кнопки microsoft dataverse для добавления новой строки](06/media/ex1-t6-image18.png)
 
-40. Select **Gadgets** for the table name.
-41. Click on the Location field and select **Location** from the dynamic content pane.
-42. Click on the Name field and select **ItemName** from the dynamic content pane.
-43. Click **Show advanced options**.
+40. Выберите **Гаджеты** в качестве имени таблицы.
+41. Щелкните поле «Местоположение» и выберите **Местоположение** на панели динамического содержимого.
+42. Щелкните поле «Имя» и выберите **ИмяЭлемента** на панели динамического содержимого.
+43. Щелкните **Показать дополнительные параметры**.
 
 
-![A Screenshot with an arrow pointing to the show advanced options button](06/media/ex1-t6-image19.png)
+![Снимок экрана со стрелкой, указывающей на кнопку "Показать дополнительные параметры"](06/media/ex1-t6-image19.png)
 
-44. Select **Available** for Availability, click on the Description field and select **Description** from the dynamic content pane.
-45. Click **Add an action** after the add a new row step.
-46. Search for set variable and select **Set variable**.
-47. Select **Response to bot** for Name, click on the Value field and select **ItemName** from the dynamic content pane.
-48. Add the text below after the ItemName.
+44. Выберите **Доступно** для параметра «Доступность», щелкните поле «Описание» и выберите **Описание** на панели динамического содержимого.
+45. Нажмите **Добавить действие** после шага добавления новой строки.
+46. Найдите заданную переменную и выберите **Установить переменную**.
+47. Выберите **Ответ Боту** для Имя, щелкните поле Значение и выберите **ИмяЭлемента** на панели динамического содержимого.
+48. Добавьте текст ниже после ИмениЭлемента.
 
-``` was added to the Upcycle application.```
+''Был добавлен в приложение Upcycle''.
 
-48. The two branches of the condition should now look like the image below. Click to expand the **Return value(s) to Power Virtual Agents** step.
+48. Две ветви условия теперь должны выглядеть, как на изображении ниже. Щелкните, чтобы развернуть шаг **Возвращаемые значения до Power Virtual Agents**.
 
-![A Screenshot with an arrow pointing to the return values to power virtual agents box beneath the if yes and if no conditions boxed](06/media/ex1-t6-image20.png)
+![Снимок экрана со стрелкой, указывающей на возвращаемые значения в поле Virtual Agents под полями «если да» и «если нет»](06/media/ex1-t6-image20.png)
 
-49. Click **+ Add an output**.
-50. Select **Text**.
-51. Enter **Response**, click on the value field, and select **Response to bot** from the dynamic content pane.
+49. Щелкните **+ Добавить результат**.
+50. Выберите **Текст**.
+51. Введите **Ответ**, щелкните поле значения и выберите **Ответ Боту** на панели динамического содержимого.
 
-![A Screenshot with an arrow pointing to the response to bot option in the dynamic content pane under variables](06/media/ex1-t6-image21.png)
+![Снимок экрана со стрелкой, указывающей на параметр ответа бота на панели динамического содержимого под переменными](06/media/ex1-t6-image21.png)
 
-52. Click **Save** to save the flow.
-53. Click on the **<-** back button next to the flow name.
+52. Нажмите **Сохранить**, чтобы сохранить последовательность.
+53. Нажмите кнопку **<-** назад рядом с названием потока.
 
-![Back to PVA button - screenshot](06/media/ex1-t6-image22.png)
+![Вернуться к кнопке PVA - снимок экрана](06/media/ex1-t6-image22.png)
 
-54. You should now be back to the bot authoring canvas.
-55. Do not navigate away from this page.
+54. Теперь вы должны вернуться к холсту создания ботов.
+55. Не уходите с этой страницы.
 
-#### Task 7 - Call flow 
-In this task, you will call the flow as an action from the Power Virtual Agents bot.
+#### Задача 7 - Поток вызовов 
+В этой задаче вы вызовете поток как действие от бота Power Virtual Agents.
 
-1.  Go to the last question, click **+ Add node** and select **Call an action**.
-3.  Select the **Add item to app or list** flow you created.
+1. Перейдите к последнему вопросу, нажмите **+ Добавить узел** и выберите **Вызвать действие**.
+3. Выберите поток **Добавить элемент в приложение или список**, который вы создали.
 
-![A Screenshot with an arrow pointing to the add item to app or list button](06/media/ex1-t7-image1.png)
+![Снимок экрана со стрелкой, указывающей на кнопку добавления элемента в приложение или список](06/media/ex1-t7-image1.png)
 
-4.  Click on the **User ID** and select **bot.UserId**.
+4. Щелкните **ID пользователя** и выберите **bot.UserId**.
 
-![A Screenshot with an arrow pointing to the drop down icon in the field asking the user to enter or select a value. There is also a box around the variable option bot.UserId](06/media/ex1-t7-image2.png)
+![Снимок экрана со стрелкой, указывающей на значок раскрывающегося списка в поле, предлагающий пользователю ввести или выбрать значение. Также есть рамка вокруг параметра переменной bot.UserId](06/media/ex1-t7-image2.png)
 
-5.  Click on the **UserOption** and select **UserOption**.
-6.  Click on the **ItemName** and select **ItemName**.
-7.  Click on the **Description** and select **Description**.
-8.  Click on the **Location** and select **Location**.
-9.  Click **+ Add node** and select **Show a message**.
+5. Щелкните **ВыборПользователя** и выберите **ВыборПользователя**.
+6. Щелкните **ИмяЭлемента** и выберите **ИмяЭлемента**.
+7. Щелкните **Описание** и выберите **Описание**.
+8. Щелкните **Местоположение** и выберите **Местоположение**.
+9. Щелкните **+ Добавить узел** и выберите **Показать сообщение**.
 
-![A Screenshot with an arrow pointing to the show a message button](06/media/ex1-t7-image3.png)
+![Снимок экрана со стрелкой, указывающей на кнопку отображения сообщения](06/media/ex1-t7-image3.png)
 
-8.  Click on the **Insert variable** icon and select **Response**.
+8. Щелкните значок **Вставить переменную** и выберите **Ответ**.
 
-![A Screenshot with an arrow pointing to the insert variable icon and a box around the response button in the drop down](06/media/ex1-t7-image4.png)
+![Снимок экрана со стрелкой, указывающей на значок вставки переменной и рамкой вокруг кнопки ответа в раскрывающемся списке](06/media/ex1-t7-image4.png)
 
-9.  Click **+ Add node** and select **End with survey**.
-10.  The end of the bot conversation should look like the image below.
+9. Щелкните **+ Добавить узел** и выберите **Завершить опросом**.
+10. Окончание разговора с ботом должно выглядеть, как на изображении ниже.
 
-![A screenshot of the end of the bot conversation which shows a message command with {x} response in the box and then an end of conversation command connected below](06/media/ex1-t7-image5.png)
+![Снимок экрана с окончанием беседы с ботом, на котором показана команда сообщения с {x} ответом в поле, а затем команда завершения беседы, подключенная ниже](06/media/ex1-t7-image5.png)
 
-11.  Click **save** to save your changes and wait for the bot to be saved.
-12.  Do not navigate away from this page.
+11. Нажмите **сохранить**, чтобы сохранить изменения, и дождитесь сохранения бота.
+12. Не уходите с этой страницы.
 
-### Exercise 2 – Test and publish the bot
+### Упражнение 2 - Протестируйте и опубликуйте бота.
 
-#### Task 1 - Test bot
-In this task, you will test the bot.
+#### Задача 1 - Тест бота
+В этом задании вы протестируете бота.
 
-1.  **Show** the bot if it is hidden by selecting Show Bot option on the bottom left side of the screen.
-2.  Type **Recycle** and click **Send**.
-3.  The bot should ask you if you want to add the item to the e-waste list or the upcycle application. Select **Add to the Upcycle app**.
+1. **Показать** бота, если он скрыт, выбрав параметр «Показать бота» в левой нижней части экрана.
+2. Введите **Переработка** и нажмите **Отправить**.
+3. Бот должен спросить вас, хотите ли вы добавить товар в список электронных отходов или в приложение upcycle. Выберите **Добавить в приложение Upcycle**.
 
-![A screenshot with a box around the add to the upcycle app](06/media/ex2-t1-image1.png)
+![Снимок экрана с рамкой вокруг добавления в приложение upcycle](06/media/ex2-t1-image1.png)
 
-4.  The bot should ask you to provide name. Enter **Bot charger** and click **Send**
-5.  The bot should ask you the description of the item. Enter **Universal bot charger** and click **Send**.
-6.  The bot should ask you the location of the item. Enter **Building 4 Room A-754** and click **Send**.
-7.  The bot should tell you the item was added to the Upcycle application and ask you if your question was answered. Click **Yes**.
+4. Бот должен попросить вас указать имя. Введите **Зарядное устройство для бота** и нажмите **Отправить**.
+5. Бот должен спросить у вас описание предмета. Введите **Универсальное зарядное устройство для ботов** и нажмите **Отправить**.
+6. Бот должен спросить у вас местонахождение предмета. Введите **Здание 4 Помещение A-754** и нажмите **Отправить**.
+7. Бот должен сообщить вам, что элемент был добавлен в приложение Upcycle, и спросить, был ли дан ответ на ваш вопрос. Нажмите **Да**.
 
-![A Screenshot with an arrow pointing to the yes button](06/media/ex2-t1-image2.png)
+![Снимок экрана со стрелкой, указывающей на кнопку «Да»](06/media/ex2-t1-image2.png)
 
-7.  The bot should ask you to rate your experience. give it a rating.
-8.  The bot should thank you and ask you if it can help you with anything else. Click **Yes**.
-9.  Type **Reuse** and click **Send**.
-10. Select **Add to the pick-up list** this time.
-11. The bot should ask you to provide name. Enter **Bad bot charger** and click **Send**
-12. The bot should ask you the description of the item. Enter **Bad universal bot charger** and click **Send**.
-13. The bot should ask you the location of the item. Enter **Building 4 Room A-754** and click **Send**.
-14. The bot should tell you the item was added to the e-waste pick-up list and ask you if your question was answered. Click **Yes**.
+7. Бот должен попросить вас оценить ваш опыт. Дайте ему оценку.
+8. Бот должен поблагодарить вас и спросить, может ли он вам еще чем-нибудь помочь. Нажмите **Да**.
+9. Введите **Повторное использование** и нажмите **Отправить**.
+10. На этот раз выберите **Добавить в список выбора**.
+11. Бот должен попросить вас указать имя. Введите **Плохое зарядное устройство для бота** и нажмите **Отправить**.
+12. Бот должен спросить у вас описание предмета. Введите **Плохое универсальное зарядное устройство для ботов** и нажмите **Отправить**.
+13. Бот должен спросить у вас местонахождение предмета. Введите **Здание 4 Помещение A-754** и нажмите **Отправить**.
+14. Бот должен сообщить вам, что товар был добавлен в список для вывоза электронных отходов, и спросить, был ли дан ответ на ваш вопрос. Нажмите **Да**.
 
-![A Screenshot with an arrow pointing to the yes button](06/media/ex2-t1-image3.png)
+![Снимок экрана со стрелкой, указывающей на кнопку «Да»](06/media/ex2-t1-image3.png)
 
-15. Rate the bot.
-16. Select **No, thanks**.
-17. The bot should end the conversation.
-18. Select **Teams**.
+15. Оцените бота.
+16. Выберите **Нет, спасибо**.
+17. Бот должен завершить разговор.
+18. Выберите **Команды**.
 
-![A Screenshot with an arrow pointing to the teams icon](06/media/ex2-t1-image4.png)
+![Скриншот со стрелкой, указывающей на значок команды](06/media/ex2-t1-image4.png)
 
-19. Select **Green** team chat. Select the **Upcycle** tab.
-20. Search for bot. You should see the **Bot changer** the bot added to the application.
+19. Выберите **Зеленый** командный чат. Выберите вкладку **Upcycle**.
+20. Найдите бота. Вы должны увидеть бот **Bot changer**, добавленный в приложение.
 
-![A screenshot with the word bot in the search bar in the upcycle tab](06/media/ex2-t1-image5.png)
+![Скриншот со словом Бот в строке поиска на вкладке upcycle](06/media/ex2-t1-image5.png)
 
-20. Click on the App launcher and select **OneDrive**.
+20. Щелкните панель запуска приложений и выберите **OneDrive**.
 
-![A Screenshot with an arrow pointing to the app launcher icon and a box around the onedrive option](06/media/ex2-t1-image6.png)
+![Снимок экрана со стрелкой, указывающей на значок средства запуска приложения и рамкой вокруг параметра onedrive](06/media/ex2-t1-image6.png)
 
-21.  Click to open the **Recycle.xlsx** file.
-22.  You should see the **Bad universal bot charger** added by the bot.
+21. Щелкните, чтобы открыть файл **Recycle.xlsx**.
+22. Вы должны увидеть **Плохое универсальное зарядное устройство для бота**, добавленное ботом.
 
-![Excel table- screenshot](06/media/ex2-t1-image7.png)
+![Таблица Excel - снимок экрана](06/media/ex2-t1-image7.png)
 
-23. Close the **Excel file**.
-24. Close **OneDrive**
-25. You should now be back on the Upcycle application.
-26. Do not navigate away from this page.
+23. Закройте **файл Excel**.
+24. Закройте **OneDrive**.
+25. Теперь вы должны вернуться в приложение Upcycle.
+26. Не уходите с этой страницы.
 
-#### Task 2 - Publish and add bot
-In this task, you will publish the bot you created.
+#### Задача 2 - Опубликовать и добавить бота
+В этой задаче вы опубликуете созданного вами бота.
 
-1.  Select **Power Virtual Agents**.
+1. Выберите **Power Virtual Agents**.
 
-![A Screenshot with an arrow pointing to the power virtual agents icon on the left hand side of the window](06/media/ex2-t2-image1.png)
+![Снимок экрана со стрелкой, указывающей на значок Power Virtual Agents в левой части окна](06/media/ex2-t2-image1.png)
 
-2.  Select the **Chatbots** tab and click to open the **Green Bot**.
+2. Выберите вкладку **Чат-боты** и щелкните, чтобы открыть **Зеленого бота**.
 
-![A Screenshot with an arrow pointing to the green bot button](06/media/ex2-t2-image2.png)
+![Скриншот со стрелкой, указывающей на кнопку зеленого бота](06/media/ex2-t2-image2.png)
 
-3.  Click **Publish**.
+3. Нажмите **Опубликовать**.
 
-![A Screenshot with an arrow pointing to the publish button](06/media/ex2-t2-image3.png)
+![Снимок экрана со стрелкой, указывающей на кнопку публикации](06/media/ex2-t2-image3.png)
 
-4. Click **Publish** again.
-5. Click **Publish**  on the Publish latest content pop-up and wait for the publishing to complete.
-6. Click to expand **Manage** and select **Channels**.
+4. Еще раз нажмите **Опубликовать**.
+5. Нажмите **Опубликовать** во всплывающем окне «Опубликовать последний контент» и дождитесь завершения публикации.
+6. Щелкните, чтобы развернуть **Управление** и выберите **Каналы**.
 
-![A screenshot with a box around the channels button](06/media/ex2-t2-image4.png)
+![Снимок экрана с рамкой вокруг кнопки каналов](06/media/ex2-t2-image4.png)
 
-7. Select **Microsoft Teams**.
-8. Click **Add to Teams**.
+7. Выберите **Microsoft Teams**.
+8. Щелкните **Добавить в команды**.
 
-![A screenshot of a box around the add to teams button](06/media/ex2-t2-image5.png)
+![Скриншот рамки вокруг кнопки добавления в команды](06/media/ex2-t2-image5.png)
 
-9. Select **Apps**.
+9. Выберите **Приложения**.
 
-![A Screenshot with an arrow pointing to the apps icon](06/media/ex2-t2-image6.png)
+![Снимок экрана со стрелкой, указывающей на значок приложения](06/media/ex2-t2-image6.png)
 
-10. Select **Built for your org** and click on the **Green Bot** you created.
+10. Выберите **Создан для вашей организации** и щелкните **Зеленый бот**, который вы создали.
 
-![A Screenshot with an arrow pointing to the green bot button](06/media/ex2-t2-image7.png)
+![Скриншот со стрелкой, указывающей на кнопку зеленого бота](06/media/ex2-t2-image7.png)
 
-11. Click **Add**.
-12. The bot should greet you. You may test the bot again.
+11. Щелкните **Добавить**.
+12. Бот должен вас поприветствовать. Вы можете протестировать бота еще раз.
