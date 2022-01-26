@@ -1,249 +1,249 @@
 ---
-lab:
-    title: 'Lab 01: Design the solution'
-    module: 'Module 01: Introduction to Power Platform'
+Лабораторный практикум:
+ заголовок: 'Лабораторная работа 01: Разработка решения'
+ модуль: 'Модуль 01: Введение в Power Platform'
 ---
 
-> [!NOTE]
-> Effective November 2020:
-> - Common Data Service has been renamed to Microsoft Dataverse. [Learn more](https://aka.ms/PAuAppBlog)
-> - Some terminology in Microsoft Dataverse has been updated. For example, *entity* is now *table* and *field* is now *column*. [Learn more](https://go.microsoft.com/fwlink/?linkid=2147247)
+> [!ПРИМЕЧАНИЕ]
+> С ноября 2020 г .:
+> - Common Data Service переименована в Microsoft Dataverse. [Подробнее…](https://aka.ms/PAuAppBlog)
+> - Обновлена некоторая терминология в Microsoft Dataverse. Например, *entity/объект* теперь *table/таблица*, а *field/поле* теперь *column/столбец*. [Подробнее…](https://go.microsoft.com/fwlink/?linkid=2147247)
 >
 
 
-# Lab 01: Design the solution
+# Лабораторная работа 01: Разработка решения
 
-In this lab you will be shaping your idea into something that can be implemented on the Power Platform.   As part of this you will meet with other people in your organization to get more clarity on how your idea could be implemented.  Using this information, you will identify what applications and automations need to be built.
+В этой лабораторной работе вы превратите свою идею в нечто, что можно реализовать на Power Platform. В рамках этого вы встретитесь с другими людьми в вашей организации, чтобы получить больше ясности о том, как ваша идея может быть реализована. Используя эту информацию, вы определите, какие приложения и средства автоматизации необходимо создать.
 
-## What you will learn
+## Что вы узнаете
 
-  - How to identify gaps and requirements for an idea
+ - Как определить пробелы и требования к идее
 
-  - How to map a problem domain to the Power Platform 
+ - Как сопоставить проблемную область с Power Platform 
 
-  - How to determine required Tables for a data model 
+ - Как определить необходимые таблицы для модели данных 
 
-## High-level lab steps
+## Лабораторные этапы высокого уровня
 
-  - Exercise 1 - Scenario overview 
+ - Упражнение 1 - Обзор сценария 
 
-  - Exercise 2 - Extract needs from interview with a co-worker and facility staff
+ - Упражнение 2 - Извлечение потребностей из разговора с коллегой и персоналом учреждения
 
-  - Exercise 3 - Design a data model
+ - Упражнение 3 - Разработка модели данных
 
-  - Exercise 4 - Identify apps and automation that are needed 
+ - Упражнение 4 - Определение необходимых приложений и автоматизации
 
-  - Exercise 5 - User story, mockup the app UI 
+ - Упражнение 5 - История пользователя, макет пользовательского интерфейса приложения 
 
-## Detailed steps
+## Подробные шаги
 
-### Exercise 1: Scenario Overview
+### Упражнение 1: Обзор сценария
 
-In this exercise, you will get up to speed on the scenario you will be building in this series of labs.
+В этом упражнении вы быстро ознакомитесь со сценарием, который будете строить в этой серии лабораторных работ.
 
-#### Task 1: Read the scenario
+#### Задача 1. Прочтите сценарий.
 
-Read the following scenario and make note of any key points you think might be important later.
+Прочтите следующий сценарий и отметьте все ключевые моменты, которые, по вашему мнению, могут быть важны позже.
 
-> You are an employee at Lamna Healthcare Company and work in the billing department.
+> Вы являетесь сотрудником компании Lamna Healthcare и работаете в отделе биллинга.
 > 
-> As you were walking out to your car from work you noticed the company digital sign by the exit was still welcoming participants of the 2019 convention.  You would tell someone, but you have no idea who to tell.  So often you find something in your company that should be fixed but have no way to tell anyone. 
+> Идя с работы к своей машине, вы заметили, что цифровая вывеска компании у выхода все еще приветствовала участников съезда 2019 года. Вы бы сказали кому-нибудь, но не представляете, кому сказать. Очень часто вы обнаруживаете в своей компании что-то, что нужно исправить, но не имеете возможности никому об этом сказать.
 > 
-> As you were driving home sitting in traffic you had an idea. What if there was an app you could use to report things like this?  You could report a location, a category and even a picture of the problem so someone could easily locate and fix it.  The only problem was if you got people to report things who would be listening?
+> Когда вы ехали домой в пробке, у вас возникла идея. Что, если бы существовало приложение, с помощью которого можно было бы сообщать о подобных вещах? Вы можете сообщить местоположение, категорию и даже изображение проблемы, чтобы кто-нибудь мог легко найти и исправить ее. Единственная проблема заключалась в вопросе о том, есть ли у вас есть люди, которые будут слушать, если им сообщить о проблемах?
 > 
-> The next day at work you met with your friend in the facility department and shared your idea.  She was excited too because today there is no coordinated way she can get problems like these reported and fixed. She explained how often they involve different departments and must be routed and followed up to find out the status.  She had looked at commercial options, but they had been too complex and inflexible, overengineered, and expensive. She did however give you an example of a 311-system used by cities for their citizens to report problems.  Based on that example, you decided you would call it Company 311.
+> На следующий день на работе вы встретились со своей подругой из производственного отдела и поделились с ней своей идеей. Она тоже была взволнована этим, потому что на сегодняшний день до сих пор нет скоординированного способа сообщить о подобных проблемах и исправить их. Она объяснила, как часто в них участвуют разные отделы, и их необходимо направлять и отслеживать для того, чтобы узнать статус. Она рассматривала коммерческие варианты, но они оказались слишком сложными и негибкими, изощренными и дорогими. Однако она привела вам пример системы 311, которую города используют для сообщений о проблемах. Основываясь на этом примере, вы решили, что назовете разработку Компанией 311.
 
-### Exercise 2: Extract needs from interviews
+### Упражнение 2: Извлеките потребности из разговора
 
-In this exercise, you review the text from an interview you had with a couple of colleagues. In each of these interviews you shared your idea for a Company 311 solution and got feedback from your coworkers. You should use this information to shape the solution design.
+В этом упражнении вы просматриваете текст разговора с несколькими коллегами. В каждом из этих интервью вы делились своей идеей о решении компании 311 и получали отзывы от своих коллег. Вы должны использовать эту информацию, чтобы сформировать дизайн решения.
 
-#### Task 1: Interview \#1
+#### Задача 1: Интервью \#1
 
-Review the following discussion with your coworker and take notes of any of the key things you learned from the interaction. This Interview is from a coworker in your same Department that you are friends with.
+Просмотрите следующее обсуждение со своим коллегой и запишите все ключевые вещи, которые вы узнали в ходе взаимодействия. Это интервью дано вашим коллегой из вашего отдела, с которым вы дружите.
 
-> **You**:   I wanted to get your thoughts on the idea for a Company 311 that we talked about.  I am thinking of starting to build that app. What do you think we need to include when we submit a problem report?
+> **Вы**: Я хотел узнать ваше мнение об идее компании 311, о которой мы говорили. Я подумываю начать создавать это приложение. Как вы думаете, что нам нужно внести в отчет о проблеме, когда мы его отправляем?
 > 
-> **Coworker**: Well you have to capture where the problem is - we have so many buildings.  What department should fix it.   Oh, and a picture. 
+> **Сотрудник**: Вы должны определить, где конкретно проблема - у нас так много зданий. Какой отдел должен это исправить. Ах да, еще фото проблемы.
 > 
-> **You**:   Do you think building is enough to identify where the problem is? 
+> **Вы**: Считаете ли вы, что информации о здании достаточно, чтобы определить, где находится проблема?
 > 
-> **Coworker**:   Maybe allow them to describe where in the building... 
+> **Сотрудник**: Может быть, позволите описать, где конкретно в самом здании...
 > 
-> **You**:  After you report a problem what do you expect to happen? 
+> **Вы**: Что вы ожидаете после того, как сообщите о проблемах?
 > 
-> **Coworker**:  Them to fix it of course\!  
+> **Сотрудник**: Их, конечно же, исправят\!
 > 
-> **You**: No, I mean in the app, what do you see after you click submit problem? 
+> **Вы**: Нет, я имею в виду в приложении, что вы видите после нажатия кнопки «Отправить»?
 > 
-> **Coworker**: I want to know that someone got it and it’s being worked on and when fixed. Actually, not always but most of the time...maybe let me choose to be notified? 
+> **Сотрудник**: Я хочу знать, что кто-то получил это, и над этим работают, а также когда это будет исправлено. На самом деле, не всегда, но большую часть времени ... может быть, я хочу получать уведомления?
 > 
-> **You**: So perhaps a list of all your items submitted? 
+> **Вы**: Может быть, список всех отправленных вами позиций?
 > 
-> **Coworker**: Yeah that would be great\! 
+> **Сотрудник**: Да, было бы здорово\! 
 > 
-> **You**: perfect, I will let you know when you can try the app\! 
+> **Вы**: Отлично, я дам вам знать, когда вы сможете попробовать приложение\!
 
-After you complete reading this and have your notes compare them to our notes in the next task to see if you missed anything.
+После того, как вы прочтете это и составите свои заметки, сравните их с нашими заметками в следующем задании, чтобы увидеть, не пропустили ли вы что-нибудь.
 
-#### Task 2: Interview \#1 Notes
+#### Задача 2: Интервью \# 1 Примечания
 
-In this task, you will compare your notes from Interview \#1 with our notes.
+В этом задании вы сравните свои заметки из Интервью \# 1 с нашими заметками.
 
-The following are our notes from Interview \#1
+Ниже приведены наши заметки из интервью \# 1.
 
-  - Need to be able to pick a building for each problem
+ - Необходимо уметь подбирать здание для каждой задачи
 
-  - Need to capture which department needs to fix it when you submit the problem
+ - Необходимо определить, какой отдел должен исправить это, когда вы отправляете сообщение о проблеме
 
-  - Need a photo of the problem
+ - Необходимо фото проблемы
 
-  - Need a freeform text description of the problem location within the building
+ - Требуется произвольное текстовое описание проблемного места в здании.
 
-  - Need a way to indicate if you want to be notified when completed
+ - Необходим способ указания того, хотите ли вы получать уведомления о завершении
 
-  - Need to see all the problems you submitted and their status
+ - Необходимо видеть все отправленные вами проблемы и их статус
 
-#### Task 3: Interview \#2
+#### Задача 3: Интервью \# 2
 
-Review the following discussion with your coworker and take notes of any of the key things you learned from the interaction. This Interview is from a coworker in facilities management that you are friends with. You believe most of the problem reports will be handled by them.
+Просмотрите следующее обсуждение со своим коллегой и запишите все ключевые вещи, которые вы узнали в ходе взаимодействия. Это интервью дано вашим коллегой из отдела по управлению объектами, с которым вы дружите. Вы полагаете, что большинство сообщений о проблемах будут обрабатываться ими.
 
-> **You**: I wanted to get your thoughts on the idea for a Company 311 that we talked about. I am thinking of starting to build that app. What do you think needs to be included when people submit a problem report?
+> **Вы**: Я хотел узнать ваше мнение об идее компании 311, о которой мы говорили. Я подумываю начать создавать это приложение. Как вы думаете, что необходимо внести в сообщение о проблеме, когда люди его отправляют?
 > 
-> **Coworker**: As much details as possible, a photo would be nice. Oftentimes we get reports that are just a very vague indication of the problem that if we had a picture it would be 1000 times clearer.
+> **Сотрудник**: Максимально подробные детали, фото было бы неплохо. Часто мы получаем отчеты, которые являются лишь очень расплывчатым указанием на проблему, что если бы у нас была картина, она была бы в 1000 раз яснее.
 > 
-> **You**: What do you think about allowing them to pick which department they think will fix the problem?
+> **Вы**: Что вы думаете о том, чтобы позволить им выбрать, какой отдел, по их мнению, решит проблему?
 > 
-> **Coworker**: Now that is funny\! Most people have no idea who fixes it and think it is just magic. I would suggest that people just submit the problem report without a department and then one of our facilities people would assign the department it needs to address the problem.
+> **Сотрудник**: Вот это забавно\! Большинство людей понятия не имеют, кто это исправляет, и думают, что это просто волшебство. Я бы посоветовал людям просто отправить отчет о проблеме без отдела, а затем один из сотрудников нашего предприятия назначил бы необходимый для решения данной проблемы отдел.
 > 
-> **You**: Perfect\! Do you fix all the problems that get reported?
+> **Вы**: Идеально\! Вы устраняете все проблемы, о которых сообщают?
 > 
-> **Coworker**: Many of them are duplicates and do not get fixed; others will cost too much and must get manager approval. If they are not approved they don't get fixed.
+> **Сотрудник**: Многие из них дублируются и не исправляются; другие будут стоить слишком дорого и должны будут получить одобрение менеджера. Если они не утверждены, они не исправляются.
 > 
-> **You**: How do you do that approval today?
+> **Вы**: Как на сегодняшний день вы занимаетесь решением подобного?
 > 
-> **Coworker**: If I get one that I think is going to be expensive I have to try to track down the manager for approval, and sometimes if I can’t get it right away it gets set aside till I remember.
+> **Сотрудник**: Если я получаю сообщение о проблеме, решение которой, по моему мнению, будет дорогостоящим, я должен попытаться разыскать менеджера для утверждения. И иногда, если я не могу найти его сразу, решение откладывается до тех пор, пока я не вспомню.
 > 
-> **You**: Ok, so if we could include approval that might help. I will let you know when you can try the app\!
+> **Вы**: Было бы хорошо, если б мы могли включить возможность утверждения, это могло бы помочь решению. Я дам вам знать, когда вы сможете попробовать приложение\!
 
-After you complete reading this and have your notes compare them to our notes in the next task to see if you missed anything.
+После того, как вы прочтете это и составите свои заметки, сравните их с нашими заметками в следующем задании, чтобы увидеть, не пропустили ли вы что-нибудь.
 
-#### Task 4: Interview \#2 Notes
+#### Задача 4: Интервью \# 2 Примечания
 
-In this task, you will compare your notes from Interview \#2 with our notes.
+В этом задании вы сравните свои заметки из Интервью \# 2 с нашими заметками.
 
-The following are our notes from Interview \#2
+Ниже приведены наши заметки из интервью \#2.
 
-  - Having a photo would be helpful
+ - Фото было бы полезно
 
-  - Department should not be provided by user but assigned after submitting
+ - Отдел не должен быть назначен пользователем, он должен быть назначен специальным сотрудником уже после отправки
 
-  - Approval required over specific amount, would be helpful to automate
+ - Требуется утверждение, если стоимость решения превышает определенную сумму денег, было бы полезно автоматизировать
 
-### Exercise 3: Design a data model
+### Упражнение 3: Разработка модели данных
 
-In this exercise, you will create the data model to support the apps you will be building.
+В этом упражнении вы создадите модель данных для поддержки приложений, которые вы будете создавать.
 
-#### Task 1: Evaluate what you know already about the data
+#### Задача 1. Оцените то, что вы уже знаете о данных.
 
-In this task, you will be evaluating the information you already collected about your proposed solution and trying to identify what data Tables are needed and how they are related. If you want, you can do this task concurrently with the next task where you draw the data model.
+В этой задаче вы оцените информацию, которую вы уже собрали о предлагаемом решении, и попытаетесь определить, какие таблицы данных необходимы и как они связаны. При желании вы можете выполнить эту задачу одновременно со следующей задачей, в которой вы рисуете модель данных.
 
-  - Identify the main data that will be managed by the solution. This will typically become one or two Tables and will be the focus of the app you build. Other data is typically related to and supports these Tables.
+- Определите основные данные, которыми будет управлять решение. Обычно это одна или две таблицы, на которых сосредоточено ваше приложение. Другие данные обычно связаны с этими таблицами и поддерживают их.
 
-  - Identify related Tables needed to support your scenario.
+ - Определите связанные таблицы, необходимые для поддержки вашего сценария.
 
-  - Identify how Tables should be connected using relationships.
-  
-  - Evaluate what should be Columns and what should be Tables. For example, how should the photo be stored or the location within the building?
+ - Определите, как таблицы должны быть связаны с помощью отношений.
+ 
+ - Оцените, какими должны быть столбцы, и какими - таблицы. Например, как хранить фотографию или место в здании?
 
-#### Task 2: Draw a draft data model
+#### Задача 2. Нарисуйте черновик модели данных.
 
-Use whatever tools you have available; you can use a whiteboard, Visio, PowerPoint, OneNote, or you can even use it piece of paper and pen. The goal here is not to be picture perfect but to allow you to think through what the data model should look like and possibly share it with others and get their ideas. This data model will typically be your guide when you are creating the Tables in the maker portal. You could, of course, just start creating the Tables in the portal, but creating a diagram helps ensure it's more carefully planned out.
+Используйте любые доступные вам инструменты; вы можете использовать доску, Visio, PowerPoint, OneNote или даже лист бумаги и ручку. Цель здесь не в том, чтобы добиться идеального изображения, а в том, чтобы позволить вам продумать, как должна выглядеть модель данных, и, возможно, поделиться ею с другими, взамен получив идеи от них. Эта модель данных будет вашим руководством при создании таблиц на портале разработчика. Конечно, вы можете просто начать создавать таблицы на портале, но создание диаграммы помогает обеспечить более тщательное планирование.
 
-1.  Draw your data model, including relationships and any relationship behaviors. Your drawing should look like the following example, except yours should be for your Company 311 solution.
-    
-    ![Whiteboard drawing of an example data model containing entities Course and Module and 1:N parental raltionship from Course to Module](01/media/image1.png)
+1. Нарисуйте свою модель данных, включая отношения и любое поведение в отношениях. Ваш рисунок должен выглядеть так, как в следующем примере, за исключением того, что ваш должен быть предназначен для решения компании 311.
+ 
+ ![Рисование на доске примера модели данных, содержащей объекты Курс и Модуль и 1:N материнское отношение от Курса к Модулю](01/media/image1.png)
 
 
-#### Task 3: Compare data models
+#### Задача 3. Сравните модели данных
 
-1.  Compare the data model you created in the previous task with the one we prepared. If there are significant differences you should discuss those with your instructor.
+1. Сравните созданную вами в предыдущем задании модель данных, с подготовленной нами. Если есть существенные различия, обсудите их со своим инструктором.
 
-![A close up of text on a whiteboard with a data model showing problem report, department and building](01/media/image2.png)
+![Крупный план текста на доске с моделью данных, показывающей отчет о проблеме, отдел и здание](01/media/image2.png)
 
-### Exercise 4: Identify apps and automation needed
+### Упражнение 4. Определение необходимых приложений и автоматизации
 
-In this exercise, you will be looking at the information you collected and deciding what apps and automations are required to implement the solution. The goal is not to identify every feature of the application or automation but to identify if you need one app or ten apps, and what style app they should be.
+В этом упражнении вы изучите собранную информацию и решите, какие приложения и средства автоматизации необходимы для реализации решения. Цель состоит не в том, чтобы идентифицировать каждую функцию приложения или автоматизации, а в том, чтобы определить, нужно ли вам одно приложение или десять, и в каком стиле они должны быть построены.
 
-#### Task 1: Evaluate what apps are needed
+#### Задача 1. Оценка того, какие приложения необходимы
 
-In this task you are going to look at how the users interact with the applications and decide if you need one or multiple applications and what style they're going to be, i.e. canvas or model-driven. There is no single right answer to how to accomplish this, but by asking the right questions you can design a better solution for your users. As you go through the following steps make some notes about your Company 311 solution.
+В этой задаче вы собираетесь посмотреть, как пользователи взаимодействуют с приложениями, и решить, нужно ли вам одно или несколько приложений, и в каком стиле они будут построены, то есть на основе холста или на основе модели. Не существует единственного правильного ответа на вопрос, как этого добиться, но, задав правильные вопросы, вы можете разработать лучшее решение для своих пользователей. Выполняя следующие шаги, делайте заметки о своем решении Компании 311.
 
-1.  Identify who will be using the app.
+1. Определите, кто будет использовать приложение.
 
-2.  Identify how each set of users will be accessing the app. Will it be mostly from for mobile device or desktop?
+2. Определите, как каждая группа пользователей будет получать доступ к приложению. Будет ли это в основном для мобильных устройств или настольных компьютеров?
 
-3.  Of the overall functionality you are going to provide, are there specific subsets that some users use all the time?
+3. Из общей функциональности, которую вы собираетесь предоставить, есть ли определенные подмножества, которые некоторые пользователи используют постоянно?
 
-4.  Is there any device usage that would lend itself to one type of application versus another?
+4. Существует ли какая-либо функция устройства, доступ к которой предоставляется одному типу приложений в противовес другим?
 
-5.  Model-driven apps are great for data management. Is there any functionality that would lend itself more to a model-driven app?
+5. Приложения на основе модели отлично подходят для управления данными. Есть ли какие-либо функции, которые больше подходят для приложения на основе модели?
 
-6.  Considering your answers to the above questions and make notes of how many apps you will be building, the type of app, and what each app will do and who it will be used by.
+6. Обдумайте свои ответы на приведенные выше вопросы и запишите, сколько приложений вы будете создавать, типы приложений, а также то, что каждое приложение будет делать и кем оно будет использоваться.
 
-#### Task 2: Compare your notes on apps
+#### Задача 2. Сравните свои заметки о приложениях
 
-In this task, you should compare your notes from the previous task with our prepared notes. If there are big differences you should discuss them with your instructor.
+В этом задании вы должны сравнить свои заметки из предыдущего задания с нашими подготовленными заметками. Если есть значительные расхождения, обсудите их со своим инструктором.
 
-1.  Identify who will be using the app:
-    
-      - Group 1 – Any employee in the company
-    
-      - Group 2 - Facilities staff and anyone in the different departments that fix problems
+1. Определите, кто будет использовать приложение:
+ 
+ - Группа 1 - Любой сотрудник в компании
+ 
+ - Группа 2 - Персонал объектов и все сотрудники различных отделов, которые решают проблемы.
 
-2.  For each set of users will they be accessing it mostly from for mobile device or desktop?
-    
-      - Group 1 – Probably mostly on their mobile devices
-    
-      - Group 2 - Mostly on their desktop but sometimes on mobile
+2. Для каждой группы пользователей будут ли они получать доступ в основном с мобильных устройств или настольных компьютеров?
+ 
+ - Группа 1 - Наверное, в основном на мобильных устройствах.
+ 
+ - Группа 2 - В основном на компьютерах, но иногда и на мобильных устройствах.
 
-3.  Of the overall functionality you are going to provide are there specific subsets that some users use all the time?
-    
-      - Group 1 – Most important functionality is submitting a problem report, they do not do anything to manage the list of buildings or departments
-    
-      - Group 2 - Most important functionality is routing and resolving problem reports and managing the reference data associated with buildings and apartments
+3. Из общей функциональности, которую вы собираетесь предоставить, есть определенные подмножества, которые некоторые пользователи используют постоянно?
+ 
+ - Группа 1 - Самая важная функция - это отправка отчета о проблеме, они ничего не делают для управления списком зданий или отделов.
+ 
+ - Группа 2 - Наиболее важными функциями являются маршрутизация, разрешение отчетов о проблемах и управление справочными данными, связанными со зданиями и отделами.
 
-4.  Is there any device usage that would lend itself to one type of application versus another?
-    
-      - Easy use of camera or photo upload from mobile device
+4. Существует ли какая-либо функция устройства, доступ к которой предоставляется одному типу приложений в противовес другим?
+ 
+ - Простое использование камеры или загрузка фотографий с мобильного устройства
 
-5.  Is any of the functionality more data management that would lend itself more to a model-driven app?
-    
-      - The management of reference data for buildings and apartments would be easy to do in a model driven app.
-    
-      - The routing and assignment of problem reports to different users would be easy to handle in a model driven app.
+5. Является ли какая-либо из функций дополнительного управления данными более подходящей для приложения на основе модели?
+ 
+ - Управлять справочными данными для зданий и отделов было бы легче в приложении на основе модели.
+ 
+ - Маршрутизация и назначение отчетов о проблемах различным пользователям будет легче обрабатываться в приложении на основе модели.
 
-6.  Considering your answers to the above questions make notes of how many apps you will be building, the type of app, and what each app will do and how it will be used by.
-    
-      - App 1 – Company 311 - This will be a canvas application used to submit new problem reports and see a list of any problem reports submitted.
-    
-      - App 2 – Company 311 Admin - This will be a model driven application used by all those that route and resolve problem reports. this application will also manage all the reference data like buildings and department lists.
+6. Обдумывая ваши ответы на приведенные выше вопросы, запишите, сколько приложений вы будете создавать, типы приложений, а также то, что каждое приложение будет делать и как оно будет использоваться.
+ 
+ - Приложение 1 - Компания 311 - приложение холста, которое будет использоваться для отправки новых отчетов о проблемах и просмотра списка всех отправленных отчетов о проблемах.
+ 
+ - Приложение 2 - Администратор компании 311 – приложение на основе модели, которое будет использоваться всеми, кто направляет и решает отчеты о проблемах. Это приложение также будет управлять всеми справочными данными, такими как списки зданий и отделов.
 
-### Exercise 5: User story, app UI mockup
+### Упражнение 5: История пользователя, макет пользовательского интерфейса приложения
 
-In this exercise, you will review a user story that describes a user interacting with the app to submit a problem report.
+В этом упражнении вы рассмотрите пользовательскую историю, описывающую пользователя, взаимодействующего с приложением, чтобы отправить отчет о проблеме.
 
-#### Task 1: User Story
+#### Задача 1. Пользовательская история
 
-Review the following user story:
+Просмотрите следующую пользовательскую историю:
 
-> As a user I want to be able to quickly open the app and submit a problem report. I should be able to pick a building, give a location that describes where the problem is. The app should allow me to provide one line title and details of the problem. I should be able to optionally provide a photo. I should be able to easily switch over and see the list of problems that I already submitted and their status.
+> Как пользователь я хочу иметь возможность быстро открывать приложение и отправлять отчет о проблеме. Я должен уметь выбирать здание, указывать конкретное место описания проблемы. Приложение должно позволять мне указывать заголовок в одну строку, а также подробную информацию о проблеме. При желании я могу предоставить фото. Я должен иметь возможность легко переключиться и увидеть список уже отправленных мною проблем и их статус.
 
-1.  Using any of the tools you have available, such as a whiteboard, Visio, OneNote or even a piece of paper and a pen, draw a mockup of the user interface to satisfy the above user story.
+1. Используя любой из имеющихся у вас инструментов, например, доску, Visio, OneNote или даже лист бумаги и ручку, нарисуйте макет пользовательского интерфейса, чтобы он соответствовал описанной выше пользовательской истории.
 
-2.  After you have completed your drawing of the mockup go ahead to the next task and compare it to the one we provide.
+2. После того, как вы закончите рисовать макет, переходите к следующему заданию и сравните его с тем, что предоставили мы.
 
-#### Task 2: Compare mockup
+#### Задача 2: Сравнить макет
 
-The following is an example UI mockup showing both the add new item an My reports list. There is no single answer to what this has to look like and there are possibly many examples you could come up with. The goal for UI markup is to be able to quickly demonstrate what you want to build and show it to somebody and without having to actually build it. Depending on the tool you used you can often make changes quickly as you evolve the mockup. The markup is used to help you build the actual applications screens quicker with less rework.
+Ниже приведен пример макета пользовательского интерфейса, показывающий как добавление нового элемента, так и список «Мои отчеты». Нет однозначного ответа на вопрос, как это должно выглядеть, и, возможно, есть много примеров, которые вы могли бы придумать. Цель разметки пользовательского интерфейса - иметь возможность быстро продемонстрировать то, что вы хотите создать, и показать это кому-либо, не создавая на самом деле. В зависимости от инструмента, который вы использовали, вы часто можете быстро вносить изменения по мере развития макета. Разметка используется, чтобы помочь вам быстрее создавать экраны реальных приложений с меньшими переделками.
 
-![A close up of text on a whiteboard showing a UI mockup of the add and my reports list](01/media/image3.png)
+![Крупный план текста на доске, показывающий макет пользовательского интерфейса добавления и списка моих отчетов](01/media/image3.png)
