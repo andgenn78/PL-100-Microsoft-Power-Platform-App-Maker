@@ -1,591 +1,591 @@
 ---
-lab:
-    title: 'Lab 05: Power BI'
-    module: 'Module 05: Power BI'
+Лабораторный практикум:
+ заголовок: 'Лабораторная работа 05: Power BI'
+ модуль: 'Модуль 05: Power BI'
 ---
 
-> [!NOTE]
-> Effective November 2020:
-> - Common Data Service has been renamed to Microsoft Dataverse. [Learn more](https://aka.ms/PAuAppBlog)
-> - Some terminology in Microsoft Dataverse has been updated. For example, *entity* is now *table* and *field* is now *column*. [Learn more](https://go.microsoft.com/fwlink/?linkid=2147247)
+> [!ПРИМЕЧАНИЕ]
+> С ноября 2020 г .:
+> - Common Data Service переименована в Microsoft Dataverse. [Подробнее…](https://aka.ms/PAuAppBlog)
+> - Обновлена некоторая терминология в Microsoft Dataverse. Например, *entity/объект* теперь *table/таблица*, а *field/поле* теперь *column/столбец*. [Подробнее…](https://go.microsoft.com/fwlink/?linkid=2147247)
 >
 
 
-# LAB 05: Power BI
+# Лабораторная работа 05: Power BI
 
-In this lab, you will build a Power BI dashboard that visualizes data about problems reported by company employees.
+В этой лабораторной работе вы создадите панель мониторинга Power BI, которая визуализирует данные о проблемах, о которых сообщили сотрудники компании.
 
-## What you will learn
+## Что вы узнаете
 
-  - How to connect to Dataverse 
-  - How to refine the data model and prepare it for reporting
-  - How to create a Power BI visualization 
-  - How to embed a Power BI report in Microsoft Teams
+ - Как подключиться к Dataverse 
+ - Как уточнить модель данных и подготовить ее к отчетности
+ - Как создать визуализацию Power BI 
+ - Как встроить отчет Power BI в Microsoft Teams.
 
-## High-level lab steps
+## Лабораторные этапы высокого уровня
 
-We will follow the below steps to design and create the Power BI dashboard:
+Мы выполним следующие шаги, чтобы спроектировать и создать панель мониторинга Power BI:
 
--   Connect to tables in Microsoft Dataverse 
--   Transform the data to include user-friendly descriptions for the related Rows (lookups)
--    Create and publish a report with various visualizations of the information about problem reports
--    User natural language query to build additional visualizations
--    Build mobile view
--    Embed the Company 311 Power BI report to Microsoft Teams
+- Подключение к таблицам в Microsoft Dataverse 
+- Преобразование данных для включения удобного для пользователя описания связанных строк (поисковых запросов).
+- Создание и публикация отчета с различной визуализацией информации отчетов о проблемах
+- Пользовательский запрос на естественном языке для создания дополнительных визуализаций
+- Создание мобильного вида
+- Встраивание отчета Power BI Компании 311 в Microsoft Teams.
 
-## Prerequisites
+## Предварительные требования
 
-* Must have completed **Lab 02.1: Data model and model-driven app**
-* Permissions to install programs on your computer (required for Power BI Desktop installation)
+* Должно быть выполнено **Лабораторная работа 02.1: Модель данных и приложение на основе модели**
+* Разрешения на установку программ на ваш компьютер (требуется для установки Power BI Desktop)
 
-## Things to consider before you begin
+## Что следует учесть перед началом
 
--   Who is the target audience of the report?
--   How will the audience consume the report? Typical device? Location?
--   Do you have sufficient data to visualize?
--   What are the possible characteristics you can use to analyze data about the visits?
+- Кто является целевой аудиторией отчета?
+- Как аудитория воспримет отчет? Типовое устройство? Место нахождения?
+- У вас достаточно данных для визуализации?
+- Какие возможные характеристики вы можете использовать для анализа данных о посещениях?
 
-## Detailed steps
+## Подробные шаги
 
-### Exercise 1: Prepare environment & data  
+### Упражнение 1. Подготовка среды и данных 
 
-**Objective:** In this exercise, you will install and configure Power BI Desktop and configure a connection to Microsoft Dataverse. 
+**Цель:** В этом упражнении вы установите и настроите Power BI Desktop и настроите подключение к Microsoft Dataverse. 
 
-> [!IMPORTANT]
-> If you do not have required permissions to install desktop applications or experience difficulties in configuring Power BI Desktop and connecting it to the data, follow **Addendum: Import sample data** and then continue on **Exercise 2** but using Power BI service instead of Power BI Desktop.
+> [!ВАЖНО]
+> Если у вас нет необходимых разрешений для установки настольных приложений или возникают трудности с настройкой Power BI Desktop и подключением его к данным, выполните **Дополнение: Импорт образцов данных**, а затем продолжите **Упражнение 2**, но с использованием Power BI service вместо Power BI Desktop.
 
-#### Task 1: Configure Power BI Desktop
+#### Задача 1. Настройка Power BI Desktop
 
-1. If you do not have Power BI Desktop installed, navigate to [https://aka.ms/pbidesktopstore](https://aka.ms/pbidesktopstore) to download and install Power BI app.
+1. Если у вас не установлен Power BI Desktop, перейдите по адресу [https://aka.ms/pbidesktopstore](https://aka.ms/pbidesktopstore), чтобы загрузить и установить приложение Power BI.
 
-> [!IMPORTANT]
-> If you experience issues installing Power BI Desktop using Microsoft Store, try standalone installer that can be downloaded from [https://aka.ms/pbiSingleInstaller](https://aka.ms/pbiSingleInstaller).
+> [!ВАЖНО]
+> Если у вас возникли проблемы с установкой Power BI Desktop с помощью Microsoft Store, попробуйте автономный установщик, который можно загрузить с [https://aka.ms/pbiSingleInstaller](https://aka.ms/pbiSingleInstaller).
 
-2. Open Power BI Desktop.
-2. If you signed in into Power BI Desktop previously, select **File | Sign out** 
-3. Sign in if prompted or select **File | Sign in** to sign in.  
-4. If you're signing in for the first time you may receive the following prompt
+2. Откройте Power BI Desktop.
+2. Если вы ранее входили в Power BI Desktop, выберите **Файл | Выход**
+3. Войдите в систему, если будет предложено, или выберите **Файл | Вход**, чтобы войти.
+4. Если вы входите в систему впервые, вы можете получить следующее сообщение
 
-![A screenshot of a prompt to sign up for a Power Bi account if it is your first time](05/media/image-6-2.png)
+![Снимок экрана с предложением зарегистрировать учетную запись Power BI, если это ваш первый опыт](05/media/image-6-2.png)
 
-5. Select **Sign up for Power BI** and follow the prompts to complete the sign up 
+5. Выберите **Зарегистрироваться в Power BI** и следуйте инструкциям, чтобы завершить регистрацию. 
 
-#### Task 2: Prepare Data
+#### Задача 2: Подготовка данных
 
-1.  Find out your organization URL
+1. Узнайте URL-адрес вашей организации.
 
-    * Navigate to [Power Platform Admin Center](https://aka.ms/ppac).
-    * In the left navigation page, select Environments, and then click on the target environment.
-    * Right mouse click **Environment URL** on the **Details** panel, then select **Copy link**.
+ * Перейдите в [Центр администрирования Power Platform](https://aka.ms/ppac).
+ * На левой странице навигации выберите Среды, а затем щелкните целевую среду.
+ * Щелкните правой кнопкой мыши **URL-адрес среды** на панели **Подробности**, затем выберите **Копировать ссылку**.
 
-![A Screenshot with an arrow pointing to the environment URL and another arrow pointing to the copy link button](05/media/image-6-1.png)
+![Снимок экрана со стрелкой, указывающей на URL-адрес среды, и другой стрелкой, указывающей на кнопку копирования ссылки](05/media/image-6-1.png)
 
-2. Switch to Power BI desktop.
-3. Select **Get data | More...**
+2. Переключитесь на рабочий стол Power BI.
+3. Выберите **Получить данные | Более...**
 
-![A Screenshot with an arrow pointing to the get data button and another arrow pointing to the more button at the bottom of the get data drop down](05/media/image-6-3.png)
+![Снимок экрана со стрелкой, указывающей на кнопку получения данных, и другой стрелкой, указывающей на кнопку «Дополнительно» в нижней части раскрывающегося списка получения данных](05/media/image-6-3.png)
 
-4. Select **Power Platform**, then select **Dataverse** and press **Connect**.
+4. Выберите **Power Platform**, затем выберите **Dataverse** и нажмите **Подключиться**.
 
-![A screenshot of the dataverse selected in the power platform window](05/media/image-6-4.png)
+![Снимок экрана с инверсией данных, выбранной в окне Power Platform](05/media/image-6-4.png)
 
-5. Paste the environment URL you copied earlier without the https://, select **DirectQuery**, and click **OK**.
+5. Вставьте скопированный ранее URL-адрес среды без https: //, выберите **DirectQuery** и нажмите **ОК**.
 
-![A screenshot of environment URL pasted into the environment domain field](05/media/image-6-5.png)
+![Снимок экрана с URL-адресом среды, вставленным в поле домена среды](05/media/image-6-5.png)
 
-6. The connection details dialog will open up. If you are not signed in, click **Sign in** and follow the prompts to sign in. Press **Connect**. 
+6. Откроется диалоговое окно с подробностями подключения. Если вы не вошли в систему, нажмите **Войти** и следуйте инструкциям по входу. Нажмите **Подключиться**.
 
-7. Expand environment node, select **lh_Building**, **lh_Department**, **lh_ProblemReport** tables and select **Load**. Wait until the load is complete.
+7. Разверните узел среды, выберите таблицы **lh_Building**, **lh_Department**, **lh_ProblemReport** и выберите **Загрузить**. Дождитесь завершения загрузки.
 
-![A Screenshot with an arrow pointing to the load button](05/media/image-6-7.png)
+![Снимок экрана со стрелкой, указывающей на кнопку загрузки](05/media/image-6-7.png)
 
-8. Click **Model** icon on the left vertical toolbar.
+8. Щелкните значок **Модель** на левой вертикальной панели инструментов.
 
-![A Screenshot with an arrow pointing to the model icon on the left vertical toolbar](05/media/image-6-8.png)
+![Снимок экрана со стрелкой, указывающей на значок модели на левой вертикальной панели инструментов](05/media/image-6-8.png)
 
-9. Power BI should detect the relationship between the table. The relationship should look like the image below.
+9. Power BI должен определить взаимосвязь между таблицей. Отношения должны выглядеть, как на изображении ниже.
 
-![A screenshot of the relationship between the table. There should be three main panels, Ih_building, Ih_problemreport, and Ih_department](05/media/image-6-9.png)
+![Скриншот отношения между таблицами. Должно быть три основных панели: Ih_building, Ih_problemreport и Ih_department](05/media/image-6-9.png)
 
-10.  Select **Report** icon on the left toolbar.
+10. Выберите значок **Отчет** на левой панели инструментов.
 
-![A Screenshot with an arrow pointing to the report icon on the left toolbar](05/media/image-6-10.png)
+![Снимок экрана со стрелкой, указывающей на значок отчета на левой панели инструментов](05/media/image-6-10.png)
 
-11. Expand **lh_ProblemReports** node in the **Fields** panel.
+11. Разверните узел **lh_ProblemReports** на панели **Поля**.
 
-12. Click on the **...** More options button of the **lh_ProblemReports** table.
+12. Нажмите кнопку **...** Дополнительные параметры в таблице **lh_ProblemReports**.
 
-![A Screenshot with an arrow pointing to the ellipsis for more options](05/media/image-6-11.png)
+![Снимок экрана со стрелкой, указывающей на многоточие, показывающее дополнительные параметры](05/media/image-6-11.png)
 
-13. Select **New column**.
+13. Выберите **Новый столбец**.
 
-![A screenshot of a border around the new column button](05/media/image-6-12.png)
+![Снимок экрана с рамкой вокруг кнопки нового столбца](05/media/image-6-12.png)
 
-14. Complete the formula as below and press ENTER or click checkmark button. That will add a new column with the building name into the problem report data.
+14. Заполните формулу, как показано ниже, и нажмите ENTER или нажмите кнопку с галочкой. Это добавит новый столбец с названием здания в данные отчета о проблеме.
 
 ```Building = RELATED(lh_Building[lh_name])```
 
-![A Screenshot with an arrow pointing to the checkmark icon](05/media/image-6-13.png)
+![Снимок экрана со стрелкой, указывающей на значок галочки](05/media/image-6-13.png)
 
-15. Repeat the three previous steps on **lh_problemreports** node to add a column **Department** with the below formula.
+15. Повторите три предыдущих шага на узле **lh_problemreports**, чтобы добавить столбец **Отдел** с приведенной ниже формулой.
 
 ```Department = RELATED(lh_Department[lh_name])```
 
-16.  Click ... next on the **lh_problemreportid** column of the **lh_problemreport** table and select **Rename**. Enter **Problem Report** as the column name.
-17.  Click ... next on the **statuscodename** column and select **Rename**. Enter **Status** as the column name.
-18.  Save work in progress by pressing **File &#124; Save** and enter **Problem management** as a filename.
+16. Щелкните ... Далее в столбце **lh_problemreportid** таблицы **lh_problemreport** и выберите **Переименовать**. Введите **Отчет о проблеме** в качестве имени столбца.
+17. Щелкните ... Далее в столбце **statuscodename** и выберите **Переименовать**. Введите **Статус** в качестве имени столбца.
+18. Сохраните незавершенную работу, нажав **Файл &#124; Сохранить** и введите **Управление проблемами** в качестве имени файла.
 
-### Exercise 2: Create Power BI Report 
+### Упражнение 2: Создание отчета Power BI 
 
-**Objective:** In this exercise, you will create a Power BI report based on data from Microsoft Dataverse tables.
+**Цель:** В этом упражнении вы создадите отчет Power BI на основе данных из таблиц Microsoft Dataverse.
 
-#### Task 1: Create Chart and Time Visualizations
+#### Задача 1. Создание диаграмм и визуализаций времени
 
-1. Click on **Pie chart** icon in the **Visualizations** panel to insert the chart.
+1. Щелкните значок **Круговая диаграмма** на панели **Визуализации**, чтобы вставить диаграмму.
 
-![A Screenshot with an arrow pointing to the pie chart icon](05/media/image-6-14.png)
+![Снимок экрана со стрелкой, указывающей на значок круговой диаграммы](05/media/image-6-14.png)
 
-2. Drag **Building** Column and drop it into **Legend** target box.
-3. Drag **Problem Report** Column and drop it into **Values** target box.
+2. Перетащите столбец **Здание** в поле назначения **Легенда**.
+3. Перетащите столбец **Отчет о проблеме** в целевое поле **Значения**.
 
-![A Screenshot with an arrow pointing to the direction the problem report needs to be dragged from the fields column into the values field](05/media/image-6-15.png)
+![Снимок экрана со стрелкой, указывающей направление, в котором отчет о проблеме необходимо перетащить из столбца полей в поле значений](05/media/image-6-15.png)
 
-4. Resize the pie chart using corner handles so that all chart components are visible. Your report should now look like this:
+4. Измените размер круговой диаграммы с помощью угловых маркеров, чтобы были видны все компоненты диаграммы. Теперь ваш отчет должен выглядеть так:
 
-![A screenshot with a border around the legend next to pie chart after resizing to make all your components visible](05/media/image-6-16.png)
+![Снимок экрана с рамкой вокруг легенды рядом с круговой диаграммой после изменения размера, чтобы все ваши компоненты были видны](05/media/image-6-16.png)
 
-5. Click **New visual** on the Power BI ribbon then select **stacked column** chart in **Visualizations** pane. 
+5. Щелкните **Новый визуальный элемент** на ленте Power BI, затем выберите **диаграмму с накоплением столбцов** на панели **Визуализации**. 
 
-![A Screenshot with an arrow pointing to the stacked column chart icon](05/media/image-6-17.png)
+![Снимок экрана со стрелкой, указывающей на значок столбчатой диаграммы с накоплением](05/media/image-6-17.png)
 
-6. Drag **Problem Report** Column and drop it into **Values** target box.
-7. Drag **Status** Column and drop it into **Axis** target box.
-8. Resize the chart as required using the corner handles.
-9. Test the report interactivity:
+6. Перетащите столбец **Отчет о проблеме** в поле **Значения**.
+7. Перетащите столбец **Состояние** в целевое поле **Ось**.
+8. Измените размер диаграммы, используя угловые ручки.
+9. Протестируйте интерактивность отчета:
 
-    * Select various building slices on the pie chart and observe changes on the stacked column chart.
-    * Select various bars on the stacked column chart and observe changes on the pie report.
+ * Выбирайте различные фрагменты зданий на круговой диаграмме и наблюдайте за изменениями на столбчатой диаграмме с накоплением.
+ * Выберите различные столбцы на столбчатой диаграмме с накоплением и наблюдайте за изменениями в круговом отчете.
 
-![A Screenshot with an arrow pointing to the pie chart to observe changed to the data after changing data on the stacked column chart](05/media/image-6-18.png)
+![Снимок экрана со стрелкой, указывающей на круговую диаграмму, для наблюдения за измененными данными после изменения данных на столбчатой диаграмме с накоплением](05/media/image-6-18.png)
 
-10. Select the **Insert**, and click **Q&A**.
+10. Выберите **Вставить** и нажмите **Вопросы и ответы**.
 
-![A Screenshot with an arrow pointing to the Q&A button](05/media/image-6-addbutton.png)
+![Снимок экрана со стрелкой, указывающей на кнопку вопросов и ответов](05/media/image-6-addbutton.png)
 
-11.  Select **Turn on Q&A** and wait for the Q&A to get ready.
-12.  Type **bar count of problem reports by building** and hit enter. You should see a bar chart.
+11. Выберите **Включить вопросы и ответы** и дождитесь подготовки вопросов и ответов.
+12. Введите **столбчатое количество отчетов о проблемах при построении** и нажмите Enter. Вы должны увидеть гистограмму.
 
-![A screenshot of the relevant text typed into the Q&A field](05/media/image-6-QAchart.png)
+![Снимок экрана с соответствующим текстом, введенным в поле вопросов и ответов](05/media/image-6-QAchart.png)
 
-13.  The dashboard now has Q&A enabled. Click on the **...** More options button of the Q&A visual and click **Remove**.
+13. На панели управления теперь включены вопросы и ответы. Нажмите кнопку **...** Дополнительные параметры визуального элемента «Вопросы и ответы» и нажмите **Удалить**.
 
-![A Screenshot with an arrow pointing to the ellipsis icon for more options and a border around the remove button](05/media/image-6-removevisual.png)
+![Снимок экрана со стрелкой, указывающей на значок с многоточием для дополнительных параметров и рамкой вокруг кнопки удаления](05/media/image-6-removevisual.png)
 
-14.  Save work in progress by selecting **File | Save**.
+14. Сохраните незавершенную работу, выбрав **Файл | Сохранить**.
 
 
-### Exercise 3: Create Power BI Dashboard
+### Упражнение 3. Создание панели мониторинга Power BI
 
-#### Task 1: Publish Power BI Report
+#### Задача 1. Публикация отчета Power BI
 
-1. Navigate to [Power BI Service](https://app.powerbi.com)
-2. Select **Workspaces** and click **Create a workspace**.
+1. Перейдите в [Службу Power BI](https://app.powerbi.com).
+2. Выберите **Рабочие области** и нажмите **Создать рабочее пространство**.
 
-![A Screenshot with a box around the workspaces button and an arrow pointing to the create a workspace button](05/media/image-6-createworkspace.png)
+![Снимок экрана с рамкой вокруг кнопки рабочего пространства и стрелкой, указывающей на кнопку создания рабочего пространства](05/media/image-6-createworkspace.png)
 
-3. Enter **311 Workspace** for Workspace name and click **Save**.
-4. Go back to the Power BI desktop application, select the **Home** tab, and click **Publish** .
+3. Введите **Рабочее пространство 311** в поле Имя рабочего пространства и нажмите **Сохранить**.
+4. Вернитесь в классическое приложение Power BI, выберите вкладку **Главная** и нажмите **Опубликовать**.
 
-![A Screenshot with an arrow pointing to the publish button](05/media/image-6-19.png)
+![Снимок экрана со стрелкой, указывающей на кнопку публикации](05/media/image-6-19.png)
 
-5. Select **311 Workspace** as the destination, then click **Select**.
+5. Выберите ** Рабочее пространство 311** в качестве места назначения, затем нажмите **Выбрать**.
 
-6. Wait until publishing is complete and click **Open \<name of your report\>.pbix in Power BI**.
+6. Дождитесь завершения публикации и щелкните **Открыть\<имя вашего отчета\>.pbix в Power BI**.
 
-![A Screenshot with an arrow pointing to the button to open your report](05/media/image-6-20.png)
+![Снимок экрана со стрелкой, указывающей на кнопку открытия отчета](05/media/image-6-20.png)
 
-This will open the published report in the browser.
+В браузере откроется опубликованный отчет.
 
-> [!NOTE]
-> If you are getting an error on PowerBI Service with message "the data source is missing credentials and cannot be accessed", follow the below steps:
+> [!ПРИМЕЧАНИЕ]
+> Если вы получаете сообщение об ошибке в службе Power BI Service с сообщением «в источнике данных отсутствуют учетные данные и к нему невозможно получить доступ», выполните следующие действия:
 >
-> 1. Select 311 Workspace and select Problem Management dataset.
-> 2. Expand Refresh dropdown and select Schedule refresh.
-> 3. Expand Data Source credentials section and select Edit Credentials.
-> 4. Select OAuth2 for Authentication Method and Organizational for Privacy level setting.
-> 5. Select Sign In. This will resolve the issue for report and it should display properly on Power BI Service.
+> 1. Выберите Рабочее пространство 311 и выберите набор данных управления проблемами.
+> 2. Разверните раскрывающийся список «Обновление» и выберите «Расписание обновления».
+> 3. Разверните раздел «Учетные данные источника данных» и выберите «Редактировать учетные данные».
+> 4. Выберите OAuth2 в качестве метода аутентификации и организационного метода для настройки уровня конфиденциальности.
+> 5. Выберите Войти. Это решит проблему для отчета, и он должен правильно отображаться в службе Power BI.
 
-#### Task 2: Create Power BI Dashboard
+#### Задача 2. Создание панели мониторинга Power BI
 
-1. Expand **311 Workspace**.
-2. Select the **Problem management** report under **Reports** heading.
+1. Разверните **Рабочее пространство 311**.
+2. Выберите отчет **Управление проблемами** под заголовком **Отчеты**.
 
-![A screenshot with a border around the problem management option under reports](05/media/image-6-21.png)
+![Снимок экрана с рамкой вокруг параметра управления проблемами под отчетами](05/media/image-6-21.png)
 
-3. Select **Pin to a dashboard** on the menu. Depending on the layout you may need to press **...** to show additional menu items.
+3. Выберите **Закрепить на панели управления** в меню. В зависимости от макета вам может потребоваться нажать **...**, чтобы отобразить дополнительные пункты меню.
 
-![A Screenshot with an arrow pointing to the ellipsis icon for more options and a border around the pin to dashboard option](05/media/image-6-22.png)
+![Снимок экрана со стрелкой, указывающей на значок с многоточием для дополнительных параметров, и рамкой вокруг параметра закрепления на панели управления](05/media/image-6-22.png)
 
-4. Select **New dashboard** on **Pin to dashboard** prompt.
-5. Enter **Problem Management Dashboard** as a **Dashboard name**, select **Pin live**.
+4. Выберите **Новая панель мониторинга** в строке **Закрепить на панели мониторинга**.
+5. Введите **Панель управления проблемами** в качестве **Имя информационной панели**, выберите **Pin live**.
 
-![A screenshot of the pin to dashboard prompt and the dashboard name changed](05/media/image-6-23.png)
+![Снимок экрана с выводом на панель мониторинга и измененным именем панели](05/media/image-6-23.png)
 
-6. Select **311 Workspace** node, select **Problem Management Dashboard**.
-7. Test interactivity of the pie and bar charts that are displayed.
+6. Выберите узел **Рабочее пространство 311**, выберите **Панель управления проблемами**.
+7. Протестируйте интерактивность отображаемых круговых диаграмм и гистограмм.
 
-#### Task 3: Add Visualizations Using Natural Language
+#### Задача 3. Добавление визуализаций с использованием естественного языка
 
-1. Select **Ask a question about your data** on top of the dashboard.
+1. Выберите **Задайте вопрос о ваших данных** в верхней части панели управления.
 
-![A Screenshot with an arrow pointing to the ask a question about your data button at the top of your dashboard](05/media/image-6-24.png)
+![Снимок экрана со стрелкой, указывающей на кнопку «Задать вопрос о ваших данных» в верхней части панели инструментов](05/media/image-6-24.png)
 
-2. Enter **funnel count of problem reports by status** in Q&A area. The funnel chart will be displayed.
-3. Select **Pin visual**.
+2. Введите **количество воронок отчетов о проблемах по статусу** в области вопросов и ответов. Отобразится воронкообразная диаграмма.
+3. Выберите **Закрепить визуально**.
 
-![A Screenshot with an arrow pointing to the pin visual button](05/media/image-6-25.png)
+![Снимок экрана со стрелкой, указывающей на визуальную кнопку закрепления](05/media/image-6-25.png)
 
-4. Select **Existing dashboard**, select **Problem Management dashboard**, select **Pin**.
+4. Выберите **Существующая панель мониторинга**, выберите **Панель управления проблемами**, выберите **Закрепить**.
 
-#### Task 4: Build Mobile Phone View
+#### Задача 4. Создание представления для мобильного устройства
 
-1. Select the **Problem Management dashboard** from **Dashboards** area.
-2. Click **Edit** and then select **Mobile view** from the drop down box.
-3. Rearrange tiles as desired.
+1. Выберите **Панель управления проблемами** в области **Панели мониторинга**.
+2. Нажмите **Изменить**, а затем выберите **Мобильное представление** в раскрывающемся списке.
+3. Переставьте плитки по своему желанию.
 
-![A photo of the mobile phone layout with tiles rearrange to display data](05/media/image-6-26.png)
+![Фотография макета мобильного телефона с перестановкой плиток для отображения данных](05/media/image-6-26.png)
 
-4. Select your report under **311 Workspace | Reports**
-5. Select **File** and then select **Generate QR Code** from the drop down box.
+4. Выберите свой отчет в разделе **Рабочая область 311 | Отчеты**
+5. Выберите **Файл**, а затем выберите **Создать QR-код** из раскрывающегося списка.
 
-![A Screenshot with an arrow pointing to the file button and a border around the generate a QR code button](05/media/image-6-27.png)
+![Снимок экрана со стрелкой, указывающей на кнопку файла и рамкой вокруг кнопки создания QR-кода](05/media/image-6-27.png)
 
-6. If you have a mobile device, scan the code using a QR scanner app available on both iOS and Android platforms.
+6. Если у вас есть мобильное устройство, отсканируйте код с помощью приложения для сканирования QR-кодов, доступного на платформах iOS и Android.
 
-> [!NOTE]
-> To access the dashboard and report you will have to sign in on the phone as the same user.
+> [!ПРИМЕЧАНИЕ]
+> Для доступа к панели управления и отчета вам необходимо войти в систему на телефоне как тот же пользователь.
 
-7. Navigate and explore reports and dashboards on a mobile device. 
+7. Перемещайтесь и исследуйте отчеты и информационные панели на мобильном устройстве. 
 
-### Exercise 4: Embed Power BI report
+### Упражнение 4. Встраивание отчета Power BI
 
-In this exercise, you will add the Company 311 Power BI report to Microsoft Teams and to the Company 311 Admin Model-driven application as a way for management and staff to be able to view the reports from directly within Teams and the Model-driven application. 
+В этом упражнении вы добавите отчет Power BI Компании 311 в Microsoft Teams и в приложение на основе модели Администратор Компании 311, чтобы руководство и персонал могли просматривать отчеты непосредственно из Microsoft Teams и приложения на основе модели. 
 
-#### Task 1: Setup Company 311 Team
+#### Задача 1: Настройка команды Компании 311
 
-In this task you will setup a Microsoft Teams team for the Lamna Healthcare Company, if you have not done so previously.
+В этой задаче вы настроите команду Microsoft Teams для компании Lamna Healthcare, если вы не сделали этого ранее.
 
-1.  Navigate to [Microsoft Teams](https://teams.microsoft.com) and sign in with the credentials you have been using previously.
+1. Перейдите к [Microsoft Teams](https://teams.microsoft.com) и войдите в систему с учетными данными, которые вы использовали ранее.
 
-2.  Select **Use the web app instead** on the welcome screen.
+2. Выберите **Использовать веб-приложение вместо** на экране приветствия.
 
-![A screenshot of the Microsoft Teams landing page and a border around the use the web app instead button](05/media/image-6-teams.png)
+![Снимок экрана целевой страницы Microsoft Teams и рамка вокруг кнопки использования веб-приложения вместо](05/media/image-6-teams.png)
 
-3.  When the Microsoft Teams window opens, dismiss the welcome messages.
+3. Когда откроется окно Microsoft Teams, закройте приветственные сообщения.
 
-4.  On the bottom left corner, choose **Join or create a team**.
+4. В нижнем левом углу выберите **Присоединиться или создать команду**.
 
-5.  Select **Create a team**.
+5. Выберите **Создать команду**.
 
-![A screenshot with a border around the join or create team button at the bottom of the window and another border around the create a team button](05/media/image-6-createteam.png)
+![Снимок экрана с рамкой вокруг кнопки присоединения или создания группы в нижней части окна и другой рамкой вокруг кнопки создания группы](05/media/image-6-createteam.png)
 
-6.  Press **From scratch**.
+6. Нажмите **С нуля**.
 
-7.  Select **Public**.
+7. Выберите **Публикация**.
 
-8.  For the Team name choose **Company 311** and select **Create**.
+8. В качестве названия команды выберите **Компания 311** и выберите **Создать**.
 
-9.  Select **Skip** adding members to Company 311.
+9. Выберите **Пропустить** добавление участников в компанию 311.
 
 
-#### Task 2: Embed Power BI report to Teams
+#### Задача 2: встраивание отчета Power BI в Teams
 
-1.  Navigate to [Microsoft Teams](https://teams.microsoft.com).
+1. Перейдите в [Microsoft Teams](https://teams.microsoft.com).
 
-2.  Select the **General** channel of the **Company 311** team.
+2. Выберите **Общий** канал команды **Компания 311**.
 
-3.  On the top of the page, press the **+** symbol to add a new tab.
+3. В верхней части страницы нажмите символ **+**, чтобы добавить новую вкладку.
 
-![A screenshot of the general channel of the company 311 team](05/media/image-6-addpowerbitab.png)
+![Скриншот общего канала команды компании 311](05/media/image-6-addpowerbitab.png)
 
-4.  Search for **power** and select **Power BI** from the results.
+4. Найдите **power** и выберите **Power BI** из результатов.
 
-5.  Expand **311 Workspace** and select the report you created earlier in this lab and click **Save**.
+5. Разверните **Рабочее пространство 311**, выберите отчет, созданный ранее в этой лабораторной работе, и нажмите **Сохранить**.
 
-![A screenshot of a prompt to which appears once you select Power BI](05/media/image-6-choosepowerbireport.png)
+![Снимок экрана с запросом, который появляется при выборе Power BI](05/media/image-6-choosepowerbireport.png)
 
-6.  You should now see your Power BI report in a tab in Microsoft Teams
+6. Теперь вы должны увидеть свой отчет Power BI на вкладке в Microsoft Teams.
 
-![A screenshot of your Power BI report in a tab in Microsoft Teams](05/media/image-6-powerbi.png)
+![Снимок экрана вашего отчета Power BI на вкладке в Microsoft Teams](05/media/image-6-powerbi.png)
 
 
-#### Task 3: Embed Power BI report to Model-driven app
+#### Задача 3. Встраивание отчета Power BI в приложение на основе модели
 
-1. Navigate to [Power BI](https://app.powerbi.com/home).
-2. Click to select **Datasets**.
+1. Перейдите в [Power BI](https://app.powerbi.com/home).
+2. Щелкните, чтобы выбрать **Наборы данных**.
 
-![A screenshot of a border around the datasets button](05/media/image-6-datasets.png)
+![Снимок экрана с рамкой вокруг кнопки наборов данных](05/media/image-6-datasets.png)
 
-3. Hover over the dataset you created, click on the **...** More options button, and select **Settings**.
+3. Наведите указатель мыши на созданный набор данных, нажмите кнопку **...** Дополнительные параметры и выберите **Настройки**.
 
-![A Screenshot with an arrow pointing to the ellipses button for more options and a border around the settings button](05/media/image-6-datasetsettings.png)
+![Снимок экрана со стрелкой, указывающей на кнопку с многоточием, для дополнительных параметров и рамкой вокруг кнопки настроек](05/media/image-6-datasetsettings.png)
 
-4. Click **Edit credentials**  located in the Data source credentials section.
-5. Select **OAuth2** for Authentication method, select **Organizational** for Privacy level setting, and click **Sign in**.
+4. Щелкните **Изменить учетные данные** в разделе «Учетные данные источника данных».
+5. Выберите **OAuth2** в качестве метода проверки подлинности, выберите **Организационный** для настройки уровня конфиденциальности и нажмите **Войти**.
 
-![A screenshot of the edit credentials window with all relevant text in each field](05/media/image-6-datasetconfiguration.png)
+![Снимок экрана окна редактирования учетных данных со всем соответствующим текстом в каждом поле](05/media/image-6-datasetconfiguration.png)
 
-6. Provide your credentials.
-7. Navigate to [Power Apps maker portal](https://make.powerapps.com/) and make sure you are in your practice environment.
-8. Select **Solutions** and click to open the **Company 311** solution.
-9. Click **+ New** and select **Dashboard | Power BI embedded**.
+6. Укажите свои учетные данные.
+7. Перейдите на [портал разработчиков Power Apps](https://make.powerapps.com/) и убедитесь, что вы находитесь в своей практической среде.
+8. Выберите **Решения** и щелкните, чтобы открыть решение **Компания 311**.
+9. Щелкните **+ Новое** и выберите **Информационная панель | Встроенный Power BI**.
 
-![A Screenshot with an arrow pointing to the new button, dashboard selected, and a border around the Power Bi embedded option](05/media/image-6-newpowerbiembeddeddash.png)
+![Снимок экрана со стрелкой, указывающей на новую кнопку, выбранной приборной панелью и рамкой вокруг встроенного параметра Power Bi](05/media/image-6-newpowerbiembeddeddash.png)
 
-10.  Enter **Problem management** for Display name, select **Power BI report** for type, select **311 Workspace** for Power BI workspace, select **Problem management** for Power BI report and click **Save**.
+10. Введите **Управление проблемами** для Отображаемого имени, выберите **Отчет Power BI** для типа, выберите **Рабочее пространство 311** для рабочего пространства Power BI, выберите **Управление проблемами** для отчета Power BI и нажмите **Сохранить**.
 
-![A screenshot of the New Power BI embedded data window with all relevant text in each field](05/media/image-6-powerbidashprop.png)
+![Снимок экрана нового окна встроенных данных Power BI со всем соответствующим текстом в каждом поле](05/media/image-6-powerbidashprop.png)
 
-11.  Click **Publish all customizations** and wait for the publishing to complete.
-12.  While still in the Company 311 solution, click to open the the **Company 311 Admin** Model-driven application.
+11. Щелкните **Опубликовать все настройки** и дождитесь завершения публикации.
+12. Находясь в решении «Компания 311», щелкните, чтобы открыть приложение **Администратор компании 311** на основе модели.
 
-![A Screenshot with an arrow pointing to the company 311 admin option with another border around model-driven application in the type column in line with the correct company 311 admin option](05/media/image-6-editmodeldrivenapp.png)
+![Снимок экрана со стрелкой, указывающей на параметр администратора компании 311 с другой рамкой вокруг приложения на основе модели в столбце типа в соответствии с правильным параметром администратора компании 311](05/media/image-6-editmodeldrivenapp.png)
 
-13.  Click on the **Edit** icon of the Sitemap.
+13. Щелкните значок **Изменить** в файле Sitemap.
 
-![A Screenshot with an arrow pointing to the pencil icon to edit the sitemap](05/media/image-6-editsitemap.png)
+![Снимок экрана со стрелкой, указывающей на значок карандаша для редактирования карты сайта](05/media/image-6-editsitemap.png)
 
-14.  Click **+ Add** and select **Group**.
+14. Нажмите **+ Добавить** и выберите **Группа**.
 
-![A Screenshot with an arrow pointing to the add button and a border around the group button](05/media/image-6-eddgroup.png)
+![Снимок экрана со стрелкой, указывающей на кнопку добавления и рамкой вокруг кнопки группы](05/media/image-6-eddgroup.png)
 
-16.  Go to the **Properties** pane and enter **Reports** for Title.
-17.  Select the **Reports** group you just created, click **+ Add** and select **Subarea**.
+16. Перейдите на панель **Свойства** и введите **Отчеты** в качестве заголовка.
+17. Выберите группу **Отчеты**, которую вы только что создали, нажмите **+ Добавить** и выберите **Подрайон**.
 
-![A Screenshot with an arrow pointing to the add button and a border around the subarea button](05/media/image-6-eddsubarea.png)
+![Снимок экрана со стрелкой, указывающей на кнопку добавления и рамкой вокруг кнопки подобласти](05/media/image-6-eddsubarea.png)
 
-18.   Go to the **Properties** pane, select **Dashboard** for Type, select **Problem management** for Default dashboard, and enter **Problem report** for Title.
+18. Перейдите на панель **Свойства**, выберите **Информационная панель** для Типа, выберите **Управление проблемами** для Информационной панели по умолчанию и введите **Отчет о проблемах** для Заголовка.
 
-![A screenshot of the subarea window with the relevant option selected in each field](05/media/image-6-subareaprop.png)
+![Скриншот окна подобласти с соответствующей опцией, выбранной в каждом поле](05/media/image-6-subareaprop.png)
 
-19.  Drag the new **Reports** group and drop it before the **Problems** group.
-20.  The groups in the **Manage Problems** area should now look like the image below.
+19. Перетащите новую группу **Отчеты** перед группой **Проблемы**.
+20. Группы в области **Управление проблемами** теперь должны выглядеть, как показано на рисунке ниже.
 
-![A screenshot of the manage problems area with reports and problems being the two items in this area](05/media/image-6-areagroups.png)
+![Скриншот области управления проблемами, где отчеты и проблемы являются двумя элементами в этой области](05/media/image-6-areagroups.png)
 
-21.  Click **Save and Close** to close the sitemap editor.
-22.  Click **Save and Close** again to close the app designer.
-23.  Click **Done**.
-24.  Click **Publish all customizations** and wait for the publishing to complete.
-25.  Select **Apps** and click to launch the **Company 311 Admin** Model-driven application.
-26.  The report should load.
+21. Нажмите **Сохранить и закрыть**, чтобы закрыть редактор карты сайта.
+22. Еще раз нажмите **Сохранить и закрыть**, чтобы закрыть конструктор приложения.
+23. Нажмите **Готово**.
+24. Щелкните **Опубликовать все настройки** и дождитесь завершения публикации.
+25. Выберите **Приложения** и щелкните, чтобы запустить приложение **Администратор компании 311** на основе модели.
+26. Отчет должен загрузиться.
 
-![A screenshot of your problem management report](05/media/image-6-PowerBIinModel.png)
+![Скриншот вашего отчета об управлении проблемами](05/media/image-6-PowerBIinModel.png)
 
-27.  Interact with report and make sure it behaves as expected.
+27. Взаимодействуйте с отчетом и убедитесь, что он ведет себя должным образом.
 
-### Exercise 5: Power BI embedded canvas
+### Упражнение 5. Встроенный холст Power BI
 
-In this exercise, you will add embedded canvas application to Power BI as a visual.
+В этом упражнении вы добавите встроенное приложение холста в Power BI в качестве визуального элемента.
 
 
-#### Task 1: Add canvas
+#### Задача 1: Добавить холст
 
-1. Navigate to [Power BI](https://app.powerbi.com).
-2. Select **Workspaces** and then select to open **311 Workspace**.
-3. Click to open the **Problem management** report.
-4. Click **Edit**.
-5. Resize and reposition the visuals as shown below.
+1. Перейдите в [Power BI](https://app.powerbi.com).
+2. Выберите **Рабочие области**, а затем откройте **Рабочее пространство 311**.
+3. Щелкните, чтобы открыть отчет **Управление проблемами**.
+4. Щелкните **Изменить**.
+5. Измените размер и положение визуальных элементов, как показано ниже.
 
-![Power BI visuals - screenshot](05/media/image-6-powerbivisuaLs.png)
+![Визуальные элементы Power BI - снимок экрана](05/media/image-6-PowerBIVisuals.png)
 
-6. Click on an empty area of the canvas, go to the **Visualizations** and click **Power Apps for Power BI**.
+6. Щелкните пустую область холста, перейдите к **Визуализации** и щелкните **Power Apps для Power BI**.
 
-![Power Apps for Power BI - screenshot](05/media/image-6-powerappsforpowerbi.png)
+![Power Apps для Power BI - снимок экрана](05/media/image-6-powerappsforpowerbi.png)
 
-7. Select the Power BI visual you just created, expand the **lh_problemreport** table select **Problem Report** column.
+7. Выберите только что созданный визуальный элемент Power BI, разверните таблицу **lh_problemreport** и выберите столбец **Отчет о проблеме**.
 
-![Table column - screenshot](05/media/image-6-tablecolumn.png)
+![Столбец таблицы - снимок экрана](05/media/image-6-tablecolumn.png)
 
-8. Select your practice environment and click **Create new**.
+8. Выберите среду для практики и нажмите **Создать новую**.
 
-![create app - screenshot](05/media/image-6-createembeddedapp.png)
+![создать приложение - снимок экрана](05/media/image-6-createembeddedapp.png)
 
-9. A new browser window or tab should open and load the app studio.
-10. Do not navigate away from this page.
+9. Должно открыться новое окно или вкладка браузера и загрузить студию приложений.
+10. Не уходите с этой страницы.
 
-#### Task 2: Customize the app
+#### Задача 2: настроить приложение
 
-1.  Right click on **Gallery** and select **Delete**.
+1. Щелкните правой кнопкой мыши **Галерея** и выберите **Удалить**.
 
-![Delete gallery button - screenshot](05/media/ex_5_deletegallery.png)
+![Кнопка удаления галереи - снимок экрана](05/media/ex_5_deletegallery.png)
 
-2.  Click **File**.
-4.  Select **Settings**.
-5.  Select **Display**.
-6.  Change the **Orientation** for **Landscape**.
-7.  Click **Apply** on the popup.
-8.  Close the **Settings** window.
-9.  Select **Data** and click **Add data**.
+2. Щелкните **Файл**.
+4. Выберите **Настройки**.
+5. Выберите **Дисплей**.
+6. Измените **Ориентацию** на **Пейзаж**.
+7. Нажмите **Применить** во всплывающем окне.
+8. Закройте окно **Настройки**.
+9. Выберите **Данные** и нажмите **Добавить данные**.
 
-![Add data - screenshot](05/media/ex_5_adddata.png)
+![Добавить данные - снимок экрана](05/media/ex_5_adddata.png)
 
-10.  Select the **Problem reports** table.
+10. Выберите таблицу **Отчеты о проблемах**.
 
-![Select data table - screenshot](05/media/ex_5_datatable.png)
+![Выбрать таблицу данных - снимок экрана](05/media/ex_5_datatable.png)
 
-11.  Select the **App** object from the Tree view.
-12.  Select the **OnStart** of the **App** object and set it to the formula below. This formula will create two variables one to keep track of the current index of the reports table and another to keep track of the current item row.
+11. Выберите объект **Приложение** в древовидном представлении.
+12. Выберите **OnStart** объекта **Приложение** и задайте для него формулу ниже. Эта формула создаст две переменные: одну для отслеживания текущего индекса таблицы отчетов, а другую - для отслеживания текущей строки элемента.
 
 ```Set(currentIndex,1);Set(CurrentItem, LookUp('Problem Reports', 'Problem Report' = GUID(Last(FirstN([@PowerBIIntegration].Data,currentIndex)).'Problem Report')))```
 
-![A screentshot showing OnStart property set to the expression described on the previous step](05/media/ex_5_apponstart.png)
+![Снимок экрана, на котором для свойства OnStart установлено выражение, описанное на предыдущем шаге](05/media/ex_5_apponstart.png)
 
-13.   Select the **Insert** tab, click **Media**, and select **Image**.
+13. Выберите вкладку **Вставка**, щелкните **Медиа** и выберите **Изображение**.
 
-![Insert image- screenshot](05/media/ex_5_insertimaGe.png)
+![Скриншот вставки](05/media/ex_5_insertimage.png)
 
-14  Set the **Image** value to the formula below.
+14 Задайте для параметра **Изображение** формулу, приведенную ниже.
 
 ```CurrentItem.Photo```
 
-15.  Click on the **...** button of the **App** object and select **Run OnStart**.
+15. Нажмите кнопку **...** объекта **Приложение** и выберите **Запуск при включении**.
 
-![Run app OnStart - screenshot](05/media/ex_5_runonstart.png)
+![Запуск приложения OnStart - снимок экрана](05/media/ex_5_runonstart.png)
 
-16.   You should see the photo. If you are not seeing the photo, then go to your Model Driven App and add photo to Problem Reports records where the Photo field is empty.
+16. Вы должны увидеть фото. Если вы не видите фотографию, перейдите в приложение на основе модели и добавьте фотографию в записи отчетов о проблемах.
 
-![Current image with photo - screenshot](05/media/ex_7_imagephoto.png)
+![Текущее изображение с фото - скриншот](05/media/ex_7_imagephoto.png)
 
-17.  Set the **X** value of the image to **0**.
-18.  Set the **Y** value of the image to **0**.
-19.  Set the **Width** value of the image to the formula below.
+17. Установите значение **X** изображения на **0**.
+18. Установите значение **Y** изображения на **0**.
+19. Установите значение **Ширина** изображения по формуле ниже.
 
 ```Parent.Width```
 
-20. Set the **Height** value of the image to the formula below.
+20. Установите значение **Высота** изображения по формуле ниже.
 
-```Parent.Height```
+```Parent. Height```
 
-21.  The image should fill the screen.
+21. Изображение должно заполнить экран.
 
-![Image position - screenshot](05/media/ex_7_imageposition.png)
+![Положение изображения - снимок экрана](05/media/ex_7_imageposition.png)
 
-22.  Do not navigate away from this page.
+22. Не уходите с этой страницы.
 
 
-#### Task 3: Add controls
+#### Задача 3: Добавление элементов управления
 
-1.  Select the **Insert** tab and click **Label**.
-2.  Select the label you just added and set the **Text** value to the formula below.
+1. Выберите вкладку **Вставка** и нажмите **Ярлык**.
+2. Выберите только что добавленную метку и установите значение **Текст** в формулу ниже.
 
 ```CurrentItem.Title```
 
-3.  Set the **Height** value of the labe to **60**.
-4.  Set the **X** value of the label to **0**.
-5.  Set the **Y** value of the label to formula below.
+3. Установите значение **Высота** метки на **60**.
+4. Установите значение **X** метки на **0**.
+5. Установите значение **Y** метки в формулу ниже.
 
 ```Parent.Height -Self.Height```
 
-6.  Set the the **Width** value of the label to formula below.
+6. Задайте для значения **Ширина** метки формулу, приведенную ниже.
 
 ```Parent.Width```
 
-7.  Set the **Fill** value of the label to **RGBA(0, 108, 191, .5)**.
-8.  Set the **Color** value of the label to **RGBA(255, 255, 255, 1)**.
-9.  Set the **Align** value to the formula below.
+7. Установите значение **Заливка** метки на **RGBA (0, 108, 191, .5)**.
+8. Установите значение **Цвет** метки на **RGBA (255, 255, 255, 1)**.
+9. Установите значение **Выравнивание** в формулу ниже.
 
 ```Align.Center```
 
-10. The label should now look like the image below. If you don't see the title, click on the **...** button of the **App** object and **Run OnStart** again.
+10. Теперь метка должна выглядеть как на изображении ниже. Если вы не видите заголовок, нажмите кнопку **...** объекта **Приложение** и **Запуск при включении** снова.
 
-![Resized label - screenshot](05/media/ex_7_resizedlabel.png)
+![Размер ярлыка - снимок экрана](05/media/ex_7_resizedlabel.png)
 
-11.  Go to the **Insert** tab, click **Icons** and select **Next**.
-12.  Double click on the icon you just added and rename it **Next icon**.
-13.  Go to the **Insert** tab, click **Icons** and select **Back**.
-14.  Double click on the second icon you just added and rename it **Back icon**.
-15.  Drag and place the the **Next icon** above the right side of the label.
-16.  Drag and place the the **Back icon** above the left side of the label.
-17.  The icons should now look like the image below.
+11. Перейдите на вкладку **Вставка**, щелкните **Значки** и выберите **Далее**.
+12. Дважды щелкните только что добавленный значок и переименуйте его в **Значок Далее**.
+13. Перейдите на вкладку **Вставка**, щелкните **Значки** и выберите **Назад**.
+14. Дважды щелкните второй значок, который вы только что добавили, и переименуйте его в **Значок Назад**.
+15. Перетащите значок **Далее** над правой стороной метки.
+16. Перетащите значок **Назад** над левой стороной метки.
+17. Значки теперь должны выглядеть, как на изображении ниже.
 
-![Icon location - screenshot](05/media/ex_7_iconlocation.png)
+![Расположение значка - снимок экрана](05/media/ex_7_iconlocation.png)
 
-18.  Select the **Next icon** and set the **OnSelect** value to the formula below.
+18. Щелкните значок **Далее** и установите значение **OnSelect** на формулу ниже.
 
 ```UpdateContext({CurrentItem: LookUp('Problem Reports', 'Problem Report' = GUID(Last(FirstN([@PowerBIIntegration].Data,currentIndex)).'Problem Report'))});UpdateContext({currentIndex: currentIndex +1})```
 
-19.  Set the **DisplayMode** value of the **Next icon** to the formula below.
+19. Задайте для **DisplayMode** значка **Далее** формулу, приведенную ниже.
 
 ```If(currentIndex = CountRows([@PowerBIIntegration].Data), DisplayMode.Disabled, DisplayMode.Edit)```
 
-20.  Select the **Back icon** and set the **OnSelect** value to the formula below.
+20. Выберите значок **Назад** и установите значение **OnSelect** на формулу ниже.
 
 ```UpdateContext({CurrentItem: LookUp('Problem Reports', 'Problem Report' = GUID(Last(FirstN([@PowerBIIntegration].Data,currentIndex)).'Problem Report'))});UpdateContext({currentIndex: currentIndex -1})```
 
-21.   Set the **DisplayMode** value of the **Back icon** to the formula below.
+21. Задайте для **DisplayMode** значка **Назад** формулу, приведенную ниже.
 
 ```If(currentIndex > 1, DisplayMode.Edit, DisplayMode.Disabled)```
 
-22.   Go to the **Insert** tab, click **Icons** and select **Check**.
-23.   Rename the Check icon **Complete icon**.
-24.   Move the **Complete icon** to the top right of the screen.
-25.   Set the OnSelect of the **Check icon** to the formula below. This formula will update the status of the row to completed and then refresh Power BI.
+22. Перейдите на вкладку **Вставка**, щелкните **Значки** и выберите **Проверить**.
+23. Переименуйте значок проверки в **Значок завершения**.
+24. Переместите **значок завершения** в верхний правый угол экрана.
+25. Установите для параметра OnSelect **значка проверки** формулу ниже. Эта формула обновит статус строки до завершенного, а затем обновит Power BI.
 
 ```Patch('Problem Reports', CurrentItem, {'Status Reason': 'Status Reason (Problem Reports)'.Completed}); PowerBIIntegration.Refresh()```
 
-26.   Click **Play**.
-27.   Click on the next and back icons and make sure the image changes.
-28.   Close the preview.
+26. Щелкните **Запуск**.
+27. Щелкните значки «Далее» и «Назад» и убедитесь, что изображение изменилось.
+28. Закройте превью.
 
-29.   Click **File**.
-30.   Click **Save**.
-31.   Select **Cloud** enter **Power BI embed app**.
-32.   Click **Save**.
-33.   Close the app studio browser window or tab.
-34.   You should now be back on the Power BI report. Click **Refresh** on the top header.
-35. Click on the **Next** and **Back** icons to make sure the application loads the images.
+29. Щелкните **Файл**.
+30. Нажмите **Сохранить**.
+31. Выберите **Облако** введите **Приложение для встраивания Power BI**.
+32. Нажмите **Сохранить**.
+33. Закройте окно или вкладку браузера студии приложения.
+34. Теперь вы должны вернуться к отчету Power BI. Нажмите **Обновить** в верхнем заголовке.
+35. Щелкните значки **Далее** и **Назад**, чтобы убедиться, что приложение загружает изображения.
 
-    ![Canvas inside Power BI report - screenshot](05/media/ex_7_canvasembedded.png)
+ ![Холст внутри отчета Power BI - снимок экрана](05/media/ex_7_canvasembedded.png)
 
-36. Select the **Completed** column of the stacked column chart and make a note how many rows are completed.
-37. Select any column of the stacked column chart apart from **Completed**. Click on the next icon to see the next image.
-38. Click on the **Complete** icon. 
+36. Выберите столбец **Завершено** столбчатой диаграммы с накоплением и отметьте, сколько строк заполнено.
+37. Выберите любой столбец столбчатой диаграммы с накоплением, кроме **Завершено**. Щелкните следующий значок, чтобы увидеть следующее изображение.
+38. Щелкните значок **Завершить**. 
 
-    ![Complete status of problem - screenshot](05/media/ex_7_complete.png)
+ ![Полный статус проблемы - снимок экрана](05/media/ex_7_complete.png)
 
-39. The completed count should increase. If the completed count doesn't increase, click refresh and wait for the visuals to be refreshed.
+39. Завершенный счет должен увеличиться. Если количество выполненных работ не увеличивается, нажмите «Обновить» и дождитесь обновления визуальных элементов.
 
-    ![Increased completed count - screenshot](05/media/ex_7_increasedcount.png)
+ ![Увеличение количества завершенных - скриншот](05/media/ex_7_increasedcount.png)
 
-40. Click **Save** to save the report..
+40. Нажмите **Сохранить**, чтобы сохранить отчет.
 
 
 
-## Challenges
+## Испытания
 
-* Dashboards and reports to include drilldown to individual reports with photos
-* Report and analyze problem patterns and trends
-* Problem resolution status visualization as a funnel
+* Панели мониторинга и отчеты, включающие детализацию отдельных отчетов с фотографиями.
+* Отчет и анализ проблемных моделей и тенденций
+* Визуализация статуса решения проблемы в виде воронки
 
-## Addendum
+## Дополнение
 
-### Import sample data
+### Импорт образцов данных
 
-In this exercise you will import sample data into Power BI service. That allows you to complete the lab exercises even if do not have required permissions to install desktop applications, or experience difficulties in configuring Power BI Desktop and connecting it to the data. After completion of this exercise you can skip **Exercise1** and start the lab on **Exercise 2** using Power BI service ([https://app.powerbi.com](https://app.powerbi.com)) instead of Power BI Desktop. 
+В этом упражнении вы импортируете образцы данных в службу Power BI. Это позволит выполнить лабораторные упражнения, даже если у вас нет необходимых разрешений для установки настольных приложений или возникают трудности с настройкой Power BI Desktop и подключением его к данным. После завершения этого упражнения вы можете пропустить **Упражнение 1** и начать лабораторную работу с **Упражнения 2** с помощью службы Power BI ([https://app.powerbi.com](https://app.powerbi.com)) вместо Power BI Desktop.
 
-1. Download [problem-reports-data.pbix](06\Resources\problem-reports-data.pbix) and save on your computer.
-2. Navigate to [Power BI](https://app.powerbi.com/).
-3. Click **311 Workspace**.
-4. Expand **+New** and select **Upload a file**.
+1. Загрузите [problem-reports-data.pbix](06\Resources\problem-reports-data.pbix) и сохраните на своем компьютере.
+2. Перейдите в [Power BI](https://app.powerbi.com/).
+3. Щелкните **Раблочее пространство 311**.
+4. Разверните **+ Создать** и выберите **Загрузить файл**.
 
-![A Screenshot with an arrow pointing to the new button and another arrow pointing to the upload a file button](05/media/image-6-29.png)
+![Снимок экрана со стрелкой, указывающей на кнопку +Создать, и другой стрелкой, указывающей на кнопку загрузки файла](05/media/image-6-29.png)
 
-5. Select **Local File**.
-6. Locate and select **problem-report-data.pbix** file that you've downloaded earlier.
-7. Once data load is complete, select **problem-reports-data** report.
-8. Click **...** then select **Edit**.
+5. Выберите **Локальный файл**.
+6. Найдите и выберите файл **report-data.pbix**, который вы скачали ранее.
+7. После завершения загрузки данных выберите отчет **problem-reports-data**.
+8. Щелкните **...**, затем выберите **Изменить**.
 
-![A Screenshot with an arrow pointing to the ellipses icon for more options and the edit button selected](05/media/image-6-30.png)
+![Снимок экрана со стрелкой, указывающей на значок с многоточием для дополнительных параметров и выбранной кнопкой редактирования](05/media/image-6-30.png)
 
-9. You can now start **Exercise 2: Create Power BI Report** of this lab.
+9. Теперь можно приступить к **Упражнению 2: Создание отчета Power BI** этой лабораторной работы.

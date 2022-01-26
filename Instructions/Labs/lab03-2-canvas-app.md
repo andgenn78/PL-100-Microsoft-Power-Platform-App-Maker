@@ -1,185 +1,185 @@
 ---
-lab:
-    title: 'Lab 03.2: Canvas app'
-    module: 'Module 03: Create a canvas app'
+Лабораторный практикум:
+ заголовок: 'Лабораторная работа 03.2: Приложение холста'
+ модуль: 'Модуль 03: Создание приложения холста'
 ---
 
-> [!NOTE]
-> Effective November 2020:
-> - Common Data Service has been renamed to Microsoft Dataverse. [Learn more](https://aka.ms/PAuAppBlog)
-> - Some terminology in Microsoft Dataverse has been updated. For example, *entity* is now *table* and *field* is now *column*. [Learn more](https://go.microsoft.com/fwlink/?linkid=2147247)
+> [!ПРИМЕЧАНИЕ]
+> С ноября 2020 г .:
+> - Common Data Service переименована в Microsoft Dataverse. [Подробнее…](https://aka.ms/PAuAppBlog)
+> - Обновлена некоторая терминология в Microsoft Dataverse. Например, *entity/объект* теперь *table/таблица*, а *field/поле* теперь *column/столбец*. [Подробнее…](https://go.microsoft.com/fwlink/?linkid=2147247)
 >
 
 
-# Lab 03.2: Canvas app
+# Лабораторная работа 03.2: Приложение холста
 
-In this module you will design and build a canvas app for the company employees to submit problem reports.
+В этом модуле вы разработаете и создадите приложение на основе холста, чтобы сотрудники компании могли отправлять отчеты о проблемах.
 
-## What you will learn
+## Что вы узнаете
 
-  - Import and use a pre-built component library
-  - Create a Power Apps canvas app
-  - Connect to a data source
-  - Filter data
-  - Create data Rows
-  - Use images with data Rows
-  - Embed canvas Power App into Microsoft Teams
+ - Как импортировать и использовать предварительно созданную библиотеку компонентов
+ - Как создать приложение холста Power Apps.
+ - Как подключиться к источнику данных
+ - Как фильтровать данные
+ - Как создавать строки данных
+ - Как использовать изображения с строками данных
+ - Как встраивать приложение холста Power Apps в Microsoft Teams
 
-## High-level lab steps
+## Лабораторные этапы высокого уровня
 
-  - Import company components
-  - Create app and layout main screen (including list of my items)
-  - Submit New Report
-  - Test
-  - Embed canvas app in Microsoft Teams
+ - Импорт комплектующих компании
+ - Создание главного экрана приложения и макета (включая список моих элементов)
+ - Отправка нового отчета
+ - Тестовое задание
+ - Встраивание приложения холста в Microsoft Teams
 
-## Prerequisites
+## Предварительные требования
 
-* Must have completed **Lab 02.1: Data model and model-driven app**
+* Должно быть выполнено **Лабораторная работа 02.1: Модель данных и приложение на основе модели**
 
-## Detailed steps
+## Подробные шаги
 
-  ### Exercise 1: Create canvas application
+ ### Упражнение 1: Создание приложения холста
 
-In this exercise, you will import a solution with shared components, create a view for the problem report Table and create a canvas application.
+В этом упражнении вы импортируете решение с общими компонентами, создадите представление для таблицы отчетов о проблемах и создадите приложение холста.
 
-#### Task 1: Import component library solution
+#### Задача 1: Импорт решения компонента библиотеки
 
-In this task, you will import the shared components solution into your environment. This shared component library was built by another team at your company.
+В этой задаче вы импортируете решение общих компонентов в свою среду. Эта общая библиотека компонентов была создана другой командой вашей компании.
 
-1.  Navigate to the [Power Apps maker portal](https://make.powerapps.com/) page and make sure you are in the correct environment.
+1. Перейдите на страницу [Портал разработчика Power Apps](https://make.powerapps.com/) и убедитесь, что вы находитесь в правильной среде.
 
-2.  Select **Solutions** and click **Import**.
+2. Выберите **Решения** и нажмите **Импорт**.
 
-![A Screenshot with an arrow pointing to the import button](03-2/media/image1.png)
+![Снимок экрана со стрелкой, указывающей на кнопку импорта](03-2/media/image1.png)
 
-3.  Click **Browse**.
+3. Щелкните **Обзор**.
 
-4.  Go to the course resources folder, select the **Shared components** solution, and click **Open**.
+4. Перейдите в папку ресурсов курса, выберите решение **Общие компоненты** и нажмите **Открыть**.
 
-5.  Click **Next**.
+5. Щелкните **Далее**.
 
-6.  Click **Import** and wait for the import to complete.
+6. Щелкните **Импорт** и дождитесь завершения импорта.
 
-7.  Click **Publish All Customizations** and wait for the publishing to complete.
+7. Щелкните **Опубликовать все настройки** и дождитесь завершения публикации.
 
-8.  You should now see the **Shared Components** solution you imported. Click to open the **Shared Components** solution.
+8. Теперь вы должны увидеть импортированное решение **Общие компоненты**. Щелкните, чтобы открыть решение **Общие компоненты**.
 
-9. The solution should have one item in it. (**Lamna Healthcare Shared Components**)
+9. В решении должен быть один элемент. (**Общие компоненты Lamna Healthcare**)
 
-![A screenshot of the shared components window with the Lamna Healthcare shared components item](03-2/media/image2.png)
+![Скриншот окна общих компонентов с элементом общих компонентов Lamna Healthcare](03-2/media/image2.png)
 
-> [!IMPORTANT]
-> There is an issue where importing the app as part of a solution may not add it to your components library. The following steps are designed to resolve the issue.
+> [!ВАЖНО]
+> Существует проблема, из-за которой импорт приложения как части решения может не добавить его в вашу библиотеку компонентов. Следующие шаги предназначены для решения проблемы.
 
-10. Navigate to **Apps**, Select the **Lamna Healthcare Shared Components App**.
-11. Click the **Edit Icon** to edit the app.
+10. Перейдите к **Приложениям**, выберите **Приложение общих компонентов Lamna Healthcare**.
+11. Щелкните **значок редактирования**, чтобы отредактировать приложение.
 
-![A Screenshot with an arrow pointing to the edit button](03-2/media/image2-1.png)
+![Снимок экрана со стрелкой, указывающей на кнопку редактирования](03-2/media/image2-1.png)
 
-12. Select your **Region/Country** and click **Get started** if prompted.
-    
-    > [!Note]
-    >
-    > When the app is open in Edit mode, move on to next step, as the Preloader component shows a Loading icon but it is not actually waiting for something to load.
-13. After the app opens, click **File** > **Save As**.
-14. Save the app as **Lamna Healthcare Share Components A**.
+12. Выберите **регион/страну** и нажмите **Начать** при появлении запроса.
+ 
+ > [!Примечание]
+ >
+ > Когда приложение открыто в режиме редактирования, переходите к следующему шагу, поскольку компонент Preloader показывает значок «Загрузка», но на самом деле не ждет загрузки.
+13. После открытия приложения щелкните **Файл** > **Сохранить как**.
+14. Сохраните приложение как ** Общие компоненты Lamna Healthcare A**.
 
-![A screenshot with a border around the app name saved as Lamna Healthcare Shared Components A](03-2/media/image2-2.png)
+![Снимок экрана с рамкой вокруг имени приложения, сохраненный как Lamna Healthcare Shared Components A](03-2/media/image2-2.png)
 
-14. Click **OK**.
-15. Close the **Lamna Healthcare Shared Components** tab in your browser.
+14. Нажмите **ОК**.
+15. Закройте вкладку **Общие компоненты Lamna Healthcare** в своем браузере.
 
-#### Task 2: Create view
+#### Задача 2: Создание представления
 
-In this task, you will create a view that will show the current user’s problem reports. Later you will use this view with the filter function in the canvas app.
+В этой задаче вы создадите представление, в котором будут отображаться отчеты о проблемах текущего пользователя. Позже вы будете использовать это представление с функцией фильтра в приложении холста.
 
-1.  Navigate to the [Power Apps maker portal](https://make.powerapps.com/) page and make sure you are in the correct environment.
+1. Перейдите на страницу [Портал разработчика Power Apps](https://make.powerapps.com/) и убедитесь, что вы находитесь в правильной среде.
 
-2.  Select **Solutions** and click to open the **Company 311** solution.
+2. Выберите **Решения** и щелкните, чтобы открыть решение **Компания 311**.
 
-3.  Locate and click to open the **Problem Reports** Table.
+3. Найдите и щелкните, чтобы открыть таблицу **Отчеты о проблемах**.
 
-4.  Select the **Views** tab and click to open the **Active Problem Reports** view.
+4. Выберите вкладку **Представления** и щелкните, чтобы открыть представление **Активные отчеты о проблемах**.
 
-![A Screenshot with an arrow pointing to the active problem reports view button](03-2/media/image3.png)
+![Снимок экрана со стрелкой, указывающей на кнопку просмотра активных отчетов о проблемах](03-2/media/image3.png)
 
-5.  Click **Edit filters**.
+5. Щелкните **Изменить фильтры**.
 
-![A Screenshot with an arrow pointing to the edit filters button](03-2/media/image4.png)
+![Снимок экрана со стрелкой, указывающей на кнопку редактирования фильтров](03-2/media/image4.png)
 
-6.  Change the filter to **Created By Equals current user** and click **OK**.
+6. Измените фильтр на значение **Создано равным текущему пользователю** и нажмите **ОК**.
 
-![A screenshot of the edit filters window](03-2/media/image5.png)
+![Скриншот окна редактирования фильтров](03-2/media/image5.png)
 
-7.  Click on the chevron button next to the Save button and select **Save As**.
+7. Нажмите кнопку с шевроном рядом с кнопкой «Сохранить» и выберите **Сохранить как**.
 
-![A Screenshot with an arrow pointing to the save as button](03-2/media/image6.png)
+![Снимок экрана со стрелкой, указывающей на кнопку «Сохранить как»](03-2/media/image6.png)
 
-8.  Enter **My Reports** for **Name** and click **Save**.
+8. Введите **Мои отчеты** в поле **Имя** и нажмите **Сохранить**.
 
-9.  Click **Publish** and wait for the publishing to complete.
+9. Нажмите **Опубликовать** и дождитесь завершения публикации.
 
-10. Click on the **Back** button in your browser tab to go back to the Problem Report table details.
+10. Нажмите кнопку **Назад** на вкладке браузера, чтобы вернуться к сведениям в таблице отчета о проблемах.
 
-#### Task 3: Create the user application
+#### Задача 3: Создание пользовательского приложения
 
-In this task, you will create a canvas application using the phone form factor.
+В этой задаче вы создадите приложение на основе холста, используя форм-фактор телефона.
 
-1.  Navigate to the [Power Apps maker portal](https://make.powerapps.com/) page and make sure you are in the correct environment.
+1. Перейдите на страницу [Портал разработчика Power Apps](https://make.powerapps.com/) и убедитесь, что вы находитесь в правильной среде.
 
-2.  Select **Solutions** and click to open the **Company 311** solution.
+2. Выберите **Решения** и щелкните, чтобы открыть решение **Компания 311**.
 
-3.  Click **+ New | App |Canvas app**.
+3. Щелкните **+ Создать | Приложение | Приложение холста**.
 
-![A Screenshot with an arrow pointing to the new button with the drop down menu under app upon and a border around the canvas app button](03-2/media/image7.png)
+![Снимок экрана со стрелкой, указывающей на новую кнопку с раскрывающимся меню под приложением и рамкой вокруг кнопки приложения холста](03-2/media/image7.png)
 
-4.  Enter **Company 311 Phone App**, select **Phone** for format, and click **Create**.
+4. Введите **Мобильное Приложение Компания 311**, выберите **Мобильное устройство** для формата и нажмите **Создать**.
 
-5.  Select **Skip**.
+5. Выберите **Пропустить**.
 
-6.  Go to the Tree view and double click **Screen1**.
+6. Перейдите в древовидное представление и дважды щелкните **Экран1**.
 
-![A Screenshot with an arrow pointing to the screen 1 button](03-2/media/image9.png)
+![Снимок экрана со стрелкой, указывающей на кнопку экрана 1](03-2/media/image9.png)
 
-10. Rename the screen **Main Screen**. It’s always a good idea to give your screens a meaningful name.
+10. Переименуйте экран в **Главный экран**. Всегда полезно давать вашим экранам понятное имя.
 
-![A screenshot with the Screen 1 name highlighted and renamed Main Screen](03-2/media/image10.png)
+![Снимок экрана с выделенным названием экрана 1, переименованным в главный экран](03-2/media/image10.png)
 
-11. Select the **Main Screen** and click **Insert**.
+11. Выберите **Главный экран** и нажмите **Вставить**.
 
-![A Screenshot with an arrow pointing to the plus icon for insert](03-2/media/image11.png)
+![Снимок экрана со стрелкой, указывающей на значок плюса для вставки](03-2/media/image11.png)
 
-12. Select **Get more Components**.
+12. Выберите **Получить больше компонентов**.
 
-![A screenshot with a border around the get more components button](03-2/media/image12-1.png)
+![Снимок экрана с рамкой вокруг кнопки получения дополнительных компонентов](03-2/media/image12-1.png)
 
-13.  Expand the **Lamna Healthcare Shared Components A** Library, select **Header** and **Tab Control**, and then click **Import**.
+13. Разверните библиотеку **Общие Компоненты Lamna Healthcare A**, выберите **Заголовок** и **Вкладка**, а затем нажмите **Импорт**.
 
-![A screenshot of the import components window with Ta control and header selected](03-2/media/image12-2.png)
+![Снимок экрана окна компонентов импорта с выбранными элементами управления заголовком и вкладкой](03-2/media/image12-2.png)
 
 
-14.  Expand **Library components**, select **Header Control** and **Tab Control**. These are both components from the library you imported earlier in the lab.
+14. Разверните **Компоненты библиотеки**, выберите **Элемент управления заголовком** и **Элемент управления вкладкой**. Оба этих компонента из библиотеки, которую вы импортировали ранее в лабораторной работе.
 
-![A screenshot with a border around the library components Header and Tab control](03-2/media/image12-3.png)
+![Снимок экрана с рамкой вокруг элементов библиотеки Заголовок и Вкладка](03-2/media/image12-3.png)
 
-15. Move the **Tab Control** to the bottom of the screen and the **Header Control** to the top of the screens.
+15. Переместите **Контроль вкладкой** в нижнюю часть экрана, а **Контроль заголовком** - в верхнюю.
 
-16. Select the **Header Control** and change the **Text** value to **"Company 311".**
+16. Выберите **Заголовок** и в параметре **Текст** измените значение на **«Компания 311».**
 
-![A screenshot of a border around the expression tab with the text value set to company 311](03-2/media/image13.png)
+![Снимок экрана с рамкой вокруг вкладки выражения с текстовым параметром, значение которого изменено на компанию 311](03-2/media/image13.png)
 
-17. Set the **Height** of the **Header Control** to **75**.
+17. Установите **высоту** **элемента управления заголовком** на **75**.
 
-    ![Set Height - Header](03-2/media/image37.png)
+ ![Установка высоты заголовка](03-2/media/image37.png)
 
-18. Right click on the Main Screen and select **Duplicate screen**.
+18. Щелкните правой кнопкой мыши на главном экране и выберите **Дублировать экран**.
 
-![A screenshot with a border around the duplicate screen button](03-2/media/image14.png)
+![Снимок экрана с рамкой вокруг кнопки дубликата экрана](03-2/media/image14.png)
 
-18. Rename the new screen **New Reports Screen**.
+18. Переименуйте новый экран в **Новый экран отчетов**.
 
-19. Select the **Tree view**, select **App** and change the **OnStart** value to the formula below. This formula will create a new variable named My Tabs and set it to a table of tab items.
+19. Выберите **Древовидное представление**, выберите **Приложение** и измените значение **OnStart** на формулу ниже. Эта формула создаст новую переменную с именем Мои вкладки и установит ее в таблицу элементов вкладок.
 
 ```javascript
 Set('My Tabs', Table( {
@@ -197,514 +197,513 @@ Set('My Tabs', Table( {
 ))
 ```
 
-> [!IMPORTANT]
-> When expressions are copied, the quotes and double quotes are sometimes replaced with their "smart" counterparts which are not valid in formulas. If you copy and paste the expression above, make sure the resulting formula does not contain any errors.     
+> [!ВАЖНО]
+> При копировании выражений кавычки и двойные кавычки иногда заменяются их «умными» эквивалентами, которые недопустимы в формулах. Если вы скопируете и вставите приведенное выше выражение, убедитесь, что полученная формула не содержит ошибок.
 
-![A screenshot of the copied expression into the expression tab](03-2/media/image15.png)
+![Скриншот скопированного выражения на вкладке выражения](03-2/media/image15.png)
 
-20. Select the **Tab Control** in the **Main Screen** and change the **Items** value to **‘My Tabs’**.
+20. Выберите **Контроль вкладки** на **Главном Экране** и измените значение **Элементы** на **Мои вкладки**.
 
-![A screenshot of the items value set to my tabs for Tab control](03-2/media/image16.png)
+![Снимок экрана со значениями элементов, установленными на мои вкладки для элемента управления вкладками](03-2/media/image16.png)
 
-21. Change the **SelectedColor** value to **WhiteSmoke**.
+21. Измените значение **ВыбранныйЦвет** на **БелыйДым**.
 
-22. Select the **Tab Control** inside the **New Report Screen** and set the Item value to **‘My Tabs’**.
+22. Выберите **Контроль вкладки** внутри **Нового экрана отчета** и установите для параметра Элемент значение **Мои вкладки**.
 
-23. Change the **SelectedColor** value to **WhiteSmoke**.
+23. Измените значение **ВыбранныйЦвет** на **БелыйДым**.
 
-24. Click on the **…** button of the **App** and select **Run OnStart**.
+24. Нажмите кнопку **…** в **приложении** и выберите **Запуск при включении**.
 
-![A screenshot of the run on start button coming from the ellipsis icon for see more under the app button](03-2/media/image17.png)
+![Скриншот кнопки запуска при включении на значке с многоточием, подробнее под кнопкой приложения](03-2/media/image17.png)
 
-25. Your tabs should now show the two tabs you added.
+25. Теперь на ваших вкладках должны отображаться две добавленные вами вкладки.
 
-![A screenshot of the two tabs you added](03-2/media/image18.png)
+![Снимок экрана с двумя добавленными вами вкладками](03-2/media/image18.png)
 
-26. Click **File** and then click **Save**.
-27. Click on the **<- back** button.
+26. Щелкните **Файл**, а затем **Сохранить**.
+27. Нажмите кнопку **<- назад**.
 
-28. Do not navigate away from this page.
+28. Не уходите с этой страницы.
 
-### Exercise 2: My reports
+### Упражнение 2: Мои отчеты
 
-In this exercise, you will add a gallery that will show reports created by the current logged in user.
+В этом упражнении вы добавите галерею, в которой будут отображаться отчеты, созданные текущим вошедшим в систему пользователем.
 
-#### Task 1: Add gallery
+#### Задача 1. Добавить галерею
 
-1.  Select the **Main Screen**, go to the **Insert** tab, click **Gallery**, and select **Vertical**.
+1. Выберите **Главный экран**, перейдите на вкладку **Вставка**, щелкните **Галерея** и выберите **Вертикально**.
 
-![A Screenshot with an arrow pointing to the vertical gallery option](03-2/media/image19.png)
+![Снимок экрана со стрелкой, указывающей на вариант вертикальной галереи](03-2/media/image19.png)
 
-2.  Rename the new gallery **My Reports Gallery**.
+2. Переименуйте новую галерею в **Моя галерея отчетов**.
 
-3.  Resize and reposition **My Reports Gallery** and make sure the screen looks like the image below.
+3. Измените размер и положение **Моей галереи отчетов** и убедитесь, что экран выглядит так, как показано на рисунке ниже.
 
-![A screenshot of the my reports gallery selected](03-2/media/image20.png)
+![Выбран снимок экрана галереи моих отчетов](03-2/media/image20.png)
 
-4.  Select **My Reports Gallery**, go to the **Properties** pane, and select **Problem Reports** for **Data Source**. If you do not see Problem Reports, click **See all tables** or **Search** for the table.
+4. Выберите **Моя галерея отчетов**, перейдите на панель **Свойства** и выберите **Отчеты о проблемах** для **Источник данных**. Если вы не видите отчеты о проблемах, нажмите **Просмотреть все таблицы** или **Искать** для таблицы.
 
-![A screenshot of the my reports gallery window and the properties pane with problem reports selected for data source](03-2/media/image21.png)
+![Скриншот окна галереи моих отчетов и панели свойств с отчетами о проблемах, выбранными для источника данных](03-2/media/image21.png)
 
-5.  Select the **My Reports** view you created for **View**.
+5. Выберите представление **Мои отчеты**, созданное для **Просмотра**.
 
-6.  Click **Edit fields**.
+6. Щелкните **Изменить поля**.
 
-![A Screenshot with an arrow pointing to the edit button](03-2/media/image22.png)
+![Снимок экрана со стрелкой, указывающей на кнопку редактирования](03-2/media/image22.png)
 
-7.  Change Subtitle1 to **statuscode**. This is the Status Reason Column.
+7. Измените Подзаголовок1 на **кодсостояния**. Это столбец причины состояния.
 
-![A screenshot of a border around subtitle 1 changed to the correct name](03-2/media/image23.png)
+![Скриншот рамки вокруг подзаголовка 1, измененного на правильное имя](03-2/media/image23.png)
 
-8.  Click **File** and then click **Save**.
+8. Щелкните **Файл**, а затем **Сохранить**.
 
-9.  Click on the **<- Back** button.
+9. Нажмите кнопку **<- Назад**.
 
-10. Do not navigate away from this page.
+10. Не уходите с этой страницы.
 
-### Exercise 3: Allow removing reports
+### Упражнение 3. Разрешение удаления отчетов
 
-In this exercise, you will allow unassigned reports to be removed. This will allow users to easily remove any reports that were accidentally created.
+В этом упражнении вы разрешите удалять неназначенные отчеты. Это позволит пользователям легко удалять любые случайно созданные отчеты.
 
-#### Task 1: Allow remove
+#### Задача 1. Разрешить удаление
 
-1.  Expand the **My Reports Gallery**.
+1. Разверните **Галерею моих отчеты**.
 
-2.  Select the **Icon** inside the **My Reports Gallery**.
+2. Щелкните **Icon** в **галерее моих отчетов**.
 
-![A screenshot of the arrow icon inside the my reports gallery](03-2/media/image24.png)
+![Снимок экрана со стрелкой в галерее моих отчетов](03-2/media/image24.png)
 
-3.  Change the **Icon** value to **Icon.Trash**.
+3. Измените значение **Icon** на **Icon.Trash**.
 
-![A screenshot of icon.trash typed into the expression tab](03-2/media/image25.png)
+![Скриншот icon.trash, набранный на вкладке выражения](03-2/media/image25.png)
 
-4.  Change the **Visible** value to the formula below. This formula will hide the icon if the status reason is not New.
+4. Измените значение **Visible** на формулу ниже. Эта формула скроет значок, если причина статуса не «Новая».
 
 `If(Text(ThisItem.'Status Reason') = "New", true, false)`
 
-![A screenshot of the expression tab with the relevant command pasted in](03-2/media/image26.png)
+![Скриншот вкладки выражения со вставленной соответствующей командой](03-2/media/image26.png)
 
-5.  Make sure you still have the icon selected. Change the **OnSelect** value to the formula below. This formula will remove item from the data source.
+5. Убедитесь, что значок все еще выбран. Измените значение **OnSelect** на формулу ниже. Эта формула удалит элемент из источника данных.
 
 `Remove('Problem Reports', ThisItem)`
 
-6.  Click **File** and then click **Save**.
+6. Щелкните **Файл**, а затем **Сохранить**.
 
-7.  Click on the **<-** **Back** button.
+7. Нажмите кнопку **<-** **Назад**.
 
-8.  Do not navigate away from this page.
+8. Не уходите с этой страницы.
 
-### Exercise 4: Add new report
+### Упражнение 4: Добавление нового отчета
 
-In this exercise, you will add a form to submit new problem reports.
+В этом упражнении вы добавите форму для отправки новых отчетов о проблемах.
 
-#### Task 1: Add new report form
+#### Задача 1: Добавление новой формы отчета
 
-1.  Select the **New Report Screen**, go to the **Insert** tab, click **Form**, and select **Edit**.
+1. Выберите **Экран нового отчета**, перейдите на вкладку **Вставка**, щелкните **Форма** и выберите **Изменить**.
 
-![A screenshot of the inset tab and forms button selected](03-2/media/image27.png)
+![Снимок экрана со вкладкой вставки и выбранной кнопкой форм](03-2/media/image27.png)
 
-2.  Rename the form to **New Report Form**.
+2. Переименуйте форму в **Новая форма отчета**.
 
-3.  Select **New Report Form**, go to the **Properties** pane, and select **Problem Report** for **Data source**.
+3. Выберите **Новая форма отчета**, перейдите на панель **Свойства** и выберите **Отчет о проблеме** для **Источник данных**.
 
-4.  Click **Edit fields**.
+4. Щелкните **Изменить поля**.
 
-![A Screenshot with an arrow pointing to the edit fields button](03-2/media/image28.png)
+![Снимок экрана со стрелкой, указывающей на кнопку редактирования полей](03-2/media/image28.png)
 
-5.  Remove the **Status Reason** Column.
+5. Удалите столбец **Причина состояния**.
 
-![A Screenshot with an arrow pointing to the ellipses icon for more options and a border around the remove button](03-2/media/image29.png)
+![Снимок экрана со стрелкой, указывающей на значок эллипса для дополнительных параметров и рамкой вокруг кнопки удаления](03-2/media/image29.png)
 
-6.  Remove the **Created On** Column.
+6. Удалите столбец **Создано**.
 
-7.  Remove the **Location** Column.
+7. Удалите столбец **Местоположение**.
 
-8.  Click **+ Add field**.
+8. Щелкните **+ Добавить поле**.
 
-9.  Select **Details**, **Building**, **Department**, and **Photo**, and then click **Add**.
+9. Выберите **Подробности**, **Здание**, **Отдел** и **Фото**, а затем нажмите **Добавить**.
 
-![A screenshot of photo, details, building, and location selected in the fields window](03-2/media/image30.png)
+![Скриншот фотографии, деталей, здания и местоположения, выбранных в окне полей](03-2/media/image30.png)
 
-10. Resize and reposition the form so it takes most of the page and leave enough room for a button in the bottom.
+10. Измените размер и положение формы, чтобы она занимала большую часть страницы и оставила достаточно места для кнопки внизу.
 
-![A screenshot of the form resized and reposition for room at the bottom for a button](03-2/media/image31.png)
+![Снимок экрана формы с измененным размером и перемещением для места внизу для кнопки](03-2/media/image31.png)
 
-11. Select the **New Report Screen**.
+11. Выберите **Новый экран отчета**.
 
-12. Go to the **Insert** tab and select **Button**.
+12. Перейдите на вкладку **Вставка** и выберите **Кнопка**.
 
-13. Rename the button **Submit Report**.
+13. Переименуйте кнопку **Отправить отчет**.
 
-14. Place the button below the form and make it stretch across the screen
+14. Разместите кнопку под формой и растяните ее по экрану.
 
-15. Change the **Submit Report** button's **text** property to **Submit**.
+15. Измените свойство **текст** кнопки **Отправить отчет** на **Отправить**.
 
-16. Select the Submit Report button and change the **OnSelect** value to the formula below. This formula will create a new Row in the Problem Reports table.
+16. Нажмите кнопку «Отправить отчет» и измените значение **OnSelect** на формулу ниже. Эта формула создаст новую строку в таблице отчетов о проблемах.
 
-`SubmitForm('New Report Form') `
+`SubmitForm('New Report Form')`
 
-17. Select the **New Report Form**.
+17. Выберите **Форму нового отчета**.
 
-18. Change the **OnSuccess** value to the formula below. This formula will show a notification after the new Row gets created and clear the form when the record creation is successful.
+18. Измените значение **OnSuccess** на формулу ниже. Эта формула покажет уведомление после создания новой строки и очистит форму, когда создание записи будет успешным.
 
 `Notify("Created new problem report row");NewForm('New Report Form')`
 
-19. Select the **New Report Screen**.
+19. Выберите **Экран нового отчета**.
 
-20. Set the **OnVisible** value to the formula below. This formula will create a new form when the screen becomes visible.
+20. Установите значение **OnVisible** в формулу ниже. Эта формула создаст новую форму, когда экран станет видимым.
 
 `NewForm('New Report Form')`
 
-21. Click **File** and then click **Save**.
-22. Click **Publish**.
-23. Click **Publish this version** and wait for the publishing to complete.
-24. Click on the **<-** **Back** button.
-25. Do not navigate away from this page.
+21. Щелкните **Файл**, а затем **Сохранить**.
+22. Нажмите **Опубликовать**.
+23. Нажмите **Опубликовать эту версию** и дождитесь завершения публикации.
+24. Нажмите кнопку **<-** **Назад**.
+25. Не уходите с этой страницы.
 
 
-### Exercise 5: Test the application
+### Упражнение 5: Тест приложения
 
-In this exercise, you will test the canvas application you created by submitting a problem report.
+В этом упражнении вы протестируете созданное вами приложение холста, отправив отчет о проблеме.
 
-#### Task 1: Test application
+#### Задача 1: Протестируйте приложение
 
-1.  Select the **Main Screen** and click **Preview the app**.
+1. Выберите **Главный экран** и нажмите **Предварительный просмотр приложения**.
 
-![A Screenshot with an arrow pointing to the play icon to preview the app](03-2/media/image32.png)
+![Снимок экрана со стрелкой, указывающей на значок воспроизведения для предварительного просмотра приложения](03-2/media/image32.png)
 
-2.  The application should load, and the list should show all the reports you created.
+2. Приложение должно загрузиться, и в списке должны появиться все созданные вами отчеты.
 
-![A screen of your loaded application](03-2/media/image33.png)
+![Экран загруженного приложения](03-2/media/image33.png)
 
-3.  Select the **New Report** tab.
+3. Выберите вкладку **Новый отчет**.
 
-4.  The **New Report Form** should load. Fill out the form and click on the **Photo** Column.
+4. Должна загрузиться **новая форма отчета**. Заполните форму и щелкните столбец **Фото**.
 
-5.  Select an image.
+5. Выберите изображение.
 
-6.  Click **Submit**
+6. Нажмите **Отправить**.
 
-7.  The Row should get created successfully and you should see the success message.
+7. Строка должна быть создана успешно, и вы должны увидеть сообщение об успешном завершении.
 
-![A screen of the success message reading "created new problem report record"](03-2/media/image38.png)
+![Экран успешного сообщения «Создана новая запись отчета о проблеме»](03-2/media/image38.png)
 
-8.  Select the **My Reports** tab.
+8. Выберите вкладку **Мои отчеты**.
 
-9.  You should see the new report you created. Click **Delete** to test the delete.
+9. Вы должны увидеть новый отчет, который вы создали. Нажмите **Удалить**, чтобы проверить удаление.
 
-![A Screenshot with an arrow pointing to the trash can icon to delete](03-2/media/image35.png)
+![Снимок экрана со стрелкой, указывающей на значок корзины, которую нужно удалить](03-2/media/image35.png)
 
-10. The Row should be deleted and removed from the list.
+10. Строку следует удалить и убрать из списка.
 
-![A screenshot of the row deleted and removed from the list](03-2/media/image36.png)
+![Скриншот удаленной и убранной из списка строки](03-2/media/image36.png)
 
-11. **Close** the preview.
-12. **Close** the app studio by closing the browser tab.
+11. **Закройте** предварительный просмотр.
+12. **Закройте** студию приложений, закрыв вкладку браузера.
 
-### Exercise 6: Embed canvas app in Microsoft Teams
+### Упражнение 6. Внедрение приложения холста в Microsoft Teams
 
-In this exercise, you will add the Company 311 Phone App that you created earlier, to Microsoft Teams as a way for staff to be able to log issues directly within Teams.
+В этом упражнении вы добавите мобильное приложение Компания 311, созданное вами ранее, в Microsoft Teams, чтобы сотрудники могли регистрировать проблемы непосредственно в Teams.
 
-#### Task 1: Setup Company 311 Team
+#### Задача 1: Настройка команды Компании 311
 
-In this task, you will setup a **Microsoft Teams** team for the Lamna Healthcare Company, if you have not done so previously.
+В этой задаче вы создадите команду **Microsoft Teams** для компании Lamna Healthcare, если вы не сделали этого ранее.
 
-1.  Navigate to [Microsoft Teams](https://teams.microsoft.com) and sign in with the same credentials you have been using previously.
+1. Перейдите в [Microsoft Teams](https://teams.microsoft.com) и войдите в систему с теми же учетными данными, которые вы использовали ранее.
 
-2.  Select **Use the web app instead** on the welcome screen.
+2. Выберите **Использовать веб-приложение вместо** на экране приветствия.
 
-![A screenshot of the Microsoft Teams web browser landing page with a border around the use the web app instead button](03-2/media/image-3-teams.png)
+![Снимок экрана целой страницы веб-браузера Microsoft Teams с рамкой вокруг кнопки использования веб-приложения вместо](03-2/media/image-3-teams.png)
 
-3.  When the Microsoft Teams window opens, dismiss the welcome messages.
+3. Когда откроется окно Microsoft Teams, закройте приветственные сообщения.
 
-4.  Select **Teams**.
-5.  On the bottom left corner, choose **Join or create a team**.
+4. Выберите **Команды**.
+5. В нижнем левом углу выберите **Присоединиться или создать команду**.
 
-6.  Select **Create a team**.
+6. Выберите **Создать команду**.
 
-![A screenshot of a border around the join or create a team button and another border around the create a team button](03-2/media/image-3-createteam.png)
+![Снимок экрана с рамкой вокруг кнопки присоединения или создания группы и еще одной рамкой вокруг кнопки создания группы](03-2/media/image-3-createteam.png)
 
-6.  Press **From scratch**.
+6. Нажмите **С нуля**.
 
-7.  Select **Public**.
+7. Выберите **Публикация**.
 
-8.  For the Team name enter **Company 311** and select **Create**.
+8. В поле «Название команды» введите **Компания 311** и выберите **Создать**.
 
-9.  Select **Skip** adding members to Company 311.
-10. Do not navigate away from this page.
+9. Выберите **Пропустить** добавление участников в компанию 311.
+10. Не уходите с этой страницы.
 
 
-#### Task 2: Add canvas app to Teams
+#### Задача 2. Добавление приложения холста в Teams
 
-1.  Select the **General** channel of the **Company 311** team.
+1. Выберите **Общий** канал команды **Компания 311**.
 
-2.  On the top of the page, press the **+** symbol to add a new tab.
+2. В верхней части страницы нажмите символ **+**, чтобы добавить новую вкладку.
 
-![A screenshot of a border around the plus icon to add a new tab](03-2/media/image-3-addpowerbitab.png)
+![Снимок экрана с рамкой вокруг значка плюса для добавления новой вкладки](03-2/media/image-3-addpowerbitab.png)
 
-4.  Search for **power** and select **PowerApps** from the results.
+4. Найдите **Power** и выберите **PowerApps** из результатов.
 
-5.  Select **Add** to add Power Apps to Teams
+5. Выберите **Добавить**, чтобы добавить Power Apps в Teams.
 
-![A screenshot of the prompt to add Power Apps to Teams](03-2/media/image-3-powerappsteams.png)
+![Снимок экрана с добавлением Power Apps в Teams](03-2/media/image-3-powerappsteams.png)
 
-6. Select the **Company 311 Phone App** that you created earlier in this lab. 
+6. Выберите **мобильно приложение Компания 311**, которое вы создали ранее в этой лабораторной работе. 
 
-> [!IMPORTANT]
-> If you do not see the app you need to go back to the app editor and publish the app
+> [!ВАЖНО]
+> Если вы не видите приложение, вам нужно вернуться в редактор приложений и опубликовать приложение.
 
-7. Select **Save**.
+7. Выберите **Сохранить**.
 
-8. The **Company 311** app should now appear on a tab in Microsoft Teams.
+8. Приложение **Компания 311** теперь должно появиться на вкладке в Microsoft Teams.
 
-![A screenshot of the company 311 app appearing on a tab in Microsoft Teams](03-2/media/image-3-powerappinteams.png)
+![Снимок экрана приложения компании 311, отображаемого на вкладке в Microsoft Teams](03-2/media/image-3-powerappinteams.png)
 
 
 
-### Exercise 7: Embed canvas in model-driven app
+### Упражнение 7. Встраивание приложения холста в приложение на основе модели
 
-In this exercise, you will create a canvas application and add it to the model-driven application.
+В этом упражнении вы создадите приложение холста и добавите его в приложение, управляемое моделью.
 
-#### Task 1: Add canvas app to the form
+#### Задача 1. Добавление приложения холста в форму
 
-1. Navigate to [Power Apps maker portal](https://make.powerapps.com/) and make sure you are in your practice environment.
-2. Select **Solutions** and click to open the **Company 311** solutions.
-3. Locate and click to open the **Building** table.
-4. Select the **Forms** tab and click to open the **Information** form of type **Main**.
+1. Перейдите на [портал разработчиков Power Apps](https://make.powerapps.com/) и убедитесь, что вы находитесь в своей практической среде.
+2. Выберите **Решения** и щелкните, чтобы открыть **Решения компании 311**.
+3. Найдите и щелкните, чтобы открыть таблицу **Здание**.
+4. Выберите вкладку **Формы** и щелкните, чтобы открыть форму **Информация** типа **Основная**.
 
-![A Screenshot with an arrow pointing to the word information with a border around the form type being main](03-2/media/opentableform.png)
+![Снимок экрана со стрелкой, указывающей на слово информация с рамкой вокруг типа формы, являющегося основным](03-2/media/opentableform.png)
 
-5. Select the **form section**.
-6. Go to the Properties pane and click to expand **Formatting**.
-7. Change the **Columns** value to **2**.
+5. Выберите **раздел формы**.
+6. Перейдите на панель «Свойства» и щелкните, чтобы развернуть **Форматирование**.
+7. Измените значение **Столбцы** на **2**.
 
-![A screenshot with a border around the number of columns](03-2/media/formsectioncolumns.png)
+![Снимок экрана с рамкой вокруг количества столбцов](03-2/media/formsectioncolumns.png)
 
-8. Make sure you still have the section selected. Select the **Table columns** tab.
-9. Uncheck the **Show only unused table columns** checkbox and click on the **Name** column.
+8. Убедитесь, что раздел у вас все еще выбран. Выберите вкладку **Столбцы таблицы**.
+9. Снимите флажок **Показывать только неиспользуемые столбцы таблицы** и щелкните столбец **Имя**.
 
-![A Screenshot with an arrow pointing to the name button](03-2/media/addcolumntoform.png)
+![Снимок экрана со стрелкой, указывающей на кнопку с названием](03-2/media/addcolumntoform.png)
 
-10. The column should now appear on right side column of the section. Select the **Name** column on the form.
-11. Check the **Hide label** checkbox and click **Save**.
+10. Теперь столбец должен появиться в правом столбце раздела. Выберите в форме столбец **Имя**.
+11. Установите флажок **Скрыть метку** и нажмите **Сохранить**.
 
-![A Screenshot with an arrow pointing to the save button](03-2/media/saveform.png)
+![Снимок экрана со стрелкой, указывающей на кнопку сохранения](03-2/media/saveform.png)
 
-12.  Click on the **Switch to classic** button. Select **Skip** if prompted.
+12. Нажмите кнопку **Перейти к классической версии**. При появлении запроса выберите **Пропустить**.
 
-![A Screenshot with an arrow pointing to the switch to class button](03-2/media/switchtoclassic.png)
+![Снимок экрана со стрелкой, указывающей на кнопку переключения на класс](03-2/media/switchtoclassic.png)
 
-13.   Double click on the **Name** column you added to the form.
-14.   Select the **Controls** tab and click **Add control**.
+13. Дважды щелкните столбец **Имя**, который вы добавили в форму.
+14. Выберите вкладку **Управление** и нажмите **Добавить элемент управления**.
 
-![A Screenshot with an arrow pointing to the add control button](03-2/media/ex_7_addcontrol.png)
+![Снимок экрана со стрелкой, указывающей на добавление кнопки управления](03-2/media/ex_7_addcontrol.png)
 
-15.   Select **Canvas app** and click **Add**.
-16.   Click **Customize**.
+15. Выберите **Приложение холста** и нажмите **Добавить**.
+16. Щелкните **Настроить**.
 
-![A Screenshot with an arrow pointing to the customize button](03-2/media/ex_7_customizeapp.png)
+![Снимок экрана со стрелкой, указывающей на кнопку настройки](03-2/media/ex_7_customizeapp.png)
 
-17.   A new browser window or tab should open and load the app studio.
-18.   Do not navigate away from this page.
+17. Должно открыться новое окно или вкладка браузера и загрузить студию приложений.
+18. Не уходите с этой страницы.
 
-#### Task 2: Customize the app
+#### Задача 2: Настройка приложения
 
-1.  Right click on **Form1** and select **Delete**.
+1. Щелкните правой кнопкой мыши **Форма1** и выберите **Удалить**.
 
-![A screenshot with a border around the delete button](03-2/media/ex_7_deleteform.png)
+![Скриншот с рамкой вокруг кнопки удаления](03-2/media/ex_7_deleteform.png)
 
-2.  Click **File**.
-4.  Select **The cloud**, enter **Model embed app** for name, and click **Save**.
+2. Щелкните **Файл**.
+4. Выберите **Облако**, введите **Приложение для внедрения модели** в качестве имени и нажмите **Сохранить**.
 
-![A screenshot of the Save As prompt](03-2/media/ex_7_saveapp.png)
+![Снимок экрана с надписью «Сохранить как»](03-2/media/ex_7_saveapp.png)
 
-5.  Select **Settings**.
-6.  Select **Display**.
-7.  Enter **400** for Width.
+5. Выберите **Настройки**.
+6. Выберите **Дисплей**.
+7. Введите **400** для ширины.
 
-![A screenshot with a border around the width changed to 400](03-2/media/ex_7_displaywidth.png)
+![Снимок экрана с рамкой вокруг ширины, измененной на 400](03-2/media/ex_7_displaywidth.png)
 
-8.   Click **Apply** on the popup.
-9.   Enter **500** for Width.
-10.  Click **Apply** on the popup.
-11.  Close the Settings popup window.
-12.  Select the **App** object from the Tree view.
-13.  Select the **OnStart** of the **App** object and set it to the formula below. This formula will create two variables one to keep track of the current index of the reports table and another to keep track of the current item row.
+8. Нажмите **Применить** во всплывающем окне.
+9. Введите **500** для ширины.
+10. Нажмите **Применить** во всплывающем окне.
+11. Закройте всплывающее окно настроек.
+12. Выберите объект **Приложение** в древовидном представлении.
+13. Выберите **OnStart** объекта **Приложение** и задайте для него формулу ниже. Эта формула создаст две переменные: одну для отслеживания текущего индекса таблицы отчетов, а другую - для отслеживания текущей строки элемента.
 
 ```Set(currentIndex,1);Set(CurrentItem, Last(FirstN([@ModelDrivenFormIntegration].Item.'Problem Reports',currentIndex)))```
 
-![A screenshot with a border around the app object changed to onstart and set to the aforementioned formula. There is also another border around the app button selected](03-2/media/ex_7_apponstart.png)
+![Снимок экрана с рамкой вокруг объекта приложения, измененного на onstart и установленного на вышеупомянутую формулу. Также есть еще одна рамка вокруг выбранной кнопки приложения](03-2/media/ex_7_apponstart.png)
 
-14.  Select the **Insert** insert tab, click **Media**, and select **Image**.
+14. Выберите вкладку **Вставка** вставки, щелкните **Медиа** и выберите **Изображение**.
 
-![A screenshot of a border around the image button](03-2/media/ex_7_insertimage.png)
+![Снимок экрана с рамкой вокруг кнопки изображения](03-2/media/ex_7_insertimage.png)
 
-15.  Select the image you just added and set the **Image** value to the formula below.
+15. Выберите только что добавленное изображение и установите значение **Изображение** в формулу ниже.
 
 ```CurrentItem.Photo```
 
-16.   Click on the **...** button of the **App** object and select **Run OnStart**.
+16. Нажмите кнопку **... ** объекта **Приложение** и выберите **Запуск при включении**.
 
-![A Screenshot with an arrow pointing to the ellipses icon for more options and a border around the run on start button](03-2/media/ex_7_runonstart.png)
+![Снимок экрана со стрелкой, указывающей на значок эллипса для дополнительных параметров и рамкой вокруг кнопки запуска при включении](03-2/media/ex_7_runonstart.png)
 
-17.  You should see the photo. Select **Image control** from Tree View.
+17. Вы должны увидеть фото. Выберите **Управление изображением** в древовидном представлении.
 
-![A screenshot of an icon of a broken door](03-2/media/ex_7_imagephoto.png)
+![Скриншот значка сломанной двери](03-2/media/ex_7_imagephoto.png)
 
-18. Set the **X** value of the image to **0**.
-19. Set the **Y** value of the image to **0**.
-20. Set the **Width** value of the image to the formula below.
+18. Установите значение изображения **X** на **0**.
+19. Установите значение изображения **Y** на **0**.
+20. Установите значение **Ширина** изображения по формуле ниже.
+
+`` Родитель.Ширина``
+
+21. Установите значение ** Высота ** изображения по формуле ниже.
 
 ```Parent.Width```
 
-21. Set the **Height** value of the image to the formula below.
+22. Перейдите на панель **Свойства** и выберите **Заливка** для **Положение изображения**.
 
-```Parent.Height```
+![Скриншот со стрелкой, указывающей на вкладку файла](03-2/media/ex_7_imageposition.png)
 
-22. Go to the **Properties** pane and select **Fill** for **Image position**.
-
-![A Screenshot with an arrow pointing to the the file tab](03-2/media/ex_7_imageposition.png)
-
-23. Click **File** and then click **Save** to save your progress.
-24. Click on the **<-** **Back** button.
-25. Do not navigate away from this page.
+23. Щелкните **Файл**, а затем щелкните **Сохранить**, чтобы сохранить ваш прогресс.
+24. Нажмите кнопку **<-** **Назад**.
+25. Не уходите с этой страницы.
 
 
-#### Task 3: Add controls
+#### Задача 3: Добавление элемента управления
 
-1.  Select the **Insert** tab and click **Label**.
-2.  Select the label you just added and set the **Text** value to the formula below.
+1. Выберите вкладку **Вставка** и нажмите **Ярлык**.
+2. Выберите только что добавленную метку и установите значение **Текст** в формулу ниже.
 
 ```CurrentItem.Title```
 
-3.  Set the **Height** value of the label to **60**.
-4.  Set the **X** value of the label to **0**.
-5.  Set the **Y** value of the label to formula below.
+3. Установите значение **Высота** метки на **60**.
+4. Установите значение метки **X** на **0**.
+5. Установите значение метки **Y** в формулу ниже.
 
 ```Parent.Height -Self.Height```
 
-6.  Set the the **Width** value of the label to formula below.
+6. Задайте для значения **Ширина** метки формулу, приведенную ниже.
 
 ```Parent.Width```
 
-7.  Set the **Fill** value of the label to **RGBA(0, 108, 191, .5)**.
-8.  Set the **Color** value of the label to **RGBA(255, 255, 255, 1)**.
-9.  Set the **Align** value to the formula below.
+7. Установите значение метки **Заливка** на **RGBA (0, 108, 191, .5)**.
+8. Установите значение метки **Цвет** на **RGBA (255, 255, 255, 1)**.
+9. Установите значение **Align** в формулу ниже.
 
 ```Align.Center```
 
-10. The label should now look like the image below. If you don't see the title, click on the **...** button of the **App** object and **Run OnStart** again.
+10. Теперь метка должна выглядеть как на изображении ниже. Если вы не видите заголовок, нажмите кнопку **...** объекта **Приложение** и **Run OnStart** снова.
 
-![A screenshot of the broken door icon now with a label](03-2/media/ex_7_resizedlabel.png)
+![Скриншот значка сломанной двери с меткой](03-2/media/ex_7_resizedlabel.png)
 
-11.  From the **Insert** tab, click **Icons** and select **Next**.
-12.  Double click on the icon you just added and rename it **Next icon**.
-13.  From the **Insert** tab, click **Icons** and select **Back**.
-14.  Double click on the second icon you just added and rename it **Back icon**.
-15.  Drag and place the the **Next icon** above the right side of the label.
-16.  Drag and place the the **Back icon** above the left side of the label.
-17.  The icons should now look like the image below.
+11. На вкладке **Вставка** щелкните **Значки** и выберите **Далее**.
+12. Дважды щелкните только что добавленный значок и переименуйте его в **Следующий значок**.
+13. На вкладке **Вставка** щелкните **Значки** и выберите **Назад**.
+14. Дважды щелкните второй значок, который вы только что добавили, и переименуйте его в **Значок "Назад"**.
+15. Перетащите значок **Далее** в место над правой стороной метки.
+16. Перетащите значок **Назад** в место над левой стороной метки.
+17. Значки теперь должны выглядеть, как на изображении ниже.
 
-![A screenshot of the broken door icon with the next and back icons](03-2/media/ex_7_iconlocation.png)
+![Скриншот значка сломанной двери со значками "Далее" и "Назад"](03-2/media/ex_7_iconlocation.png)
 
-18.  Select the **Next icon** and set the **OnSelect** value to the formula below.
+18. Щелкните значок **Далее** и установите значение **OnSelect** в формулу ниже.
 
 ```UpdateContext({CurrentItem: Last(FirstN([@ModelDrivenFormIntegration].Item.'Problem Reports',currentIndex))});Set(currentIndex, currentIndex +1)```
 
-19.  Set the **DisplayMode** value of the **Next icon** to the formula below.
+19. Задайте для значения **DisplayMode** значка **Далее** формулу, приведенную ниже.
 
 ```If(currentIndex = CountRows([@ModelDrivenFormIntegration].Item.'Problem Reports'), DisplayMode.Disabled, DisplayMode.Edit)```
 
-20.  Select the **Back icon** and set the **OnSelect** value to the formula below.
+20. Выберите **значок «Назад»** и установите значение **OnSelect** в формулу ниже.
 
 ```UpdateContext({CurrentItem: Last(FirstN([@ModelDrivenFormIntegration].Item.'Problem Reports',currentIndex))});Set(currentIndex, currentIndex -1);```
 
-21.  Set the **DisplayMode** value of the **Back icon** to the formula below.
+21. Задайте для значения **DisplayMode** значка **Назад** формулу, приведенную ниже.
 
 ```If(currentIndex > 1, DisplayMode.Edit, DisplayMode.Disabled)```
 
-22. Click **File** and then click **Save**.
+22. Щелкните **Файл**, а затем **Сохранить**.
 
-23. Open a new browser tab and navigate to [Power Apps maker portal](https://make.powerapps.com/) page and make sure you are in the correct environment
+23. Откройте новую вкладку браузера и перейдите на страницу [Портал разработчика Power Apps](https://make.powerapps.com/) и убедитесь, что вы находитесь в правильной среде.
 
-24. Select the **Apps** and click to launch the **Company 311 Admin** application.
+24. Выберите **Приложения** и щелкните, чтобы запустить приложение **Администратор компании 311**.
 
-25. Click **Change Area** and Select **Settings**.
+25. Щелкните **Изменить область** и выберите **Настройки**.
 
-![Change sitemap area - screenshot](03-2/media/image39.png)
+![Изменение области карты сайта - снимок экрана](03-2/media/image39.png)
 
-26. Select **Buildings**. 
+26. Выберите **Здания**. 
 
-27. Sort the Buildings rows on **Created On** Column in **Oldest to Newest** order. Keep a note of the oldest record.
+27. Отсортируйте строки зданий в столбце **Создано** в порядке от **от старых к новым**. Запишите самую старую запись.
 
-28. Click **Change Area** and Select **Manage Problems**.
+28. Щелкните **Изменить область** и выберите **Управление проблемами**.
 
-29. Select **Problem Reports**.
+29. Выберите **Отчеты о проблемах**.
 
-30. Click **+New**. 
+30. Нажмите **+ Создать**. 
 
-31. Enter **Broken Tap** for Name, select the oldest building in the **Building** column and enter **The Tap is broken and the water is continuously flowing.** in the Details column. Add any image of your choice in the **Photo** column.
+31. Введите **Сломанный кран** в поле Имя, выберите самое старое здание в столбце **Здание** и введите **Кран сломан, и вода непрерывно течет** в столбце Подробности. Добавьте любое изображение по вашему выбору в столбец **Фото**.
 
-32. Click **Save**.
+32. Нажмите **Сохранить**.
 
-33. Click **+New**.
+33. Нажмите **+ Создать**.
 
-34. Enter **Roof Leaks** for Name, select the oldest building in the **Building** column and enter **Water is seeping through the ceiling.** in the Details column. Add any image of your choice in the **Photo** column.
+34. Введите **Течет крыша** в поле Имя, выберите самое старое здание в столбце **Здание** и введите **Вода просачивается через потолок** в столбце Детали. Добавьте любое изображение по вашему выбору в столбец **Фото**.
 
-35. Click **Save** and close the browser tab of the Model Driven App.
+35. Нажмите **Сохранить** и закройте вкладку браузера в приложении на основе модели.
 
-36. Open the Canvas App Editor for the **Model embed app** application. Select **Data** icon on the left menu.
+36. Откройте редактор приложений холста для приложения **Приложение для встраивания модели**. Выберите значок **Данные** в левом меню.
 
-    ![Select Data - screenshot](03-2/media/image40.png)
+ ![Выбор данных - снимок экрана](03-2/media/image40.png)
 
-37. Locate **Problem Reports** and click on the **ellipsis** and then click on **Refresh**.
+37. Найдите **Отчеты о проблемах** и нажмите **многоточие**, а затем нажмите **Обновить**.
 
-38. Click on the **...** button of the **App** object and select **Run OnStart**.
+38. Нажмите кнопку **...** объекта **Приложение** и выберите **Запуск при включении**.
 
-39. Select **Tree View** from the left menu and select **FormScreen** screen.
+39. Выберите **древовидное представление** в левом меню и выберите экран **ФормаЭкрана**.
 
-40. Click **Play**.
+40. Щелкните **Запуск**.
 
-41. Click on the next and back icons and make sure the image changes.
+41. Щелкните значки «Далее» и «Назад» и убедитесь, что изображение изменилось.
 
-42. Close the preview.
+42. Закройте превью.
 
-43. Click **File**.
+43. Щелкните **Файл**.
 
-44. Click **Save**.
+44. Нажмите **Сохранить**.
 
-45. Click **Publish**.
+45. Нажмите **Опубликовать**.
 
-46. Click **Publish this version** and wait for the publishing to complete.
+46. Нажмите **Опубликовать эту версию** и дождитесь завершения публикации.
 
-47. Close the app studio browser window or tab.
+47. Закройте окно или вкладку браузера студии приложений.
 
-48. You should now be back on the **Field Properties**. Select **Web, Phone, Tablet** and click **OK**.
+48. Теперь вы должны вернуться в **Свойства поля**. Выберите **Вэб, телефон, планшет** и нажмите **ОК**.
 
-![A screenshot with a border around the canvas app item under control with web, phone, and tablet selected. There is also an arrow pointing to the ok button at the bottom of the window](03-2/media/ex_7_fieldproperties.png)
+![Снимок экрана с рамкой вокруг элемента приложения холста, находящегося под контролем, когда выбраны Интернет, телефон или планшет. Также есть стрелка, указывающая на кнопку ОК в нижней части окна](03-2/media/ex_7_fieldproperties.png)
 
-49. Click **Save** on the classic form editor.
-50. Close the classic form editor browser window or tab.
-51. You should now be back on the modern form editor. Click on **<-** **Back** button.
+49. Нажмите **Сохранить** в классическом редакторе форм.
+50. Закройте окно или вкладку браузера классического редактора форм.
+51. Теперь вы должны вернуться в современный редактор форм. Нажмите кнопку **<-** **Назад**.
 
-![A Screenshot with an arrow pointing to the back button](03-2/media/ex_7_backtomaker.png)
+![Скриншот со стрелкой, указывающей на кнопку назад](03-2/media/ex_7_backtomaker.png)
 
-52. Select **Solutions**.
-53. Click **Publish all customizations** and wait for the publishing to complete.
+52. Выберите **Решения**.
+53. Щелкните **Опубликовать все настройки** и дождитесь завершения публикации.
 
 
-#### Task 4: Test app
+#### Задача 4: Тестировка приложения
 
-1. Select the **Apps** and click to launch the **Company 311 Admin** application.
+1. Выберите **Приложения** и щелкните, чтобы запустить приложение **Администратор компании 311**.
 
-   ![A Screenshot with an arrow pointing to the company 311 admin application](03-2/media/ex_7_launchmodelapp.png)
+ ![Снимок экрана со стрелкой, указывающей на приложение администратора компании 311](03-2/media/ex_7_launchmodelapp.png)
 
-2. Select **Problem reports** and click to open one of the problem report rows.
-3. Make sure the problem has a photo and click on the **Building** lookup.
+2. Выберите **Отчеты о проблемах** и щелкните, чтобы открыть одну из строк отчета о проблемах.
+3. Убедитесь, что у проблемы есть фотография, и нажмите на поиск **Здания**.
 
-   ![A Screenshot with an arrow pointing to the building lookup](03-2/media/ex_7_lookup.png)
+ ![Снимок экрана со стрелкой, указывающей на поиск здания](03-2/media/ex_7_lookup.png)
 
-4. The Canvas app should load inside the Model-Driven application. Click on the Next/Back icons and make sure the application behaves as expected.
+4. Приложение холста должно загрузиться внутри модельно-управляемого приложения. Щелкните значки «Далее» / «Назад» и убедитесь, что приложение работает должным образом.
 
-   ![A screenshot of the broken door icon in the context of the canvas app inside the Model-Driven Application](03-2/media/ex_7_canvasinmodel.png)
-
+ ![Снимок экрана со значком сломанной двери в контексте приложения холста внутри модельно-управляемого приложения](03-2/media/ex_7_canvasinmodel.png)

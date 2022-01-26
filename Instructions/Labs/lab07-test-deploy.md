@@ -1,380 +1,381 @@
 ---
-lab:
-    title: 'Lab 07: Test & Deploy'
-    module: 'Module 07: Testing & deployment'
+Лабораторный практикум:
+ заголовок: 'Лабораторная работа 07: Тестирование и развертывание'
+ модуль: 'Модуль 07: Тестирование и развертывание'
 ---
 
-> [!NOTE]
-> Effective November 2020:
-> - Common Data Service has been renamed to Microsoft Dataverse. [Learn more](https://aka.ms/PAuAppBlog)
-> - Some terminology in Microsoft Dataverse has been updated. For example, *entity* is now *table* and *field* is now *column*. [Learn more](https://go.microsoft.com/fwlink/?linkid=2147247)
+> [!ПРИМЕЧАНИЕ]
+> С ноября 2020 г.:
+> - Common Data Service переименована в Microsoft Dataverse. [Подробнее…](https://aka.ms/PAuAppBlog)
+> - Обновлена некоторая терминология в Microsoft Dataverse. Например, *entity/объект* теперь *table/таблица*, а *field/поле* теперь *column/столбец*. [Подробнее…](https://go.microsoft.com/fwlink/?linkid=2147247)
 >
 
-# Lab 07: Test & Deploy
+# Лабораторная работа 07: Тестирование и развертывание
 
-In this lab you will complete solution configuration by adding security roles for the users. Then you will verify, test, and deploy the solution in the production environment.
+В этой лабораторной работе вы завершите настройку решения, добавив роли безопасности для пользователей. Затем вы проверите, протестируете и развернете решение в производственной среде.
 
-## What you will learn
+## Что вы узнаете
 
-  - How to deploy a solution to another environment
+ - Как развернуть решение в другой среде
 
-## High-level lab steps
+## Лабораторные этапы высокого уровня
 
-  - Exercise 1 – Create security roles for users 
-    
-      - Company 311 User – read all on Building, user owned on Problem Reports 
-      
-      - Company 311 Admin – All access for Buildings, Departments, Problem Reports 
-      
-      - Associate Company 311 Admin role with model-driven app 
+  - Упражнение 1. Создание ролей безопасности для пользователей. 
+ 
+      - Пользователь компании 311 – Доступ к чтению Здания, пользователь привязан к отчетам о проблемах 
+ 
+      - Администратор компании 311 - Полный доступ к зданиям, отделам, отчетам о проблемах 
+ 
+      - Свяжите роль администратора компании 311 с приложением на основе модели 
 
-  - Exercise 2 – Run solution checker
+  - Упражнение 2 - Запуск средства проверки решения
 
-  - Exercise 3 – Use Test Studio to create test case for submitting problem (ok to not include image)
+  - Упражнение 3. Использование Test Studio для создания тестового примера для отправки проблемы (можно не включать изображение)
 
-  - Exercise 4 – Export and import solution
-  
-  - Exercise 5: Add existing flow to solution
+  - Упражнение 4 - Решение для экспорта и импорта
+ 
+  - Упражнение 5: Добавление существующего потока к решению
 
-## Prerequisites
+## Предварительные требования
 
-* Must have completed **Lab 02.1: Data model and model-driven app**
+* Должно быть выполнено **Лабораторная работа 02.1: Модель данных и приложение на основе модели **
 
-## Detailed steps
+## Подробные шаги
 
-### Exercise 1: Create security roles
+### Упражнение 1. Создание ролей безопасности
 
-In this exercise, you will create security roles for users.
+В этом упражнении вы создадите роли безопасности для пользователей.
 
-#### Task 1: Create security roles
+#### Задача 1. Создание ролей безопасности
 
-1.  Navigate to the [Power Apps maker portal](https://make.powerapps.com/) and make sure you are in the correct environment.
-2.  Select **Solutions** and click to open the **Company 311** solution.
-3.  Click **+ New** and select **Other** and then select **Security Role**.
-4.  Enter **Company 311 User** for **Role Name** and select the **Custom Entities** tab.
-5.  Set the read privilege of the **Building** Table to **Organization**.
-6.  Set the read privilege of the **Problem Report** Table to **User**.
-7. The read privileges for the **Building** and **Problem Report** Tables should now look like the image below. Click **Save Create New**.
+1. Перейдите на [портал разработчика Power Apps](https://make.powerapps.com/) и убедитесь, что вы находитесь в правильной среде.
+2. Выберите **Решения** и щелкните, чтобы открыть решение **Компания 311**.
+3. Нажмите **+ Создать** и выберите **Другое**, а затем выберите **Роль безопасности**.
+4. Введите **Пользователь Компании 311** в поле **Имя Роли** и выберите вкладку **Пользовательские Объекты**.
+5. Установите право чтения таблицы **Здание** на **Организацию**.
+6. Установите право чтения таблицы **Отчет о проблеме** на ** Пользователе**.
+7. Права на чтение таблиц **Здание** и **Отчет о проблеме** теперь должны выглядеть, как показано на рисунке ниже. Нажмите **Создать новое сохранение**.
 
-   ![A Screenshot with an arrow pointing to the save create new icon in the topmost part of the window and borders around the building and problem report on the list of custom entities](07/media/image2.png)
+ ![Снимок экрана со стрелкой, указывающей на значок создания нового сохранения в верхней части окна и границами вокруг здания, и отчет о проблеме в списке настраиваемых объектов](07/media/image2.png)
 
-8. Enter **Company 311 Admin** for **Role Name** and select the **Custom Entities** tab
+8. Введите **Администратор компании 311** для **Имя роли** и выберите вкладку **Пользовательские объекты**.
 
-9. Set all privileges of the **Building**, **Department**, and **Problem Reports** Tables to **Organization**.
+9. Установите для всех привилегий таблиц **Здание**, **Отдел** и **Отчеты о проблемах** значение **Организация**.
 
-   ![A screenshot of building, department, and problem report having all privileges selected in the custom entities tab](07/media/image3.png)
+ ![Снимок экрана здания, отдела и отчета о проблеме со всеми привилегиями, выбранными на вкладке настраиваемых объектов](07/media/image3.png)
 
-10. Select the **Customizations** tab.
-11. Set all privileges for **Model-driven app**.
+10. Выберите вкладку **Настройки**.
+11. Установите все привилегии для **Приложения на основе модели**.
 
-![A screenshot of the security role edit dialog with all privileges selected for Model Driven app table](07/media/image25.png)
+![Снимок экрана диалогового окна редактирования роли безопасности со всеми привилегиями, выбранными для таблицы приложения на основе модели](07/media/image25.png)
 
-12. Click **Save and Close**.
-13. Click **Done** on the popup.
-14. Select **Solutions**.
-15. Click **Publish all customizations** and wait for the publishing to complete.
+12. Нажмите **Сохранить и закрыть**.
+13. Во всплывающем окне нажмите **Готово**.
+14. Выберите **Решения**.
+15. Щелкните **Опубликовать все настройки** и дождитесь завершения публикации.
 
-### Exercise 2: Solution checker
+### Упражнение 2: Проверка решения
 
-In this exercise, you will run the solution checker on the Company 311 solution.
+В этом упражнении вы запустите средство проверки решения для решения Компания 311.
 
-#### Task 1: Run solutions checker
+#### Задача 1. Запуск средства проверки решений
 
-1.  Make sure you are still on the [Power Apps maker portal](https://make.powerapps.com/) site and you are in the correct environment.
+1. Убедитесь, что вы по-прежнему находитесь на сайте [портал разработчиков Power Apps](https://make.powerapps.com/) и находитесь в правильной среде.
 
-2. Select **Solutions**, select **Company 311** solution, click **Solution checker** and select **Run**.
+2. Выберите **Решения**, выберите **Решение компании 311**, щелкните **Средство проверки решений** и выберите **Выполнить**.
 
-   ![A screenshot of the drop down from the solution checked button](07/media/image4.png)
+ ![Снимок экрана раскрывающегося с помощью кнопки выбора решения списка](07/media/image4.png)
 
-3. The solution checker should start checking your solution, wait for it to complete. The solution check column value will change to Results with a timestamp.
+3. Средство проверки решения должно начать проверку вашего решения, дождитесь его завершения. Значение столбца проверки решения изменится на Результаты с отметкой времени.
 
-4. **Refresh** the page and select the solution again, click **Solution checker**, and select **View results**.
+4. **Обновите** страницу и снова выберите решение, щелкните **Средство проверки решений** и выберите **Просмотреть результаты**.
 
-![A Screenshot with an arrow pointing to the solution checked drop down icon and a border around the view results button](07/media/image5.png)
+![Снимок экрана со стрелкой, указывающей на выпадающий значок с отмеченным решением и рамкой вокруг кнопки просмотра результатов](07/media/image5.png)
 
-5. Review the solution check results and make sure there are no issues.
+5. Просмотрите результаты проверки решения и убедитесь, что проблем нет.
 
-   > [!NOTE]
-   >
-   > If you are seeing errors in the Solution Check Result, open the component showing errors one by one and resolve the issues.
-   >
-   > At this point you will see errors for Canvas Apps. Open both the apps one by one and fix the assessible label and Tab Index error. For assistance, you can refer to [Microsoft Documentation](https://docs.microsoft.com/en-us/powerapps/maker/canvas-apps/accessibility-checker). After resolving the issues, save and publish your app. Go back to the solution and re-run the solution checker.
-   >
-   > Users who have vision, hearing, or other impairments can use your canvas app more easily and successfully if you consider accessibility as you design how the app looks and behaves.
+ > [!ПРИМЕЧАНИЕ]
+ >
+ > Если вы видите ошибки в результатах проверки решения, откройте компонент, отображающий ошибки одну за другой, и устраните проблемы.
+ >
+> На этом этапе вы увидите ошибки для приложений холста. Откройте оба приложения одно за другим и исправьте оцениваемую метку и ошибку индекса вкладки. Для получения помощи вы можете обратиться к [документации Microsoft](https://docs.microsoft.com/en-us/powerapps/maker/canvas-apps/accessibility-checker). После решения проблем сохраните и опубликуйте свое приложение. Вернитесь к решению и повторно запустите средство проверки решения.
+ >
+ > Пользователи с нарушениями зрения, слуха или другими нарушениями могут более легко и успешно использовать ваше приложение холста, если вы учитываете специальные возможности при разработке внешнего вида и поведения приложения.
 
-### Exercise 3: Use test studio
+### Упражнение 3. Использование тестовой студии
 
-In this exercise, you use test studio to create test case for submitting a problem report.
+В этом упражнении вы используете тестовую студию для создания тестового примера для отправки отчета о проблеме.
 
-#### Task 1: Create test case
+#### Задача 1. Создать тестовый пример
 
-1.  Navigate to the [Power Apps maker portal](https://make.powerapps.com/) and make sure you are in the correct environment.
+1. Перейдите на [портал разработчика Power Apps](https://make.powerapps.com/) и убедитесь, что вы находитесь в правильной среде.
 
-2.  Select **Apps**, select the **Company 311 Phone** application, and click **Edit**. Select **Skip** if prompted.
+2. Выберите **Приложения**, выберите **Мобильное приложение Компании 311** и нажмите **Изменить**. При появлении запроса выберите **Пропустить**.
 
-    ![A Screenshot with an arrow pointing to the edit button](07/media/image6.png)
+![Снимок экрана со стрелкой, указывающей на кнопку редактирования](07/media/image6.png)
 
-3.  Click **File** and select **Settings**.
+3. Щелкните **Файл** и выберите **Настройки**.
 
-4.  Select **Upcoming features**.
+4. Выберите **Предстоящие функции**.
 
-5.  Select the **Experimental** tab and enable **Formula level error management**.
-6.  Close the settings pane.
-    
-    Note: Currently test studio cannot record steps inside components like the tab control we are using, you edit the App OnStart formula, so the app navigates directly to the new report screen.
+5. Выберите вкладку **Экспериментальный** и включите **Управление ошибками на уровне формулы**.
+6. Закройте панель настроек.
+ 
+    Примечание. В настоящее время тестовая студия не может записывать шаги внутри такого компонента, как элемент управления вкладками, который мы используем, вы редактируете формулу Приложения При запуске, поэтому приложение переходит непосредственно к новому экрану отчета.
 
-7.  Select the **Tree view** menu.
+7. Выберите меню **Древовидное представление**.
 
-8.  Select **App** and select **OnStart**.
-9.  Add the formula below to the existing formula.
+8. Выберите **Приложение** и выберите **При запуске**.
+9. Добавьте приведенную ниже формулу к существующей формуле.
 
     ```; Navigate('New Reports Screen')```
 
-    ![A screenshot with a border around the relevant formula added to the existing formula](07/media/image7.png)
+![Скриншот с рамкой вокруг соответствующей формулы, добавленной к существующей формуле](07/media/image7.png)
 
-9. Click **File** and select **Save**.
+10. Щелкните **Файл** и выберите **Сохранить**.
 
-10. Click **Publish**.
+11. Щелкните **Опубликовать**.
 
-11. Select **Publish this version** and wait for the publishing to complete.
+12. Выберите **Опубликовать эту версию** и дождитесь завершения публикации.
 
-12. Click on the **back** button to go back to the app designer.
+13. Нажмите кнопку **Назад**, чтобы вернуться в конструктор приложения.
 
-13. Select the **Advanced tools** tab and select **Open tests**.
+14. Выберите вкладку **Дополнительные инструменты** и выберите **Открыть тесты**.
 
-    ![A screenshot of the left navigation pane with an arrow pointing to the Advanced tools icon. Advanced tools pane is expanded with Open tests link highlighted with a rectangular border.](07/media/image26.png)
+![Снимок экрана левой панели навигации со стрелкой, указывающей на значок Дополнительные инструменты. Панель дополнительных инструментов расширена ссылкой «Открыть тесты», выделенной прямоугольной рамкой.](07/media/image26.png)
 
-14. Click on the **ellipsis** of the **Case** and select **Rename**.
+15. Щелкните **многоточие** в **Обращение** и выберите **Переименовать**.
 
-15. Rename the Case to **Submit problem report**.
+16. Переименуйте обращение в **Отправить отчет о проблеме**.
 
-16. Click **Record**.
+17. Щелкните **Запись**.
 
-17. You should see the **New Report** tab.
+18. Вы должны увидеть вкладку **Новый отчет**.
 
-18. Fill out the form and click **Submit**.
+19. Заполните форму и нажмите **Отправить**.
 
-19. Click **Done** button on the bottom-left side of the screen.
+20. Нажмите кнопку **Готово** в нижнем левом углу экрана.
 
-21. You should see list of the recorded steps. Click **Play**.
+21. Вы должны увидеть список записанных шагов. Нажмите **Запуск**.
 
-    ![A Screenshot with an arrow pointing to the play button](07/media/recordedSteps.png)
+![Снимок экрана со стрелкой, указывающей на кнопку воспроизведения](07/media/recordedSteps.png)
 
-22. Click **Publish** and wait for the publishing to complete.
+22. Нажмите **Опубликовать** и дождитесь завершения публикации.
 
-23. The steps should replay correctly. Click **Done**.
+23. Шаги должны воспроизводиться правильно. Нажмите **Готово**.
 
-24. Close the test studio browser window or tab.
+24. Закройте окно или вкладку обозревателя тестовой студии.
 
-25. Close the app designer browser window or tab.
+25. Закройте окно или вкладку браузера конструктора приложений.
 
 
-### Exercise 4: Import export
+### Упражнение 4: Импорт и экспорт
 
-In this exercise, you will export the company 311 solution and import it into a new environment.
+В этом упражнении вы экспортируете решение компании 311 и импортируете его в новую среду.
 
-#### Task 1: Export solution
+#### Задача 1: Экспорт решения
 
-1.  Navigate to the [Power Apps maker portal](https://make.powerapps.com/) and make sure you are in the correct environment.
+1. Перейдите на [портал разработчика Power Apps](https://make.powerapps.com/) и убедитесь, что вы находитесь в правильной среде.
 
-2.  Select **Solutions**, and click to open the **Company 311** solution.
-3.  Click **+ Add existing** and select **Connection Reference**.
+2. Выберите **Решения** и щелкните, чтобы открыть решение **Компания 311**.
+3. Нажмите **+ Добавить существующий** и выберите **Ссылка на подключение**.
 
-![A Screenshot with an arrow pointing to the add existing drop down icon](07/media/add_connection_ref.png)
+![Снимок экрана со стрелкой, указывающей на значок добавления существующего раскрывающегося списка](07/media/add_connection_ref.png)
 
-4.  Select all of the connection references and click **Add**.
-5.  Click **Publish all customizations** and wait for the publishing to complete.
-7.  Click **Export**.
+4. Выберите все ссылки на подключение и нажмите **Добавить**.
+5. Щелкните **Опубликовать все настройки** и дождитесь завершения публикации.
+7. Щелкните **Экспорт**.
 
-![A Screenshot with an arrow pointing to the export button](07/media/image8.png)
+![Снимок экрана со стрелкой, указывающей на кнопку экспорта](07/media/image8.png)
 
-8.  Click **Next**.
-9.  Select **Managed** and click **Export**.
+8. Щелкните **Далее**.
+9. Выберите **Управляемый** и нажмите **Экспорт**.
 
-10. Save the solution on your computer.
+10. Сохраните решение на свой компьютер.
 
-11. Click **Export** again.
+11. Снова нажмите **Экспорт**.
 
-12. Click **Next**.
+12. Нажмите **Далее**.
 
-13. Select **Unmanaged**, change the **version** to match the managed solution version and click **Export**.
+13. Выберите **Неуправляемое**, измените **версию** в соответствии с версией управляемого решения и нажмите **Экспорт**.
 
-14. You should have the managed and unmanaged versions of the solution exported.
+14. У вас должны быть экспортированы управляемые и неуправляемые версии решения.
 
-#### Task 2: Create new environment and import solution
+#### Задача 2: Создание новой среды и импорт решения
 
-1.  Navigate to [Power Apps Community Plan page](https://powerapps.microsoft.com/en-us/communityplan/)
-2.  Click on **Existing User? Add a dev environment**.
-3.  Enter your credentials when prompt to sign in
-4.  Select your country from the dropdown menu and click **Accept**
-5.  Navigate to [Power Platform Admin Center](https://admin.powerplatform.microsoft.com/environments) to see a new environment had been created by the system. We will refer to it as "Prod" environment for the rest of this course (the environment name will be <your account name>'s Environment).
-6.  Navigate to the [Power Apps maker portal](https://make.powerapps.com/) and select the environment you just created.
-7.  Select **Solutions** and click **Import**.
-8.  Click **Choose File**.
-9.  Select the managed solution you exported and click **Open**.
-    ![A screenshot of a border around a zip file of the managed solution you exported](07/media/image10.png)
-10.  Click **Next**.
-11.  Click **Next** again.
-12.  Click **Select connection** for outlook and then click **+ New connection**.
+1. Перейдите на [страницу плана сообщества Power Apps](https://powerapps.microsoft.com/en-us/communityplan/)
+2. Щелкните **Существующий пользователь? Добавьте среду разработки**.
+3. Введите свои учетные данные, когда будет предложено войти в систему.
+4. Выберите свою страну в раскрывающемся меню и нажмите **Принять**.
+5. Перейдите в [Центр администрирования Power Platform](https://admin.powerplatform.microsoft.com/environments), чтобы увидеть, что система создала новую среду. Мы будем называть ее средой «Prod» до конца этого курса (имя среды будет «Среда» <имя вашей учетной записи>).
+6. Перейдите на [портал разработчика Power Apps](https://make.powerapps.com/) и выберите только что созданную среду.
+7. Выберите **Решения** и нажмите **Импорт**.
+8. Щелкните **Выбрать файл**.
+9. Выберите экспортированное управляемое решение и нажмите **Открыть**.
 
-![A Screenshot with an arrow pointing to the drop down icon and a border around the plus new connection button](07/media/new_connection.png)
+![Снимок экрана с рамкой вокруг zip-файла экспортированного управляемого решения](07/media/image10.png)
 
-13. It will open a new window. Click **Create**.
-14. Provide your **credentials**.
-15. Close the connections browser window or tab.
-16. Click **Refresh**.
-17. Repeat steps 12 - 16 for the rest of the of the connections.
-18. Click **Import** and wait for the import to complete.
-19. Click **Publish all customizations** and wait for the publishing to complete.
-20. Click to open the **Company 311** solution you just imported.
-21. Review the components in solution.
-22. Select **Apps** and make sure you have both the Canvas and Model-driven applications.
-23. Click to open the **Company 311 Admin** application.
-24. The application should load without issues.
-25. Close the Company 311 Admin application browser window or tab.
-26. Click To open the **Company 311 Phone App**.
-27. The application should load without issues.
-28. Close the **Company 311 Phone App** browser window or tab.
+10. Щелкните **Далее**.
+11. Еще раз нажмите **Далее**.
+12. Щелкните **Выбрать соединение** для Outlook, а затем щелкните **+ Новое соединение**.
 
+![Снимок экрана со стрелкой, указывающей на значок раскрывающегося списка, и рамкой вокруг кнопки плюс новое соединение](07/media/new_connection.png)
 
-### Exercise 5: Add existing flow to solution
+13. Откроется новое окно. Нажмите **Создать**.
+14. Предоставьте свои **учетные данные**.
+15. Закройте окно или вкладку браузера подключений.
+16. Щелкните **Обновить**.
+17. Повторите шаги 12–16 для остальных соединений.
+18. Щелкните **Импорт** и дождитесь завершения импорта.
+19. Щелкните **Опубликовать все настройки** и дождитесь завершения публикации.
+20. Щелкните, чтобы открыть только что импортированное решение **Компания 311**.
+21. Просмотрите компоненты решения.
+22. Выберите **Приложения** и убедитесь, что у вас есть и приложение холста, и приложение на основе модели.
+23. Щелкните, чтобы открыть приложение **Администратор компании 311**.
+24. Приложение должно загрузиться без проблем.
+25. Закройте окно или вкладку браузера приложения администратора компании 311.
+26. Щелкните, чтобы открыть **Мобильное приложение Компания 311**.
+27. Приложение должно загрузиться без проблем.
+28. Закройте окно или вкладку браузера **Мобильного приложения Компания 311**.
 
-An employee has created a simple personal productivity flow. The flow looks like a very useful addition to everyone at the company so the decision was made to make this flow available to everyone by including it into the existing solution.
-In this exercise, you will create the flow outside of the solution and then add it to the Company 311 solution.
 
+### Упражнение 5: Добавьте существующий поток в решение
 
-#### Task 1: Create the team
-In this task, you will create the Lunchtime Sports team.
+Сотрудник создал простой поток личной продуктивности. Поток выглядит очень полезным дополнением для всех в компании, поэтому было принято решение сделать этот поток доступным для всех, включив его в существующее решение.
+В этом упражнении вы создадите поток вне решения, а затем добавите его в решение Компания 311.
 
-1.  Navigate to [Microsoft Teams](https://teams.microsoft.com/).
-2.  Select **Teams** and click **Join or create a team**.
 
-![A Screenshot with an arrow pointing to the join or create a team button](07/media/join_create_team.png)
+#### Задача 1. Создайте команду
+В этом задании вы создадите команду Lunchtime Sports.
 
-3.  Click **Create team**.
-4.  Select **From scratch**.
-5.  Select **Public**.
-6.  Enter **Lunchtime Sports** for Team name and click **Create**.
-7.  Click **Skip**.
+1. Перейдите в [Microsoft Teams](https://teams.microsoft.com/).
+2. Выберите **Команды** и нажмите **Присоединиться или создать команду**.
 
-#### Task 2: Create the flow
-In this task, you create a flow that will get triggered when someone is added to the group "Lunchtime Sports", the flow will send a notification to you and tell you to find out what sport the new member will be playing.
+![Снимок экрана со стрелкой, указывающей на кнопку присоединиться или создать команду](07/media/join_create_team.png)
 
-1.  Navigate to the [Power Apps maker portal](https://make.powerapps.com/) and make sure you are in the correct environment (your practice environment).
-2.  Select **Flows**.
-3.  Click **+ New flow** and select **Automated cloud flow**.
+3. Щелкните **Создать команду**.
+4. Выберите **С нуля**.
+5. Выберите **Публикация**.
+6. Введите **Lunchtime Sports** в поле "Название команды" и нажмите **Создать**.
+7. Щелкните **Пропустить**.
 
-![A Screenshot with an arrow pointing to the new flow button](07/media/image11.png)
+#### Задача 2: Создайте поток
+В этой задаче вы создадите поток, который будет запускаться, когда кто-то будет добавлен в группу «Lunchtime Sports», поток отправит вам уведомление и скажет вам узнать, каким видом спорта будет заниматься новый участник.
 
-4.  Click **Skip**.
-5.  Search for groups and select **When a group member is added or removed** Office 365.
+1. Перейдите на [портал разработчика Power Apps](https://make.powerapps.com/) и убедитесь, что вы находитесь в правильной среде (среде вашей практики).
+2. Выберите **Потоки**.
+3. Нажмите **+ Новый поток** и выберите **Автоматизированный облачный поток**.
 
-![A screenshot with a border around the when a group member is added is added or removed button](07/media/image12.png)
+![Снимок экрана со стрелкой, указывающей на кнопку нового потока](07/media/image11.png)
 
-6.  Click **Sign in**.
-7.  Provide your credentials.
-8.  Select **Lunchtime Sports** for Group Id and click **+ New step**.
-9.  Select **Condition**.
-10. Click on the left value field and select **@removed** from the dynamic content pane.
-11. Select **is equal to** on the second value field, for third value field select the **Expression** tab, type **null** and click **OK**.
+4. Щелкните **Пропустить**.
+5. Найдите группы и выберите **При добавлении или удалении участника группы** Office 365.
 
-    ![A screenshot of a border around the choose value field, then another border around the text null typed into the expression tab and an arrow pointing to the ok button](07/media/image13.png)
+![Снимок экрана с рамкой вокруг кнопки добавления или удаления участника группы](07/media/image12.png)
 
-12. Go to the **If yes** branch and click **Add an action**.
-13. Search for **get user profile** and select **Get user profile (V2)**.
-14. Click on the User (UPN) field and select **User Id** from the dynamic content pane.
+6. Нажмите **Войти**.
+7. Предоставьте свои учетные данные.
+8. Выберите **Lunchtime Sports** для идентификатора группы и нажмите **+ Новый шаг**.
+9. Выберите **Условие**.
+10. Щелкните левое поле значения и выберите **@удалено** на панели динамического содержимого.
+11. Выберите **равно** во втором поле значения, для третьего поля значения выберите вкладку **Выражение**, введите **null** и нажмите **ОК**.
 
-    ![A screenshot of a border around user UPN field and user Id in the field. There is also an arrow pointing to the user Id option in the dynamic content pane](07/media/image14.png)
+![Снимок экрана с рамкой вокруг поля выбора значения, затем еще одна рамка вокруг нулевого текста, введенного на вкладке выражения, и стрелка, указывающая на кнопку ОК](07/media/image13.png)
 
-15. Click **Add an action** again.
-16. Search for **send** and select **Send me an email notification**.
-17. Type **New Lunchtime Sports Member** for Subject.
-18. Click on the Body field and select **Display Name** from the dynamic content pane.
-19. Type **was added to the Lunchtime Sports team, find out what sports this member is interested in.** after the Display Name.
+12. Перейдите в ветку **Если да** и нажмите **Добавить действие**.
+13. Найдите **получить профиль пользователя** и выберите **Получить профиль пользователя (V2)**.
+14. Щелкните поле «Пользователь (UPN)» и выберите **ID пользователя** на панели динамического содержимого.
 
-![A screenshot of the send me an email notification command in the flow with the relevant text in the subject and body field](07/media/image15.png)
+![Снимок экрана с рамкой вокруг поля UPN пользователя и идентификатора пользователя в поле. Также есть стрелка, указывающая на параметр идентификатора пользователя на панели динамического содержимого](07/media/image14.png)
 
-20. Rename the flow **Notify me when a member is added to the Lunchtime Sports group** and click **Save**.
+15. Еще раз нажмите **Добавить действие**.
+16. Найдите **отправить** и выберите **Отправить мне уведомление по электронной почте**.
+17. Введите **Новый участник Lunchtime Sports** в поле "Тема".
+18. Щелкните поле «Описание» и выберите **Отображаемое имя** на панели динамического содержимого.
+19. Введите **был добавлен в команду Lunchtime Sports, узнайте, какими видами спорта интересуется этот участник.** после отображаемого имени.
 
-    ![A screenshot with a box around new name of the flow and an arrow pointing to the save button](07/media/image16.png)
+![Снимок экрана с командой отправить мне уведомление по электронной почте в потоке с соответствующим текстом в поле темы и описания](07/media/image15.png)
 
+20. Переименуйте поток на **Уведомлять меня, когда участник добавляется в группу Lunchtime Sports**, и нажмите **Сохранить**.
 
+![Снимок экрана с рамкой вокруг нового имени потока и стрелкой, указывающей на кнопку сохранения](07/media/image16.png)
 
-#### Task 3: Test the flow
-In this task, you will test the flow.
 
-1.  Navigate to the [Teams](https://teams.microsoft.com/).
-2. Click on the **... More options** button of the Lunchtime Sports team and select **Manage team**.
 
-   ![A Screenshot with an arrow pointing to the ellipsis icon for more options and a border around the manage team button](07/media/image17.png)
+#### Задача 3. Тестировка потока
+В этой задаче вы протестируете поток.
 
-3. Click **Add member**.
-4. Search and select a user you want to use for testing.
-5. click **Add**.
-6. Click **Close**.
-7. Navigate to [Outlook online](https://outlook.office.com/).
-8. You should receive the email notification. Open the notification email.
-9. The email should look like the image below.
+1. Перейдите в [Команды](https://teams.microsoft.com/).
+2. Нажмите кнопку **... Дополнительные параметры** команды Lunchtime Sports и выберите **Управление командой**.
 
-   ![A screenshot of how the email should look](07/media/image18.png)
+![Снимок экрана со стрелкой, указывающей на значок с многоточием для дополнительных параметров и рамкой вокруг кнопки управления командой](07/media/image17.png)
 
+3. Щелкните **Добавить участника**.
+4. Найдите и выберите пользователя, которого хотите использовать для тестирования.
+5. нажмите **Добавить**.
+6. Щелкните **Закрыть**.
+7. Перейдите в [Outlook в Интернете](https://outlook.office.com/).
+8. Вы должны получить уведомление по электронной почте. Откройте письмо с уведомлением.
+9. Электронное письмо должно выглядеть как на изображении ниже.
 
+![Скриншот того, как должно выглядеть письмо](07/media/image18.png)
 
 
-#### Task 4: Add flow to solution
-In this task, you will add the flow to the Company 311 solution.
 
-1.  Navigate to the [Power Apps maker portal](https://make.powerapps.com/) and make sure you are in the correct environment.
-2.  Select **Solutions** and click to open the **Company 311** solutions.
-3.  Click **+ Add existing** and select **Cloud flow**.
-4. Select the **Outside Dataverse** tab, select the flow you created, and click **Add**.
 
-   ![A screenshot of the flow you created selected and an add button below](07/media/image19.png)
+#### Задача 4: Добавление потока в решение
+В этой задаче вы добавите поток в решение «Компания 311».
 
-5. Click **Publish all customizations** and wait for the publishing to complete.
-6. Click **Export**.
-7. Click **Next**.
-8. Select **Managed** and click **Export**.
-9. Wait for the export to complete and save the exported solution on your machine.
-10. Click **Export** again.
-11. Click **Next**.
-12. Select **Unmanaged**, change the **version** to match the managed solution you just exported and click **Export**.
-13. Wait for the export to complete and save the exported solution on your machine.
+1. Перейдите на [портал разработчика Power Apps](https://make.powerapps.com/) и убедитесь, что вы находитесь в правильной среде.
+2. Выберите **Решения** и щелкните, чтобы открыть **Решения компании 311**.
+3. Нажмите **+ Добавить существующий** и выберите **Облако**.
+4. Выберите вкладку **Outside Dataverse**, выберите созданный поток и нажмите **Добавить**.
 
-#### Task 5: Import solution
-In this task, you will import the solution into another environment.
+![Скриншот выбранного вами потока и кнопка добавления ниже](07/media/image19.png)
 
-1.  Navigate to the [Power Apps maker portal](https://make.powerapps.com/) and select the **Prod** environment that you created in **Exercise 4 Task 2**.
-2.  Select **Solutions** and click **Import**.
-3.  Click **Browse**.
-4.  Select the **managed** version you just exported and click **Open**.
-5.  Click **Next**.
-6.  You should get a message **This solution package contains an update for a solution that is already installed** click **Import**.
+5. Щелкните **Опубликовать все настройки** и дождитесь завершения публикации.
+6. Щелкните **Экспорт**.
+7. Щелкните **Далее**.
+8. Выберите **Управляемый** и нажмите **Экспорт**.
+9. Дождитесь завершения экспорта и сохраните экспортированное решение на своем компьютере.
+10. Еще раз нажмите **Экспорт**.
+11. Щелкните **Далее**.
+12. Выберите **Неуправляемый**, измените **версию** в соответствии с только что экспортированным управляемым решением и нажмите **Экспорт**.
+13. Дождитесь завершения экспорта и сохраните экспортированное решение на вашем компьютере.
 
-![A screenshot of the import a solution pane with the message mentioned in step six having appeared.](07/media/image27.png)
+#### Задача 5: Импорт решения
+В этой задаче вы импортируете решение в другую среду.
 
-7.  Wait for the solution import to complete.
-15. Click to open the **Company 311** solution.
-16. Locate the flow you added to the solution and click to open it.
+1. Перейдите на [портал разработчика Power Apps](https://make.powerapps.com/) и выберите среду **Prod**, которую вы создали в **упражнении 4, задание 2**.
+2. Выберите **Решения** и нажмите **Импорт**.
+3. Щелкните **Обзор**.
+4. Выберите **управляемую** версию, которую вы только что экспортировали, и нажмите **Открыть**.
+5. Щелкните **Далее**.
+6. Вы должны получить сообщение **Этот пакет решения содержит обновление для уже установленного решения** щелкните **Импорт**.
 
-![A Screenshot with an arrow pointing to the name of the flow you added to the solution](07/media/image21.png)
+![Снимок экрана импорта панели решения с появившимся сообщением, упомянутым на шаге 6.](07/media/image27.png)
 
-10. Click **Edit**.
+7. Дождитесь завершения импорта решения.
+15. Щелкните, чтобы открыть решение **Компания 311**.
+16. Найдите поток, который вы добавили в решение, и щелкните, чтобы открыть его.
 
-    ![A Screenshot with an arrow pointing to the edit button](07/media/image22.png)
+![Снимок экрана со стрелкой, указывающей на имя потока, который вы добавили в решение](07/media/image21.png)
 
-11. Click to expand the trigger.
-12. Click **+ Add new connection**.
+10. Щелкните **Изменить**.
 
-![A Screenshot with an arrow pointing to the add new connection button](07/media/image23.png)
+![Снимок экрана со стрелкой, указывающей на кнопку редактирования](07/media/image22.png)
 
-13. Click to expand the condition..
-14. Click to expand the first step in the **If yes** branch.
-15. Click **+ Add new connection** again.
-16. Click to expand the last step.
-17. Click **+ Add new connection** one more time.
-18. Click **Save** and wait for the flow to be saved.
-19. Click on the **<-** back button.
-20. Click **Turn on**.
-21. The flow should show the status as **On**. You can verify the Status value in the Details sections.
+11. Щелкните, чтобы развернуть триггер.
+12. Нажмите **+ Добавить новое соединение**.
 
+![Снимок экрана со стрелкой, указывающей на кнопку добавления нового подключения](07/media/image23.png)
+
+13. Щелкните, чтобы развернуть условие.
+14. Щелкните, чтобы развернуть первый шаг в ветке **Если да**.
+15. Снова нажмите **+ Добавить новое соединение**.
+16. Щелкните, чтобы развернуть последний шаг.
+17. Нажмите **+ Добавить новое соединение** еще раз.
+18. Нажмите **Сохранить** и дождитесь сохранения потока.
+19. Нажмите кнопку **<-** назад.
+20. Нажмите **Включить**.
+21. Поток должен показать статус **Включен**. Вы можете проверить значение статуса в разделе «Подробности».

@@ -1,429 +1,428 @@
 ---
-lab:
-    title: 'Lab 03.1: Create apps in Teams'
-    module: 'Module 03: Create a canvas app'
+Лабораторный практикум:
+ заголовок: 'Лабораторная работа 03.1: Создание приложений в Teams'
+ модуль: 'Модуль 03: Создание приложения на холсте'
 ---
 
-> [!NOTE]
-> Effective November 2020:
+> [!ПРИМЕЧАНИЕ]
+> С ноября 2020 г .:
 >
-> - Common Data Service has been renamed to Microsoft Dataverse. [Learn more](https://aka.ms/PAuAppBlog)
-> - Some terminology in Microsoft Dataverse has been updated. For example, *entity* is now *table* and *field* is now *column*. [Learn more](https://go.microsoft.com/fwlink/?linkid=2147247)
+> - Common Data Service переименована в Microsoft Dataverse. [Подробнее…](https://aka.ms/PAuAppBlog)
+> - Обновлена некоторая терминология в Microsoft Dataverse. Например, *entity/объект* теперь *table/таблица*, а *field/поле* теперь *column/столбец*. [Подробнее…](https://go.microsoft.com/fwlink/?linkid=2147247)
 >
 
-Lab 03.1: Create apps in Teams
+Лабораторная работа 03.1: Создание приложений в Teams.
 =================================
 
-## Scenario
+## Сценарий
 
-It is not uncommon for organizations to accumulate unused computer Peripherals, power cords and other electronics. Your organization is taking steps to reuse existing devices and computer peripherals before ordering new equipment.
+Организации нередко накапливают неиспользуемые компьютерные периферийные устройства, шнуры питания и другую электронику. Ваша организация предпринимает шаги для повторного использования существующих устройств и компьютерной периферии перед заказом нового оборудования.
 
-You are asked to create an application where users can post devices they no longer need and browse through what their colleagues posted.
+Вас просят создать приложение, в котором пользователи могут публиковать устройства, которые им больше не нужны, и просматривать то, что опубликовали их коллеги.
 
-## Requirements
+## Требования
 
-1)	Application must use Dataverse for Teams.
-2)	Users should be able to create new items, edit items they created and see items created by other users.
-3)	Items should be removed from the list if they are no longer available.
-4)  Allow users to reserve an item.
-5)  Allow user to mark item for pick up.
-6)  If item is reserved, only reserved user should be able to mark item picked up.
-7)  Users should be able to search items.
+1)	Приложение должно использовать Dataverse для команд.
+2)	Пользователи должны иметь возможность создавать новые элементы, редактировать созданные ими элементы и видеть элементы, созданные другими пользователями.
+3)	Элементы следует удалить из списка, если они больше не доступны.
+4) Разрешить пользователям резервировать товар.
+5) Разрешить пользователю отмечать предмет для получения.
+6) Если элемент зарезервирован, только зарезервированный пользователь должен иметь возможность отмечать выбранный элемент.
+7) Пользователи должны иметь возможность искать элементы.
 
-## What you will learn
+## Что вы узнаете
 
-1)	How to create an application using Dataverse for Teams.
-2)	How to publish application.
-3)	How to give other users permission to your application.
+1)	Как создать приложение с помощью Dataverse для команд.
+2)	Как опубликовать приложение.
+3)	Как дать другим пользователям разрешение на ваше приложение.
 
-## Detailed steps
+## Подробные шаги
 
-### Exercise 1: Get started with Microsoft Dataverse for Teams
+### Упражнение 1. Начало работы с Microsoft Dataverse для Teams
 
-In this exercise, you will create a new team and install Power Apps for Teams.
+В этом упражнении вы создадите новую команду и установите Power Apps для Teams.
 
-#### Task 1: Create team
-In this task you will create a new team
+#### Задача 1: Создание команды
+В этом задании вы создадите новую команду
 
-1. Navigate to [Microsoft Teams](https://teams.microsoft.com).
-2. Select **Teams**, click **Join or create a team** and click **Create Team**.
+1. Перейдите в [Microsoft Teams](https://teams.microsoft.com).
+2. Выберите **Команды**, нажмите **Присоединиться или создать команду** и нажмите **Создать команду**.
 
-![A screenshot with a box around the teams button on the left side of the window and an arrow pointing to the create team button](03-1/media/ex1-t1-image1.png)
+![Снимок экрана с рамкой вокруг кнопки команд в левой части окна и стрелкой, указывающей на кнопку создания команды](03-1/media/ex1-t1-image1.png)
 
-3. Select **From scratch**.
-4. Select **Public**.
-5. Enter **Green** for Team name and click **Create**.
+3. Выберите **С нуля**.
+4. Выберите **Публикация**.
+5. Введите **Зеленый** в поле Имя команды и нажмите **Создать**.
 
-![A screenshot with the word green in the team name field](03-1/media/ex1-t1-image2.png)
+![Скриншот со словом «Зеленый» в поле названия команды](03-1/media/ex1-t1-image2.png)
 
-6. Click **Skip**.
-7. You should now have a new team named **Green**.
+6. Щелкните **Пропустить**.
+7. Теперь у вас должна быть новая команда **Зеленый**.
 
-![A screenshot of the microsoft teams page with your new team named green now under your teams](03-1/media/ex1-t1-image3.png)
+![Снимок экрана страницы Microsoft Teams с вашей новой командой, названной «Зеленый» в разделе ваших команд](03-1/media/ex1-t1-image3.png)
 
-8. Do not navigate away from this page.
+8. Не уходите с этой страницы.
 
-#### Task 2: Install Power Apps
-In this task you will install Power Apps for Teams.
+#### Задача 2: Установка Power Apps
+В этой задаче вы установите Power Apps для команд.
 
-1.  Click on the **... More added apps**, search for power apps and select **Power Apps**.
+1. Щелкните **... Дополнительные добавленные приложения**, найдите приложения Power Apps и выберите **Power Apps**.
 
-![A Screenshot with an arrow pointing to the ellipsis icon for more added apps on the left side of the page and a box around power apps button](03-1/media/ex1-t2-image1.png)
+![Снимок экрана со стрелкой, указывающей на значок с многоточием для дополнительных добавленных приложений в левой части страницы и рамкой вокруг кнопки приложений Power Apps](03-1/media/ex1-t2-image1.png)
 
-2.  Click **Add**.
+2. Щелкните **Добавить**.
 
-3.  Right click on the Power Apps tab and select  **Pin**.
+3. Щелкните правой кнопкой мыши вкладку Power Apps и выберите **Закрепить**.
 
-![A Screenshot with an arrow pointing to the power apps icon and a box around the pin button](03-1/media/ex1-t2-image2.png)
+![Снимок экрана со стрелкой, указывающей на значок Power Apps и рамкой вокруг кнопки Закрепить](03-1/media/ex1-t2-image2.png)
 
 
-### Exercise 2: Create application
-In this exercise, you will provision Dataverse for Teams by creating an application and you will also create a Dataverse table with columns.
+### Упражнение 2: Создание приложения
+В этом упражнении вы подготовите Dataverse для Teams, создав приложение, а также создадите таблицу Dataverse со столбцами.
 
-#### Task 1: Create application
-In this task, you will provision Dataverse for Teams by creating an application.
-1. Navigate to [Microsoft Teams](https://teams.microsoft.com).
+#### Задача 1: Создание приложения
+В этой задаче вы подготовите Dataverse для Teams, создав приложение.
+1. Перейдите в [Microsoft Teams](https://teams.microsoft.com).
 
-2. Select Power Apps and click **Start now**.
+2. Выберите Power Apps и нажмите **Начать сейчас**.
 
-![A screenshot of the power apps home page](03-1/media/ex2-t1-image1.png)
+![Скриншот домашней страницы Power Apps](03-1/media/ex2-t1-image1.png)
 
-3. Select the **Green** team you created and click **Create**.
-4. Enter **Upcycle** for App name and click **Save**.
-5. Do not navigate away from this page.
+3. Выберите команду **«Зеленый»**, которую вы создали, и нажмите **Создать**.
+4. Введите **Upcycle** в качестве имени приложения и нажмите **Сохранить**.
+5. Не уходите с этой страницы.
 
-#### Task 2: Create table
-In this task, you will create a table and columns.
+#### Задача 2: Создание таблицы
+В этой задаче вы создадите таблицу и столбцы.
 
-1. Click **With data** and select **+ Create new table**.
+1. Щелкните **С данными** и выберите **+ Создать новую таблицу**.
 
-![A Screenshot with an arrow pointing to the with data option and a box around the create new table button from the select a data source prompt](03-1/media/ex2-t2-image2.png)
+![Снимок экрана со стрелкой, указывающей на параметр с данными, и рамкой вокруг кнопки создания новой таблицы из выбора запроса источника данных](03-1/media/ex2-t2-image2.png)
 
-2. Enter **Gadget** for Table name and click **Create**.
-3. Click **+ Add column**.
-4. Enter **Description** for Name select **Text** for Type, and click to expand the **Advanced options** section.
+2. Введите **Гаджет** в качестве имени таблицы и нажмите **Создать**.
+3. Щелкните **+ Добавить столбец**.
+4. Введите **Описание** в поле Имя, выберите **Текст** в поле Тип и щелкните, чтобы развернуть раздел **Дополнительные параметры**.
 
-![A Screenshot with an arrow pointing to the advanced options button](03-1/media/ex2-t2-image3.png)
+![Снимок экрана со стрелкой, указывающей на кнопку дополнительных параметров](03-1/media/ex2-t2-image3.png)
 
-5. Change the **Max length** to **500** and click **Create**.
-6. Click **+ Add column** again.
-7. Enter **Availability** for Name, select **Choice** for Type, enter **Available** for the first choice and click **+ New choice**.
+5. Измените **Макс. Длина** на **500** и нажмите **Создать**.
+6. Снова нажмите **+ Добавить столбец**.
+7. Введите **Доступность** в поле Имя, выберите **Выбор** в поле Тип, введите **Доступен** в качестве первого варианта и нажмите **+ Новый выбор**.
 
-![A Screenshot with an arrow pointing to the new choice button](03-1/media/ex2-t2-image4.png)
+![Снимок экрана со стрелкой, указывающей на кнопку нового выбора](03-1/media/ex2-t2-image4.png)
 
-8.  Enter **Reserved** for the second choice and click **+ New choice**.
-9.  Enter **Picked up** for the third choice and click **Create**.
-10.  Your table screen should now look like the image below.
-     ![A Screenshot with an arrow pointing to the word saved in the right hand corner of the window](03-1/media/ex2-t2-image5.png)
-11.  Close the table editor by clicking on the **Close** button.
-12.  Do not navigate away from this page.
+8. Введите **Зарезервировано** для второго варианта и нажмите **+ Новый вариант**.
+9. Введите **Подобрано** для третьего варианта и нажмите **Создать**.
+10. Экран вашего стола должен выглядеть, как показано на рисунке ниже.
+ ![Снимок экрана со стрелкой, указывающей на слово, сохраненное в правом углу окна](03-1/media/ex2-t2-image5.png)
+11. Закройте редактор таблиц, нажав кнопку **Закрыть**.
+12. Не уходите с этой страницы.
 
 
-#### Task 3: Add columns
-In this task, you will add new columns to the table.
+#### Задача 3: Добавление столбцов
+В этой задаче вы добавите в таблицу новые столбцы.
 
-1. Select the **Home** tab and click **See more**.
+1. Выберите вкладку **Главная** и нажмите **Подробнее**.
 
-![A screenshot of a box around the home button and an arrow pointing to the see more button in the recent apps window of the home page of power apps](03-1/media/ex2-t3-image1.png)
+![Снимок экрана с рамкой вокруг кнопки «Домой» и стрелкой, указывающей на кнопку «Просмотреть больше» в окне последних приложений на домашней странице Power Apps](03-1/media/ex2-t3-image1.png)
 
-2. Click to open the **Gadget** table.
-3. Click  **+ Add column** column.
-4. Enter **Location** for Display name, select **Text** for Data type, make the column **Required** and click **Done**.
+2. Щелкните, чтобы открыть таблицу **Гаджет**.
+3. Щелкните **+ Добавить столбец**.
+4. Введите **Местоположение** для Отображаемого имени, выберите **Текст** для Типа данных, сделайте столбец **Обязательным** и нажмите **Готово**.
 
-![A screenshot of the add column window with the relevant text in each field](03-1/media/ex2-t3-image.png)
+![Скриншот окна добавления столбца с соответствующим текстом в каждом поле](03-1/media/ex2-t3-image.png)
 
-5. Click **+ Add column**.
-6. Enter **Photo** for Display name, select **Image** for Data type, check the **Primary image** checkbox and click **Done**.
+5. Щелкните **+ Добавить столбец**.
+6. Введите **Фото** в поле Отображаемое имя, выберите **Изображение** в поле Тип данных, установите флажок **Основное изображение** и нажмите **Готово**.
 
-![A screenshot of the add column window with the relevant text in each field](03-1/media/ex2-t3-image3.png)
+![Скриншот окна добавления столбца с соответствующим текстом в каждом поле](03-1/media/ex2-t3-image3.png)
 
-7.  Click **+ Add column**.
-8.  Enter **Reserved by** for Display name, select **Lookup** for Data type, select **User** for Related table and click **Done**.
+7. Щелкните **+ Добавить столбец**.
+8. Введите **Зарезервировано** для Отображаемого имени, выберите **Поиск** для Типа данных, выберите **Пользователь** для Связанной таблицы и нажмите **Готово**.
 
-![A screenshot of the add column window with the relevant text in each field](03-1/media/ex2-t3-image4.png)
+![Скриншот окна добавления столбца с соответствующим текстом в каждом поле](03-1/media/ex2-t3-image4.png)
 
-9.  Select the **Availability** column.
-10. Select **Available** for Default value and click **Done**
+9. Выберите столбец **Доступность**.
+10. Выберите **Доступно** в качестве значения по умолчанию и нажмите **Готово**.
 
-![A screenshot with a box around available selected as the default value option](03-1/media/ex2-t3-image5.png)
+![Снимок экрана с рамкой, выбранной в качестве параметра значения по умолчанию](03-1/media/ex2-t3-image5.png)
 
-11. Click the **Save table** button located on the bottom right of the screen.
-12. Do not navigate away from this page.
+11. Нажмите кнопку **Сохранить таблицу** в правом нижнем углу экрана.
+12. Не уходите с этой страницы.
 
 
-#### Task 4: Edit the application
-In this task, you will edit the application by filters for gadgets that are available and edit the form.
+#### Задача 4: Редактирование приложения
+В этой задаче вы отредактируете приложение по фильтрам для доступных гаджетов и отредактируете форму.
 
-1. Select the **Home** tab and click to open the **Upcycle** application you created.
-2. Select **Screen1**. If the screen already contains the form, move to the next step, otherwise click **With data** and select **Gadgets** table under **Current environment**. That will create the screen elements including the form.
-3. Make sure **RightContainer1** is expanded and select the **EditForm1** control from tree view.
+1. Выберите вкладку **Главная** и щелкните, чтобы открыть созданное приложение **Upcycle**.
+2. Выберите **Экран1**. Если на экране уже есть форма, перейдите к следующему шагу, в противном случае щелкните **С данными** и выберите таблицу **Гаджеты** в разделе **Текущая среда**. Это создаст элементы экрана, включая форму.
+3. Убедитесь, что **ПравыйКонтейнер1** развернут, и выберите элемент управления **РедактированиеФормы1** в дереве.
 
-![A screenshot with a border around the edit form button under screen 1](03-1/media/ex2-t4-image1.png)
+![Снимок экрана с рамкой вокруг кнопки редактирования формы под экраном 1](03-1/media/ex2-t4-image1.png)
 
-3. Go to the **Properties** pane and click **Edit fields**
+3. Перейдите на панель **Свойства** и нажмите **Изменение поля**.
 
-![A Screenshot with an arrow pointing to the edit fields button](03-1/media/ex2-t4-image2.png)
+![Снимок экрана со стрелкой, указывающей на кнопку редактирования полей](03-1/media/ex2-t4-image2.png)
 
-4. Click on the **+ Add field** button.
-5. Select the fields that does not exist on the EditForm control from the below list and click **Add**.
-   1. **Name**
-   2. **Description**
-   3. **Availability**
-   4. **Location**
-   5. **Reserved by**
-   6. **Photo**
+4. Нажмите кнопку **+ Добавить поле**.
+5. Выберите поля, которых нет в элементе управления Редактирование Формы, из списка ниже и нажмите **Добавить**.
+ 1. **Имя**
+ 2. **Описание**
+ 3. **Наличие**
+ 4. **Расположение**
+ 5. **Зарезервировано**
+ 6. **Фото**
 
-![A screenshot of the add field window](03-1/media/ex2-t4-image3.png)
+![Скриншот окна добавления поля](03-1/media/ex2-t4-image3.png)
 
-6. Remove any extra fields and close the **Fields** pane. Your form should only have **Name, Description, Availability, Location, Reserved By and Photo** columns.
-7. Change **Columns** for Snap to columns to **1**.
+6. Удалите все лишние поля и закройте панель **Поля**. В вашей форме должны быть только столбцы **Имя, Описание, Доступность, Местоположение, Зарезервировано и Фото**.
+7. Измените **Столбцы** для Привязки к столбцам на **1**.
 
-![A screenshot with a border around the columns field and the value of 1 in the field itself](03-1/media/ex2-t4-image4.png)
+![Снимок экрана с рамкой вокруг поля столбцов и значением 1 в самом поле](03-1/media/ex2-t4-image4.png)
 
-8. Select the **Photo** inside the canvas and change **Width** to **400**.
+8. Выберите **Фото** внутри холста и измените **Ширина** на **400**.
 
-![A screenshot of the photo selected inside the canvas and a border around the size field changed to 400 in the properties pane](03-1/media/ex2-t4-image5.png)
+![Скриншот выбранной внутри холста фотографии и границы вокруг поля размера, которая в панели свойств была изменена на 400](03-1/media/ex2-t4-image5.png)
 
-9.  Expand the form and select the **Reserved by** data card.
+9. Разверните форму и выберите карту данных **Зарезервировано**.
 
-![A screenshot of a border around reserved by data card selected under edit form 1](03-1/media/ex2-t4-image5_1.png)
+![Снимок экрана с рамкой вокруг зарезервированной карты данных, выбранной в форме редактирования 1](03-1/media/ex2-t4-image5_1.png)
 
-10.  Go to the **Properties** pane, select the **Advanced** tab and click **Unlock**.
+10. Перейдите на панель **Свойства**, выберите вкладку **Дополнительно** и нажмите **Разблокировать**.
 
-![A Screenshot with an arrow pointing to the lock icon under the advanced tab](03-1/media/ex2-t4-image5_2.png)
+![Снимок экрана со стрелкой, указывающей на значок замка на расширенной вкладке](03-1/media/ex2-t4-image5_2.png)
 
-11.   Search for display and change the **DisplayMode** value to **DisplayMode.View**.
+11. Найдите отображение и измените значение **DisplayMode** на **DisplayMode.View**.
 
-![A screenshot with a border around the display mode field](03-1/media/ex2-t4-image5_3.png)
+![Снимок экрана с рамкой вокруг поля режима отображения](03-1/media/ex2-t4-image5_3.png)
 
-12.  Select the **Browse gallery**.
-13. Select **Items** form the formula bar and replace the value with formula below. This formula will filter the gadgets to show only the available gadgets
+12. Выберите **Обзор галереи**.
+13. Выберите **Элементы** в строке формул и замените значение формулой ниже. Эта формула отфильтрует гаджеты, чтобы отобразить только доступные гаджеты.
 
-    ```Filter(Gadgets, Availability <> 'Availability (Gadgets)'.'Picked up')```
+ ```Filter(Gadgets, Availability <> 'Availability (Gadgets)'.'Picked up')```
 
-![Filter data - screenshot](03-1/media/ex2-t4-image6.png)
+![Данные фильтра - снимок экрана](03-1/media/ex2-t4-image6.png)
 
-14.  Select the **Image** inside the gallery.
+14. Выберите **изображение** внутри галереи.
 
-![A Screenshot with an arrow pointing to image 1 inside the gallery](03-1/media/ex2-t4-image7.png)
+![Снимок экрана со стрелкой, указывающей на изображение 1 внутри галереи](03-1/media/ex2-t4-image7.png)
 
-15.  Go to the formula bar and change the value of the Image to the formula below.
+15. Перейдите к строке формул и измените значение изображения на формулу ниже.
 
 ```ThisItem.Photo```
 
-![A screenshot of the relevant command put into the formula bar](03-1/media/ex2-t4-image8.png)
+![Скриншот соответствующей команды, помещенной в строку формул](03-1/media/ex2-t4-image8.png)
 
-16.   Select the **Data** tab, click on the **...More actions** button of the **Gadgets** table and select **Refresh**.
+16. Выберите вкладку **Данные**, нажмите кнопку **... Дополнительные действия** в таблице **Гаджеты** и выберите **Обновить**.
 
-![A Screenshot with an arrow pointing to the ellipsis icon for more actions and a border around the refresh button](03-1/media/ex2-t4-image9.png)
+![Снимок экрана со стрелкой, указывающей на значок с многоточием для дополнительных действий и рамкой вокруг кнопки обновления](03-1/media/ex2-t4-image9.png)
 
-17.  Click **Save** and wait for the app to be saved.
-18.  Click **Preview**.
-19.  Click **+ New record**.
+17. Нажмите **Сохранить** и дождитесь сохранения приложения.
+18. Щелкните **Предварительный просмотр**.
+19. Нажмите **+ Новая запись**.
 
-![A screenshot of a border around the new record button](03-1/media/ex2-t4-image10.png)
+![Снимок экрана с рамкой вокруг кнопки новой записи](03-1/media/ex2-t4-image10.png)
 
-20.  Fill out the form and click **Tap or click to add a picture**.
+20. Заполните форму и нажмите **Нажмите или нажмите, чтобы добавить изображение**.
 
-![A Screenshot with an arrow pointing to the tap or click to add a picture button](03-1/media/ex2-t4-image11.png)
+![Снимок экрана со стрелкой, указывающей на касание или кнопку щелчка, чтобы добавить изображение](03-1/media/ex2-t4-image11.png)
 
-21.  Provide your own photo or select one from the lab resources folder.
-22.  Click **Save**.
+21. Предоставьте свою фотографию или выберите ее из папки ресурсов лабораторных работ.
+22. Нажмите **Сохранить**.
 
-![A Screenshot with an arrow pointing to the tick icon to save](03-1/media/ex2-t4-image12.png)
+![Снимок экрана со стрелкой, указывающей на значок галочки для сохранения](03-1/media/ex2-t4-image12.png)
 
-23.  Add few more items.
-24.  Your app should now look like the image below. Close the preview.
+23. Добавьте еще несколько предметов.
+24. Теперь ваше приложение должно выглядеть как на изображении ниже. Закройте превью.
 
-![A screenshot of the running app with an arrow pointing to the cross icon to close the preview](03-1/media/ex2-t4-image13.png)
+![Снимок экрана работающего приложения со стрелкой, указывающей на крестик, чтобы закрыть предварительный просмотр](03-1/media/ex2-t4-image13.png)
 
-25.  Do not navigate away from this page.
+25. Не уходите с этой страницы.
 
 
-#### Task 5: Update Dataverse rows
-In this task, you will add buttons that will let users reserve and/or pick up item, you will also update the rows in Dataverse as reserved or picked up.
+#### Задача 5: Обновление строки Dataverse
+В этой задаче вы добавите кнопки, которые позволят пользователям зарезервировать и / или забрать элемент, вы также обновите строки в Dataverse на зарезервированные или забранные.
 
-1. Select **App** from the Tree view and set the **OnStart** value to the formula below. This formula will create a variable named CurrentUser and set its value to the first user that matches the logged in user's email.
+1. Выберите **Приложение** в древовидном представлении и установите значение **OnStart** в формулу ниже. Эта формула создаст переменную с именем CurrentUser и установит ее значение для первого пользователя, который войдет в систему с соответствующей электронной почтой.
 
 ```Set(CurrentUser, First(Filter(Users, 'Primary Email' = User().Email)))```
 
-![A screenshot with a border around app selected in the screens tab on the left and another border around the formula bar with the relevant command typed in](03-1/media/ex2-t5-image1.png)
+![Снимок экрана с рамкой вокруг приложения, выбранного на вкладке экранов слева, и другой рамкой вокруг строки формул с введенной соответствующей командой](03-1/media/ex2-t5-image1.png)
 
-2. Select App, select **ellipsis** and select **Run OnStart**.
-3. Select the **RightContainer**.
+2. Выберите Приложение, выберите **многоточие** и выберите **Запуск при включении**.
+3. Выберите **ПравыйКонтейнер**.
 
-![A screenshot with a border around the RightContainer1 element selected](03-1/media/ex2-t5-image2.png)
+![Снимок экрана с рамкой вокруг выбранного элемента ПравыйКонтейнер1](03-1/media/ex2-t5-image2.png)
 
-3. Click on the **+** Insert button and select **Button**.
+3. Нажмите кнопку вставки **+** и выберите **Кнопка**.
 
-![A Screenshot with an arrow pointing to the plus icon to insert and a border around the button option](03-1/media/ex2-t5-image3.png)
+![Снимок экрана со стрелкой, указывающей на значок плюса, который нужно вставить, и рамкой вокруг параметра кнопки](03-1/media/ex2-t5-image3.png)
 
-4. Select the **Tree view**, double click on the button you just added and rename it **Reserve Button**.
+4. Выберите **Древовидное представление**, дважды щелкните только что добавленную кнопку и переименуйте ее в **Кнопка резервирования**.
 
-![A screenshot with the text "Reserve Button" highlighted as the new name for the button you added](03-1/media/ex2-t5-image4.png)
+![Снимок экрана с текстом «Кнопка резервирования», выделенным как новое имя для добавленной вами кнопки](03-1/media/ex2-t5-image4.png)
 
-5. Set the **Text** value of the Reserve Button to **Reserve**.
-6. Move the Reserve Button and place it next to the Image.
+5. Установите для параметра **Текст** кнопки «Зарезервировать» значение **Зарезервировать**.
+6. Переместите кнопку «Зарезервировать» и поместите ее рядом с изображением.
 
-![A screenshot of the Reserve button selected and moved next to the image on the right hand side](03-1/media/ex2-t5-image5.png)
+![Скриншот выбранной кнопки "Зарезервировать", которая была помещена рядом с изображением по правой стороне](03-1/media/ex2-t5-image5.png)
 
-7. Set the **DisplayMode** value of the Reserve Button to the formula below. This formula will disable the button if the selected item is not available.
+7. Задайте для параметра **DisplayMode** кнопки «Зарезервировать» формулу, приведенную ниже. Эта формула отключит кнопку, если выбранный элемент недоступен.
 
 ```If(BrowseGallery1.Selected.Availability = 'Availability (Gadgets)'.Available, DisplayMode.Edit, DisplayMode.Disabled)```
 
-8. Set the **OnSelect** value of the Reserve Button to the formula below. This formula will update the selected record by setting the reserved by value to the current user and the availability value to reserved.
+8. Установите значение **OnSelect** кнопки «Зарезервировать» в соответствии с приведенной ниже формулой. Эта формула обновит выбранную запись, установив зарезервированное значение по текущему пользователю, и значение доступности - зарезервировано.
 
 ```Patch(Gadgets, BrowseGallery1.Selected, {Availability: 'Availability (Gadgets)'.Reserved, 'Reserved by': CurrentUser})```
 
-9. Set the **Visible** value of the Reserve Button to the formula below. This formula will hide the button if the user is creating a new record.
+9. Установите значение **Visible** кнопки «Зарезервировать» по формуле, приведенной ниже. Эта формула скроет кнопку, если пользователь создает новую запись.
 
 ```If(EditForm1.Mode = FormMode.View, true, false)```
 
-10. Select the **RightContainer** again.
-11. Click on the **+** Insert button and select **Button** again.
-12. Select the **Tree view**, double click on the button you just added and rename it **Picked Up Button**.
+10. Снова выберите **ПравыйКонтейнер**.
+11. Нажмите кнопку вставки **+** и снова выберите **Кнопка**.
+12. Выберите **Древовидное представление**, дважды щелкните только что добавленную кнопку и переименуйте ее в **Подобрано**.
 
-![A screenshot with the text "Picked Up Button" highlighted as the name new for button you added](03-1/media/ex2-t5-image6.png)
+![Снимок экрана с текстом «Подобрано», выделенным в качестве нового имени для кнопки, которую вы добавили](03-1/media/ex2-t5-image6.png)
 
-12. Set the **Text** value of the Reserve Button to **Picked up**.
-13. Adjust the width and move the Picked Up Button and place it to the right of the Reserve Button.
+12. Установите для параметра **Текст** кнопки «Зарезервировать» значение **Подобрано**.
+13. Отрегулируйте ширину и переместите кнопку подбора так, чтобы она находилась справа от кнопки резерва.
 
-![A screenshot showing the Picked Up button selected and moved to the right of the Reserve button](03-1/media/ex2-t5-image7.png)
+![Снимок экрана, показывающий, что кнопка "Подобрано" выбрана и перемещена вправо от кнопки "Зарезервировать"](03-1/media/ex2-t5-image7.png)
 
-14. Set the **DisplayMode** value of the Picked Up Button to the formula below. This formula will disable the button if the selected item is reserved and the reserved by user is not the current user.
+14. Задайте для параметра **DisplayMode** Кнопки "Подобрано" формулу, приведенную ниже. Эта формула отключит кнопку, если выбранный элемент зарезервирован, при этом зарезервирован пользователем не являющимся текущим.
 
  ```If(BrowseGallery1.Selected.Availability = 'Availability (Gadgets)'.Reserved And BrowseGallery1.Selected.'Reserved by'.'Primary Email' <> CurrentUser.'Primary Email', DisplayMode.Disabled, DisplayMode.Edit)```
 
-15. Set the **OnSelect** value of the Picked Up Button to the formula below. This formula will update the selected record by setting the reserved by value to the current user and the availability value to picked up. The second formula will select the first item of the gallery.
+15. Задайте для параметра **OnSelect** Кнопки "Подобрано" формулу, приведенную ниже. Эта формула обновит выбранную запись, установив значения резервирования по текущему пользователю и доступности для получения. Вторая формула выберет первый элемент галереи.
 
 ```Patch(Gadgets, BrowseGallery1.Selected, {Availability: 'Availability (Gadgets)'.'Picked up', 'Reserved by': CurrentUser});Select(BrowseGallery1,1)```
 
-16. Set the **Visible** value of the Picked Up Button to the formula below. This formula will hide the button if the user is creating a new record.
+16. Задайте для параметра **Visible** Кнопки "Подобрано" значение приведенной ниже формулы. Эта формула скроет кнопку, если пользователь создает новую запись.
 
 ```If(EditForm1.Mode = FormMode.View, true, false)```
 
- 17. Click **Save** to save your changes.
- 18. Do not navigate away from this page.
+ 17. Нажмите **Сохранить**, чтобы сохранить изменения.
+ 18. Не уходите с этой страницы.
 
 
-#### Task 6: Add search
-In this task, you will add search capability to your application.
+#### Задача 6: Добавление поиска
+В этой задаче вы добавите в свое приложение возможность поиска.
 
-1. Select the **RightContainer**.
-2. Click on the **+** Insert menu and select **+ Add icon**.
-3. Place the icon above the form.
+1. Выберите **ПравыйКонтейнер**.
+2. Щелкните на **+** меню вставки и выберите **+ Значок добавления**.
+3. Поместите значок над формой.
 
-![A screenshot of the plus icon selected](03-1/media/ex2-t6-image1.png)
+![Снимок экрана с выбранным значком плюса](03-1/media/ex2-t6-image1.png)
 
-4. Select the icon, go to the **Properties** and select **Search** for Icon.
+4. Выберите значок, перейдите в **Свойства** и выберите **Поиск** для значка.
 
-![A screenshot with a border around the Search option selected as the icon](03-1/media/ex2-t6-image2.png)
+![Снимок экрана с рамкой вокруг параметра поиска, выбранного в качестве значка](03-1/media/ex2-t6-image2.png)
 
-5. Click on the **+** Insert menu and select **Text box**.
-6. Select the **Tree view**.
-7. Select the text box you just added and rename it **Search box**.
+5. Щелкните на **+** меню вставка и выберите **Текстовое поле**.
+6. Выберите **Древовидное представление**.
+7. Выделите только что добавленное текстовое поле и переименуйте его в **Поле поиска**.
 
-![A screenshot of the words "Search Box" highlighted as the new name for the text box you added](03-1/media/ex2-t6-image3.png)
+![Снимок экрана со словами «Поле поиска», выделенными как новое имя для добавленного вами текстового поля](03-1/media/ex2-t6-image3.png)
 
-8. Place the Search Box to the right of the icon.
+8. Поместите поле поиска справа от значка.
 
-![A screenshot of the Search Box placed to the right of the icon](03-1/media/ex2-t6-image4.png)
+![Снимок экрана окна поиска, расположенного справа от значка](03-1/media/ex2-t6-image4.png)
 
-9.  Select the **Search Box** and set **OnChange** value to the formula below. This formula will reset the gallery.
+9. Выберите **Поле поиска** и установите значение **OnChange** в формулу ниже. Эта формула сбросит галерею.
 
 ```Reset(BrowseGallery1)```
 
-10. Select the **BrowseGallery** and change the **Items** formula to the formula below. The formula is incomplete, we will complete it in the next step.
+10. Выберите **Просмотр галереи** и измените формулу **Позиции** на формулу ниже. Формула неполная, мы завершим ее на следующем шаге.
 
 ```Filter(Search(Gadgets, 'Search Box'.Value, ), Availability <> 'Availability (Gadgets)'.'Picked up')```
 
-11. Place your cursor after **'Search Box'.Value** and type name. You should see a suggestion with crxxx_name, select the suggested column.
+11. Поместите курсор после **'Поле поиска'.Значение** и введите имя. Вы должны увидеть предложение crxxx_name, выберите предлагаемый столбец.
 
-![A screenshot with a border around the words "crefe4_name"](03-1/media/ex2-t6-image5.png)
+![Скриншот с рамкой вокруг текста "crefe4_name"](03-1/media/ex2-t6-image5.png)
 
-12. Add comma after the name column you just selected and type **description** and select the suggested column again.
+12. Добавьте запятую после только что выбранного столбца имени, введите **описание** и снова выберите предложенный столбец.
 
-![A screenshot with a border around the worlds "crfe4_description"](03-1/media/ex2-t6-image6.png)
+![Скриншот с рамкой вокруг текста "crfe4_description"](03-1/media/ex2-t6-image6.png)
 
-13. Your formula should now look like the image below. This formula will search the name and description columns of the gadgets table for whatever the user types in the text box and filter out the picked up items.
+13. Теперь ваша формула должна выглядеть, как на изображении ниже. Эта формула будет искать в столбцах имени и описания таблицы гаджетов все, что пользователь вводит в текстовое поле, и отфильтровывать выбранные элементы.
 
-![Suggested description column - screenshot](03-1/media/ex2-t6-image7.png)
+![Предлагаемый столбец описания - снимок экрана](03-1/media/ex2-t6-image7.png)
 
-14.  Select the **Search Box**.
-15.  Go to the formula bar and remove the **Value** text.
+14. Выберите **Поле поиска**.
+15. Перейдите к строке формул и удалите текст **Значение**.
 
-![A screenshot with a border around the formula bar](03-1/media/ex2-t6-image8.png)
+![Снимок экрана с рамкой вокруг строки формул](03-1/media/ex2-t6-image8.png)
 
-16.  Click **Save** to save your changes.
+16. Нажмите **Сохранить**, чтобы сохранить изменения.
 
-### Exercise 3: Test and publish application
-In this exercise, you will test, publish and give colleagues permission to use the application.
+### Упражнение 3: Тестирование и публикация приложения
+В этом упражнении вы протестируете, опубликуете и дадите коллегам разрешение на использование приложения.
 
-#### Task 1: Test application
-In this task, you will test the application.
+#### Задача 1: Тест приложения
+В этой задаче вы протестируете приложение.
 
-1. Click on the **Preview** button.
+1. Нажмите кнопку **Предварительный просмотр**.
 
-![A screenshot with an arrow pointing to the Preview button](03-1/media/ex3-t1-image1.png)
+![Снимок экрана со стрелкой, указывающей на кнопку предварительного просмотра](03-1/media/ex3-t1-image1.png)
 
-2. The **Reserve** and **Picked up** button should be visible and enabled.
-3. Search for cable. The gallery should show items that have the text **cable** in the name or description column.
+2. Кнопки **Зарезервировать** и **Подобраны** должны быть видимыми и активными.
+3. Найдите кабель. В галерее должны отображаться элементы, у которых есть текст **кабель** в столбце имени или описания.
 
-![A screenshot with the word cable in the search bar and a gallery showing items that have the text cable in their name or description column on the left side of the window](03-1/media/ex3-t1-image2.png)
+![Снимок экрана со словом "кабель" в строке поиска и галереей, показывающей элементы, у которых есть текст "кабель" в названии или столбце описания в левой части окна](03-1/media/ex3-t1-image2.png)
 
-4. Select one of the items, the **Reserved by** column value should be empty.
-5. Click on the **Reserve** button.
+4. Выберите один из элементов, значение столбца **Зарезервировано** должно быть пустым.
+5. Нажмите кнопку **Зарезервировать**.
 
-![A screenshot of a border around the Reserved by field and an arrow pointing to the Reserve button](03-1/media/ex3-t1-image3.png)
+![Снимок экрана с рамкой вокруг поля «Зарезервировано» и стрелкой, указывающей на кнопку «Зарезервировать»](03-1/media/ex3-t1-image3.png)
 
-6. The **Reserve** button should become disabled and the **reserved by** value will be set to your username. Click on the **Picked up** button.
+6. Кнопка **Зарезервировать** должна стать недоступной, а в качестве значения **Зарезервировано** будет установлено ваше имя пользователя. Нажмите кнопку **Подобрано**.
 
-![A screenshot with a border around the reserved by field with your username and another border around the now-disabled reserve button](03-1/media/ex3-t1-image4.png)
+![Снимок экрана с рамкой вокруг поля зарезервированного пользователем с вашим именем пользователя и другой рамкой вокруг теперь отключенной кнопки резервирования](03-1/media/ex3-t1-image4.png)
 
-7. The item should no longer show up on the gallery and the first item of the gallery should get selected.
-8. Close the preview.
-9. Do not navigate away from this page.
-
-
-#### Task 2: Publish application
-In this task, you will publish the application to Teams.
-
-1. Click on the **Publish to Teams** button.
-
-![A Screenshot with an arrow pointing to the publish to teams button](03-1/media/ex3-t2-image1.png)
-
-2. Click **Next**.
-3. Click **+** add app as a tab.
-
-![A Screenshot with an arrow pointing to the plus icon for add app as a tab in the general box](03-1/media/ex3-t2-image2.png)
-
-4. Click **Save and close**
-5. Select **Teams** and select the new **Upcycle** tab.
-
-![A Screenshot with an arrow pointing to the upcycle button](03-1/media/ex3-t2-image3.png)
-
-6. The app should load. If the app is not loaded, refresh the page.
-
-![A screenshot of the loaded app](03-1/media/ex3-t2-image4.png)
-
-7. Test the application in Teams and make sure it behaves as you expected.
+7. Элемент больше не должен отображаться в галерее, и должен быть выбран первый элемент галереи.
+8. Закройте предварительный просмотр.
+9. Не уходите с этой страницы.
 
 
-#### Task 3: Give permissions
-In this task, you will give your colleagues permission to create new items, edit items they created, delete items they created and read items created by other people.
+#### Задача 2: Публикация приложения
+В этой задаче вы опубликуете приложение в Teams.
 
-1. Select **Power Apps** and click on the **See more** link.
+1. Нажмите кнопку **Опубликовать в Teams**.
 
-![A screenshot with a border around the power apps button on the left side of the window and an arrow pointing to the see more link in the recent apps](03-1/media/ex3-t3-image1.png)
+![Снимок экрана со стрелкой, указывающей на кнопку публикации для команд](03-1/media/ex3-t2-image1.png)
 
-2. Click to open the **Gadget** table.
-3. Click **Manage permissions**.
+2. Щелкните **Далее**.
+3. Щелкните **+** добавить приложение как вкладку.
 
-![A Screenshot with an arrow pointing to the manage permissions button](03-1/media/ex3-t3-image2.png)
+![Снимок экрана со стрелкой, указывающей на значок плюса для добавления приложения в качестве вкладки в общем поле](03-1/media/ex3-t2-image2.png)
 
-4. Select **Members**, select **Collaborate** permission and click **Save**
+4. Нажмите **Сохранить и закрыть**.
+5. Выберите **Команды** и перейдите на новую вкладку **Upcycle**.
 
-![A screenshot of the collaborate permission selected](03-1/media/ex3-t3-image3.png)
+![Снимок экрана со стрелкой, указывающей на кнопку «Upcycle»](03-1/media/ex3-t2-image3.png)
 
-5. You may test the application with another user and see how it behaves.
+6. Приложение должно загрузиться. Если приложение не загружено, обновите страницу.
 
+![Скриншот загруженного приложения](03-1/media/ex3-t2-image4.png)
+
+7. Протестируйте приложение в Teams и убедитесь, что оно ведет себя так, как вы ожидали.
+
+
+#### Задача 3: Предоставление разрешения
+В этой задаче вы дадите своим коллегам разрешение на создание новых элементов, редактирование элементов, которые они создали, удаление элементов, которые они создали, и чтение элементов, созданных другими людьми.
+
+1. Выберите **Power Apps** и щелкните ссылку **Подробнее**.
+
+![Снимок экрана с рамкой вокруг кнопки «Power Apps» в левой части окна и стрелкой, указывающей на ссылку «Подробнее» в последних приложениях](03-1/media/ex3-t3-image1.png)
+
+2. Щелкните, чтобы открыть таблицу **Гаджет**.
+3. Щелкните **Управление разрешениями**.
+
+![Снимок экрана со стрелкой, указывающей на кнопку управления разрешениями](03-1/media/ex3-t3-image2.png)
+
+4. Выберите параметр **Участники**, выберите разрешение **Совместная работа** и нажмите **Сохранить**.
+
+![Скриншот выбранного разрешения на совместную работу](03-1/media/ex3-t3-image3.png)
+
+5. Вы можете протестировать приложение с другим пользователем и посмотреть, как оно себя ведет.

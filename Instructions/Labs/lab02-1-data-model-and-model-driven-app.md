@@ -1,713 +1,713 @@
 ---
-lab:
-    title: 'Lab 02.1: Data model and model-driven app'
-    module: 'Module 02: Create a model-driven app'
+Лабораторный практикум:
+ заголовок: 'Лабораторная работа 02.1: Модель данных и приложение на основе модели'
+ модуль: 'Модуль 02: Создание приложения на основе модели'
 ---
 
-> [!NOTE]
-> Effective November 2020:
-> - Common Data Service has been renamed to Microsoft Dataverse. [Learn more](https://aka.ms/PAuAppBlog)
-> - Some terminology in Microsoft Dataverse has been updated. For example, *entity* is now *table* and *field* is now *column*. [Learn more](https://go.microsoft.com/fwlink/?linkid=2147247)
+> [!ПРИМЕЧАНИЕ]
+> С ноября 2020 г .:
+> - Common Data Service переименована в Microsoft Dataverse. [Подробнее…](https://aka.ms/PAuAppBlog)
+> - Обновлена некоторая терминология в Microsoft Dataverse. Например, *entity/объект* теперь *table/таблица*, а *field/поле* теперь *column/столбец*. [Подробнее…](https://go.microsoft.com/fwlink/?linkid=2147247)
 >
 
 
-# Lab 02.1: Data model and model-driven app
+# Лабораторная работа 02.1: Модель данных и приложение на основе модели
 
-In this lab you will be implementing the data model for the solution and building a model-driven app that will be used for fixing problems or managing the overall effort.
+В этой лабораторной работе вы будете реализовывать модель данных для решения и создавать приложение на основе модели, которое будет использоваться для устранения проблем или управления общими усилиями.
 
-## What you will learn
+## Чему вы научитесь
 
-  - Create Tables, Columns, and relationships
+ - Созданию таблиц, столбцов и отношений
 
-  - Create a model-driven app
+ - Созданию приложения на основе модели
 
-  - Create a site map
+ - Созданию карты сайта
 
-  - Create and configure Table forms
+ - Созданию и настройке форм таблиц
 
-  - Create and configure Table views
+ - Созданию и настройке представлений таблиц
 
-## High-level lab steps
+## Лабораторные этапы высокого уровня
 
-  - Exercise 1 – Create publisher and solution  
+ - Упражнение 1. Создание издателя и решения 
 
-  - Exercise 2 – Implement the data model 
-    
-      - Data Model 
-        
-          - Building 
-          
-          - Department 
-          
-          - Problem Report 
+ - Упражнение 2 - Реализация модели данных 
+ 
+ - Модель данных 
+ 
+ - Строительство 
+ 
+ - Отделение 
+ 
+ - Отчет о проблеме 
 
-  - Exercise 3 – Configure forms and views 
+ - Упражнение 3 - Настройка форм и представлений 
 
-  - Exercise 4 – Compose a basic model-driven app 
+ - Упражнение 4. Составьте базовое приложение на основе модели. 
 
-  - Exercise 5 – Input data and refine some views, import some problem reports 
+ - Упражнение 5 - Ввод данных и уточнение некоторых представлений, импорт некоторых отчетов о проблемах 
 
-## Detailed steps
+## Подробные шаги
 
-### Exercise 1: Create publisher and solution
+### Упражнение 1. Создайте издателя и решение
 
-In this exercise, you will create a custom solution publisher and a solution. This solution will be used in all the labs for this course to keep all the components together.
+В этом упражнении вы создадите решение и настраиваемого издателя решения. Это решение будет использоваться во всех лабораторных работах этого курса, чтобы объединить все компоненты.
 
-#### Task 1: Create publisher and solution
+#### Задача 1. Создание издателя и решения
 
-1.  Navigate to the [Power Apps maker portal](https://make.powerapps.com/) and make sure you are in the practice environment you created.
+1. Перейдите на [портал разработчика Power Apps](https://make.powerapps.com/) и убедитесь, что вы находитесь в созданной вами учебной среде.
 
-2.  Select **Solutions** and click **+ New solution**.
+2. Выберите **Решения** и нажмите **+ Новое решение**.
 
-3.  Enter **Company 311** for **Display name** and click.
+3. Введите **Компания 311** в поле **Отображаемое имя** и нажмите.
 
-4.  Click on the **Publisher** dropdown and select **+ Publisher**.
+4. Щелкните раскрывающееся меню **Издатель** и выберите **+ Издатель**.
 
-![A Screenshot with an arrow pointing to the new publisher button](02-1/media/image1.png)
+![Снимок экрана со стрелкой, указывающей на кнопку нового издателя](02-1/media/image1.png)
 
-5.  Enter **Lamna Healthcare** for **Display name**, **lamnahealthcare** for **Name**, **lh** for **Prefix**, **88186** for Choice value prefix, and click **Save**.
+5. Введите **Lamna Healthcare** для **Отображаемое имя**, **lamnahealthcare** для **Имя**, **lh** для **Префикс**, **88186** для значения выбора префикса. и нажмите **Сохранить**.
 
-![A screenshot of the new publisher properties pane](02-1/media/image105.png)
+![Снимок экрана новой панели свойств издателя](02-1/media/image105.png)
 
-6.  Click on the **Publisher** dropdown again and select the **Lamna Healthcare** publisher you created.
+6. Снова щелкните раскрывающееся меню **Издатель** и выберите созданного вами издателя **Lamna Healthcare**.
 
-8.  Click **Create**.
+8. Щелкните **Создать**.
 
-![A screenshot of the new solution pane](02-1/media/image3.png)
+![Снимок экрана новой панели решения](02-1/media/image3.png)
 
-9.  You should now see the solution you created in the solution list.
+9. Теперь вы должны увидеть созданное вами решение в списке решений.
 
-![A screenshot with a border around your solution](02-1/media/image4.png)
+![Снимок экрана с рамкой вокруг вашего решения](02-1/media/image4.png)
 
-### Exercise 2: Implement data model
+### Упражнение 2: Реализация модели данных
 
-In this exercise, you will create Tables, Columns, and the Relationships you identified when you designed the data model for the Company 311 app.
+В этом упражнении вы создадите таблицы, столбцы и отношения, которые вы определили при разработке модели данных для приложения Company 311.
 
-#### Task 1: Create Tables
+#### Задача 1. Создание таблиц
 
-1.  In the [Power Apps maker portal](https://make.powerapps.com/) select **Solutions** and click to open the **Company 311** solution you created in Exercise 1.
+1. На [портале разработчика Power Apps](https://make.powerapps.com/) выберите **Решения** и щелкните, чтобы открыть решение **Компания 311**, созданное в упражнении 1.
 
-2.  Click **+ New** and select **Table**.
+2. Нажмите **+ Создать** и выберите **Таблица**.
 
-3.  Enter **Building** for **Display name** and click **Create**.
+3. Введите **Здание** для **Отображаемое имя** и нажмите **Создать**.
 
-![A screenshot of the new table window with the relevant value in each field](02-1/media/image5.png)
+![Снимок экрана нового окна таблицы с соответствующим значением в каждом поле](02-1/media/image5.png)
 
-4.  Go back to the solution by clicking on the solution name.
+4. Вернитесь к решению, щелкнув имя решения.
 
-5.  Click **+ New** and select **Table** again.
+5. Нажмите **+ Создать** и снова выберите **Таблица**.
 
-6.  Enter **Department** for **Display name** and click **Create**.
+6. Введите **Отдел** для **Отображаемое имя** и нажмите **Создать**.
 
-![A screenshot of the new table window with the relevant value in each field](02-1/media/image7.png)
+![Снимок экрана нового окна таблицы с соответствующим значением в каждом поле](02-1/media/image7.png)
 
-7.  Go back to the solution by clicking on the solution name.
+7. Вернитесь к решению, щелкнув имя решения.
 
-![Building Table properties - screenshot](02-1/media/image99.png)
+![Создание свойств таблицы - снимок экрана](02-1/media/image99.png)
 
-8.  Click **+ New** and select **Table** one more time.
+8. Нажмите **+ Создать** и выберите **Таблица** еще раз.
 
-9.  Enter **Problem Report** for **Display name**, change the **Primary Column** **Display name** to **Title**, and click **More settings**.
+9. Введите **Отчет о проблеме** для **Отображаемое имя**, измените **Основной столбец** **Отображаемое имя** на **Заголовок** и нажмите **Дополнительные настройки**.
 
-![A screenshot with a border around the primary name column settings: display name and name. There is also an arrow pointing to the more settings button below](02-1/media/image8.png)
+![Снимок экрана с рамкой вокруг основных настроек столбца имени: отображаемое имя и имя. Также есть стрелка, указывающая на кнопку дополнительных настроек ниже](02-1/media/image8.png)
 
-10. Click to expand the **Collaboration** section.
+10. Щелкните, чтобы развернуть раздел **Сотрудничество**.
 
-![A Screenshot with an arrow pointing to the collaboration button](02-1/media/image9.png)
+![Снимок экрана со стрелкой, указывающей на кнопку сотрудничества](02-1/media/image9.png)
 
-11. Check the **Enable queues** checkbox and click **Create**. Enabling queues allows Problem Report Rows to be associated with one or more queues to help facilitate routing to the different departments.
+11. Установите флажок **Включить очереди** и нажмите **Создать**. Включение очередей позволяет связать строки отчета о проблемах с одной или несколькими очередями, чтобы облегчить маршрутизацию в разные отделы.
 
-![A screenshot of the enable queues checkbox highlighted](02-1/media/image10.png)
+![Снимок экрана с выделенным флажком включения очередей](02-1/media/image10.png)
 
-12. Click **Okay** on the **Confirm changes** popup.
+12. Нажмите **ОК** во всплывающем окне **Подтвердить изменения**.
 
-![A screenshot of the confirm changes popup](02-1/media/image11.png)
+![Скриншот всплывающего окна подтверждения изменений](02-1/media/image11.png)
 
-#### Task 2: Add Columns
+#### Задача 2: Добавление столбцов
 
-In this task, you will add Columns to the Problem Report Table.
+В этой задаче вы добавите столбцы в таблицу отчета о проблемах.
 
-1.  Navigate to the [Power Apps maker portal](https://make.powerapps.com/) page and make sure you are in the correct environment.
+1. Перейдите на страницу [Портал разработчика Power Apps](https://make.powerapps.com/) и убедитесь, что вы находитесь в правильной среде.
 
-2.  Select **Solutions** and click to open the **Company 311** solution you created in exercise 1.
+2. Выберите **Решения** и щелкните, чтобы открыть решение **Компания 311**, созданное в упражнении 1.
 
-3.  Locate and click to open the **Problem Report** Table.
+3. Найдите и щелкните, чтобы открыть таблицу **Отчет о проблеме**.
 
-![A screenshot of a border around the problem report button](02-1/media/image12.png)
+![Снимок экрана с рамкой вокруг кнопки отчета о проблеме](02-1/media/image12.png)
 
-4.  Select the **Columns** tab and click **+ Add Column**.
+4. Выберите вкладку **Столбцы** и нажмите **+ Добавить столбец**.
 
-![A Screenshot with an arrow pointing to the add column button](02-1/media/image13.png)
+![Снимок экрана со стрелкой, указывающей на кнопку добавления столбца](02-1/media/image13.png)
 
-5.  Enter **Location** for **Display name**, select **Text** for **Data type**, and click **Advanced options**.
+5. Введите **Местоположение** для **Отображаемое имя**, выберите **Текст** для **Тип данных** и нажмите **Дополнительные параметры**.
 
-![A Screenshot with an arrow pointing to the advanced options at the bottom of the location window](02-1/media/image14.png)
+![Снимок экрана со стрелкой, указывающей на дополнительные параметры в нижней части окна местоположения](02-1/media/image14.png)
 
-6.  Change **Max length** to **150** and click **Done**.
+6. Измените **Макс. Длина** на **150** и нажмите **Готово**.
 
-![A screenshot showing the max length at a value of 150](02-1/media/image15.png)
+![Снимок экрана, показывающий максимальную длину при значении 150](02-1/media/image15.png)
 
-7.  Click **+ Add Column** again.
+7. Снова нажмите **+ Добавить столбец**.
 
-8.  Enter **Details** for **Display name**, select **Multiline text** for **Data type**, make the Column **Required**, and click **Done**.
+8. Введите **Подробности** для параметра **Отображаемое имя**, выберите **Многострочный текст** для **Тип данных**, сделайте столбец **Обязательным** и нажмите **Готово**.
 
-![A screenshot of the details window with the relevant values in each field](02-1/media/image16.png)
+![Снимок экрана с подробными данными с соответствующими значениями в каждом поле](02-1/media/image16.png)
 
-9.  Click **+ Add Column** again.
+9. Снова нажмите **+ Добавить столбец**.
 
-10. Enter **Photo** for **Display name**, select **Image** for **Data type**, and click **Done**.
+10. Введите **Фото** для **Отображаемое имя**, выберите **Изображение** для **Тип данных** и нажмите **Готово**.
 
-11. Click **+ Add Column**.
+11. Щелкните **+ Добавить столбец**.
 
-12. Enter **Resolution** for **Display name**, select **Multiline text** for **Data type**, and click **Done**.
+12. Введите **Разрешение** для **Отображаемое имя**, выберите **Многострочный текст** для **Тип данных** и нажмите **Готово**.
 
-13. Click **+ Add Column**.
+13. Щелкните **+ Добавить столбец**.
 
-14. Enter **Resolved On** for **Display name**, select **Date and time** for **Data type**, and click **Done**.
+14. Введите **Разрешено** для **Отображаемое имя**, выберите **Дата и время** для **Тип данных** и нажмите **Готово**.
 
-15. Click **Default** Filter and select **Custom**. (For small screen devices, default dropdown goes into the **ellipsis**).
-![A Screenshot with an arrow pointing to the default dropdown menu and a border around the custom button](02-1/media/image17.png)
+15. Щелкните **Фильтр по умолчанию** и выберите **Пользовательский**. (Для устройств с маленьким экраном раскрывающийся список по умолчанию превращается в **многоточие**).
+![Снимок экрана со стрелкой, указывающей на раскрывающееся меню по умолчанию, и рамкой вокруг настраиваемой кнопки](02-1/media/image17.png)
 
-16. You should now see the 5 new Columns you created. Click **Save Table**.
+16. Теперь вы должны увидеть 5 новых столбцов, которые вы создали. Нажмите **Сохранить таблицу**.
 
-![A screenshot showing the 5 new columns you have created: details, location, photo, resolution, and resolved on](02-1/media/image18.png)
+![Снимок экрана, показывающий 5 новых столбцов, которые вы создали: сведения, местоположение, фото, разрешение и разрешение](02-1/media/image18.png)
 
-17. Go back to the solution by clicking on the solution name.
+17. Вернитесь к решению, щелкнув имя решения.
 
-18. Click **Publish all customizations** and wait for the publishing to complete.
+18. Щелкните **Опубликовать все настройки** и дождитесь завершения публикации.
 
-19. Do not navigate away from this page until all customizations have been published successfully.
+19. Не уходите с этой страницы, пока все настройки не будут успешно опубликованы.
 
-#### Task 3: Edit status reason Choice
+#### Задача 3: Изменение причины состояния Выбора
 
-In this task, you will edit the status reason Column of the problem report Table.
+В этой задаче вы отредактируете столбец причины состояния в Таблице отчета о проблеме.
 
-1.  Make sure you are in the **Company 311** solution.
+1. Убедитесь, что вы используете решение **Компания 311**.
 
-2.  Click to open the **Problem Report** Table.
+2. Щелкните, чтобы открыть таблицу **Отчет о проблеме**.
 
-3.  Click on the **… More commands** button and select **Switch to classic**.
+3. Нажмите кнопку **… Дополнительные команды** и выберите **Перейти к классической версии**.
 
-> [!NOTE]  
-> You are switching to classic because the modern solution explorer does not support editing status reason yet but will in the future.
+> [!ПРИМЕЧАНИЕ] 
+> Вы переходите на классический режим, потому что современный обозреватель решений еще не поддерживает причину изменения статуса, но будет в будущем.
 
-![A Screenshot with an arrow pointing to the ellipses icon for more options next to AI builder and a border around the switch to classic button](02-1/media/image19.png)
+![Снимок экрана со стрелкой, указывающей на значок с многоточием, рядом с конструктором AI и рамкой вокруг кнопки переключения на классическую](02-1/media/image19.png)
 
-4.  Select **Fields** and look for **Status Reason** in the Display Name column, double click to open the **Status Reason** Column.
+4. Выберите **Поля** и найдите **Причину состояния** в столбце Отображаемое имя, дважды щелкните, чтобы открыть столбец **Причина состояния**.
 
-> [!NOTE]  
-> If the pop-ups are not enabled on the browser, the pop-up window for updating the column will not open. Make sure that you have enabled open popups and redirects on the browser tab. 
+> [!ПРИМЕЧАНИЕ] 
+> Если в браузере не разрешены всплывающие окна, всплывающее окно для обновления столбца не открывается. Убедитесь, что вы разрешили открывать всплывающие окна и перенаправления на вкладке браузера.
 
-![A screenshot with a border around the fields button and an arrow pointing to the display name of status code](02-1/media/image20.png)
+![Снимок экрана с рамкой вокруг кнопки полей и стрелкой, указывающей на отображаемое имя кода состояния](02-1/media/image20.png)
 
-5.  Make sure **Active** is selected for **Status** and double click to open the **Active** option.
+5. Убедитесь, что для параметра **Статус** выбран пункт **Активный**, и дважды щелкните, чтобы открыть параметр **Активный**.
 
-![A Screenshot with an arrow pointing to the status with a border emphasizing it is active](02-1/media/image21.png)
+![Снимок экрана со стрелкой, указывающей на статус с рамкой, подчеркивающей, что он активен](02-1/media/image21.png)
 
-6.  Change the **Label** value to **New** and click **OK**.
+6. Измените значение **Ярлык** на **Новый** и нажмите **ОК**.
 
-![A screenshot of the modify list value window](02-1/media/image22.png)
+![Снимок экрана окна значений списка изменений](02-1/media/image22.png)
 
-7.  Click **Add**.
+7. Щелкните **Добавить**.
 
-![A screenshot of the type window and a border around the add button](02-1/media/image23.png)
+![Снимок экрана с окном типа и рамкой вокруг кнопки добавления](02-1/media/image23.png)
 
-8.  Enter **Assigned** for **Label** and click **OK**.
+8. Введите **Назначено** для параметра **Ярлык** и нажмите **ОК**.
 
-![A screenshot of the add list value window](02-1/media/image24.png)
+![Скриншот окна добавления значений списка](02-1/media/image24.png)
 
-9.  Click **Add** again.
+9. Снова нажмите **Добавить**.
 
-10. Enter **In Progress** for **Label** and click **OK**.
+10. Введите **Выполняется** для **Ярлык** и нажмите **ОК**.
 
-11. Click **Add** again.
+11. Снова нажмите **Добавить**.
 
-12. Enter **Completed** for **Label** and click **OK**.
+12. Введите **Завершено** в поле **Ярлык** и нажмите **ОК**.
 
-13. Click **Add** one more time.
+13. Еще раз нажмите **Добавить**.
 
-14. Enter **Won’t Fix** for **Label** and click **OK**.
+14. Введите **Не исправлять** для **Ярлыка** и нажмите **ОК**.
 
-15. You should now have 5 options. Select **New** for **Default Value** and click **Save and Close**.
+15. Теперь у вас должно быть 5 вариантов. Выберите **Создать** для **Значение по умолчанию** и нажмите **Сохранить и закрыть**.
 
-![A Screenshot with an arrow pointing to the save and close button](02-1/media/image25.png)
+![Снимок экрана со стрелкой, указывающей на кнопку сохранения и закрытия](02-1/media/image25.png)
 
-16. Click **Publish** and wait for the publishing to complete.
+16. Щелкните **Опубликовать** и дождитесь завершения публикации.
 
-17. Click **Save and Close** to close the classic editor.
+17. Нажмите **Сохранить и закрыть**, чтобы закрыть классический редактор.
 
-18. You should now be back on the **Power Apps Maker** portal.
+18. Теперь вы должны вернуться на портал **Power Apps Maker**.
 
-![A screenshot of the Power Apps Maker portal](02-1/media/image26.png)
+![Скриншот портала Power Apps Maker](02-1/media/image26.png)
 
-#### Task 4: Relationships
+#### Задача 4: Взаимоотношения
 
-In this task, you will create many to one relationships between the problem report Table and the building and department Tables.
+В этой задаче вы создадите отношения типа "один к одному" между таблицей отчетов о проблемах и таблицами зданий и отделов.
 
-1.  Make sure you are in the **Problem Report** Table.
+1. Убедитесь, что вы находитесь в таблице **Отчет о проблеме**.
 
-2.  Select the **Relationships** tab and click **+ Add relationship**.
+2. Выберите вкладку **Взаимосвязи** и нажмите **+ Добавить взаимосвязь**.
 
-![A Screenshot with an arrow pointing to the add relationship button](02-1/media/image27.png)
+![Снимок экрана со стрелкой, указывающей на кнопку добавления отношения](02-1/media/image27.png)
 
-3.  Select **Many-to-one**.
+3. Выберите **Многие к одному**.
 
-![A screenshot of a border around the many to one button](02-1/media/image28.png)
+![Снимок экрана с рамкой вокруг кнопки "многие к одному"](02-1/media/image28.png)
 
-4.  Select **Building** for **Related (One) Table** and click **Done**.
+4. Выберите **Здание** для **Связанная (одна) таблица** и нажмите **Готово**.
 
-![A screenshot of the many-to-one relationship settings](02-1/media/image29.png)
+![Снимок экрана с настройками отношения "многие-к-одному"](02-1/media/image29.png)
 
-5.  Click **+ Add relationship** again.
+5. Снова нажмите **+ Добавить отношение**.
 
-6.  Select **Many-to-one**.
+6. Выберите **Многие к одному**.
 
-7.  Select **Department** for **Related (One) Table** and click **Done**.
+7. Выберите **Отдел** для **Связанная (одна) таблица** и нажмите **Готово**.
 
-8.  Click **Save Table**.
+8. Щелкните **Сохранить таблицу**.
 
-9.  Go back to the solution by clicking on the solution name.
+9. Вернитесь к решению, щелкнув имя решения.
 
-10. Click **Publish all customizations** and wait for the publishing to complete.
+10. Щелкните **Опубликовать все настройки** и дождитесь завершения публикации.
 
-### Exercise 3: Configure form and views
+### Упражнение 3. Настройка формы и представлений
 
-In this exercise, you will configure form and views for the problem report Table.
+В этом упражнении вы настроите форму и представления для таблицы отчетов о проблемах.
 
-#### Task 1: Configure form
+#### Задача 1: Настройка формы
 
-1.  Navigate to the [Power Apps maker portal](https://make.powerapps.com/) and make sure you are in the correct environment.
+1. Перейдите на [портал разработчика Power Apps](https://make.powerapps.com/) и убедитесь, что вы находитесь в правильной среде.
 
-2.  Select Solutions and click to open the **Company 311** solution.
+2. Выберите Решения и щелкните, чтобы открыть решение **Компания 311**.
 
-3.  Locate and click to open the **Problem Report** Table.
+3. Найдите и щелкните, чтобы открыть таблицу **Отчет о проблеме**.
 
-4.  Select the **Forms** tab and click to open the **Information** form of type **Main**.
+4. Выберите вкладку **Формы** и щелкните, чтобы открыть форму **Информация** типа **Основная**.
 
-![A screen shot of a border around the main form under the forms tab](02-1/media/image30.png)
+![Снимок экрана с рамкой вокруг основной формы на вкладке форм](02-1/media/image30.png)
 
-5.  Use the Zoom control at the bottom of the form to make the form large enough for you to work easily. Select the **form section**.
+5. Используйте элемент управления масштабированием в нижней части формы, чтобы сделать форму достаточно большой, чтобы вам было легче работать. Выберите **раздел формы**.
 
-![A Screenshot with an arrow pointing to the selection of the form section](02-1/media/image31.png)
+![Снимок экрана со стрелкой, указывающей на выбор раздела формы](02-1/media/image31.png)
 
-6.  Go to the **Properties** pane, change the **Label** to **Problem details**, and enter **section\_problem\_report** for **Name**.
+6. Перейдите на панель **Свойства**, измените **Ярлык** на **Сведения о проблеме** и введите **раздел \ _проблема \ _report** для **Имя**.
 
-![A screenshot of the properties pain with the relevant text in each field](02-1/media/image32.png)
+![Снимок экрана с описанием свойств с соответствующим текстом в каждом поле](02-1/media/image32.png)
 
-7.  While you still have the section selected, go to the **Table Columns** pane, and click on the **Building** Column. The Building Column will be added to the form.
+7. Пока у вас все еще выделен раздел, перейдите на панель **Столбцы таблицы** и щелкните **Столбец здания**. Колонна здания будет добавлена в форму.
 
-![A screenshot with a border around the table columns icon and an arrow pointing to the building column](02-1/media/image33.png)
+![Снимок экрана с рамкой вокруг значка столбца таблицы и стрелкой, указывающей на столбец здания](02-1/media/image33.png)
 
-8.  Add the **Details**, and **Photo** Columns to the form.
+8. Добавьте в форму столбцы **Подробности** и **Фото**.
 
-9.  Your form should now look like the image below. Select the **Details** Column.
+9. Теперь ваша форма должна выглядеть как на изображении ниже. Выберите столбец **Подробности**.
 
-![A screenshot with the details column selected](02-1/media/image34.png)
+![Снимок экрана с выбранным столбцом сведений](02-1/media/image34.png)
 
-10. Go to the **Properties** pane and click to expand the **Formatting** section.
+10. Перейдите на панель **Свойства** и щелкните, чтобы развернуть раздел **Форматирование**.
 
-![A Screenshot with an arrow pointing to the formatting button](02-1/media/image35.png)
+![Снимок экрана со стрелкой, указывающей на кнопку форматирования](02-1/media/image35.png)
 
-11. Change the **Form field height** to **4**.
+11. Измените **высоту поля формы** на **4**.
 
-![A screenshot of the form field height set to 4](02-1/media/image36.png)
+![Снимок экрана с высотой поля формы 4](02-1/media/image36.png)
 
-12. Select the **Components** from the toolbar.
+12. Выберите **Компоненты** на панели инструментов.
 
-![A Screenshot with an arrow pointing to the components icon](02-1/media/image37.png)
+![Снимок экрана со стрелкой, указывающей на значок компонентов](02-1/media/image37.png)
 
-13. Select **1-Column section.**
+13. Выберите **Раздел из 1 столбца.**
 
-![A Screenshot with an arrow pointing to the 1-column section button](02-1/media/image38.png)
+![Снимок экрана со стрелкой, указывающей на кнопку раздела с 1 столбцом](02-1/media/image38.png)
 
-14. A new section should be added to the form. Select the **new section**.
+14. В форму необходимо добавить новый раздел. Выберите **новый раздел**.
 
-![A Screenshot with an arrow pointing to the new section selected](02-1/media/image39.png)
+![Снимок экрана со стрелкой, указывающей на новый выбранный раздел](02-1/media/image39.png)
 
-15. Go to the **Properties** pane, change the **Section label** to **Resolution details**, and enter **section\_resolution\_details** for **Name**.
+15. Перейдите на панель **Свойства**, измените **Метку раздела** на **Сведения о разрешении** и введите **section\ _resolution\ _details** для **Имя**.
 
-![A screenshot of the properties pane with the relevant text in each field](02-1/media/image40.png)
+![Снимок экрана панели свойств с соответствующим текстом в каждом поле](02-1/media/image40.png)
 
-16. Select **Table columns** from the toolbar.
+16. Выберите **Столбцы таблицы** на панели инструментов.
 
-17. Add **Department**, **Status Reason**, **Resolved on**, and **Resolution** Columns to the **Resolution details** section.
+17. Добавьте столбцы **Отдел**, **Причина состояния**, **Решено** и **Разрешение** в раздел **Сведения о решении**.
 
-![A screenshot of the Resolution details section with the Resolution column highlighted](02-1/media/image100.png)
+![Снимок экрана раздела "Сведения о разрешении" с выделенным столбцом "Разрешение"](02-1/media/image100.png)
 
-18. Select the **Resolution** Column.
+18. Выберите столбец **Разрешение**.
 
-19. Go to the **Properties** pane and click to expand the **Formatting** section.
+19. Перейдите на панель **Свойства** и щелкните, чтобы развернуть раздел **Форматирование**.
 
-20. Change the **Form field height** to **4**.
+20. Измените **высоту поля формы** на **4**.
 
-21. You form should now look like the image below. Click **Save**.
+21. Теперь ваша форма должна выглядеть как на изображении ниже. Нажмите **Сохранить**.
 
-![A Screenshot of the Problem Report form with an arrow pointing to the Save button](02-1/media/image101.png)
+![Скриншот формы отчета о проблеме со стрелкой, указывающей на кнопку «Сохранить»](02-1/media/image101.png)
 
-22. Click **Publish** and wait for the publishing to complete.
+22. Нажмите **Опубликовать** и дождитесь завершения публикации.
 
-23. Click on the **<- Back** button.
+23. Нажмите кнопку **<- Назад**.
 
-![A Screenshot with an arrow pointing to the back button arrow icon](02-1/media/image43.png)
+![Снимок экрана со стрелкой, указывающей на значок стрелки кнопки "Назад"](02-1/media/image43.png)
 
-24. You should now be back to the Table.
+24. Теперь вы должны вернуться к таблице.
 
-#### Task 2: Edit view
+#### Задача 2: Редактировать представление
 
-1.  Select the **Views** tab and click to open the **Active Problem Reports** view.
+1. Выберите вкладку **Представления** и щелкните, чтобы открыть представление **Активные отчеты о проблемах**.
 
-![A Screenshot with an arrow pointing to the active problem reports button](02-1/media/image44.png)
+![Снимок экрана со стрелкой, указывающей на кнопку активных отчетов о проблемах](02-1/media/image44.png)
 
-2.  Click **+ View column** and select **Building** to add the **Building** column to the view.
+2. Щелкните **+ Столбец представления** и выберите **Здание**, чтобы добавить столбец **Здание** в представление.
 
-![A Screenshot with an arrow pointing to the view column button and a border around the building button](02-1/media/image45.png)
+![Снимок экрана со стрелкой, указывающей на кнопку столбца просмотра и рамкой вокруг кнопки здания](02-1/media/image45.png)
 
-3.  Add **Location**, **Status Reason**, and **Owner** columns to the view.
-    You will have to change the column filter to **All** when adding status reason and owner columns.
+3. Добавьте в представление столбцы **Местоположение**, **Причина состояния** и **Владелец**.
+ Вам нужно будет изменить фильтр столбца на **Все** при добавлении столбцов причины статуса и владельца.
 
-![A screenshot of a border around the column filter set to all](02-1/media/image46.png)
+![Снимок экрана с рамкой вокруг фильтра столбца, установленного на все](02-1/media/image46.png)
 
-4.  Go to the view properties pane and click **Edit filters**.
+4. Перейдите на панель свойств представления и щелкните **Изменить фильтры**.
 
-![A Screenshot with an arrow pointing to the edit filters button](02-1/media/image47.png)
+![Снимок экрана со стрелкой, указывающей на кнопку редактирования фильтров](02-1/media/image47.png)
 
-5.  Update the existing filter and set it to **Status Reason Equals New**.
+5. Обновите существующий фильтр и установите для него значение **Причина состояния равна новому**.
 
-6.  Click on the Column where **New** is selected.
+6. Щелкните столбец, в котором выбрано **Новое**.
 
-![A Screenshot with an arrow pointing to a column with new written in it](02-1/media/image48.png)
+![Снимок экрана со стрелкой, указывающей на столбец, в котором написано новое](02-1/media/image48.png)
 
-7.  Select **Assigned**.
+7. Выберите **Назначено**.
 
-![A Screenshot with an arrow pointing to the assigned option in the column where new is written](02-1/media/image49.png)
+![Снимок экрана со стрелкой, указывающей на назначенный параметр в столбце, где написано новое](02-1/media/image49.png)
 
-8.  Click on the column again and select **In progress**.
+8. Щелкните столбец еще раз и выберите **Выполняется**.
 
-9.  The filter should now look like the image below. Click **OK**.
+9. Теперь фильтр должен выглядеть как на изображении ниже. Нажмите **ОК**.
 
-![A screenshot of the edit filters window with status reason equals, new, assigned, and in progress](02-1/media/image50.png)
+![Снимок экрана окна редактирования фильтров с указанием причины состояния равно, новый, назначенный и выполняется](02-1/media/image50.png)
 
-10. Click **Save**.
+10. Нажмите **Сохранить**.
 
-#### Task 3: Create view from existing
+#### Задача 3. Создание представления из существующих
 
-In this task, you will create a new view from the Active Problem Reports view.
+В этой задаче вы создадите новое представление из представления «Активные отчеты о проблемах».
 
-1.  Click **Edit filters**.
+1. Нажмите **Изменить фильтры**.
 
-![A Screenshot with an arrow pointing to the edit filters buttton](02-1/media/image51.png)
+![Снимок экрана со стрелкой, указывающей на кнопку редактирования фильтров](02-1/media/image51.png)
 
-2.  Remove **In Progress** from the filter.
+2. Удалите из фильтра **В процессе**.
 
-![A Screenshot with an arrow pointing to the in progress box in the 3rd column in the edit filters window](02-1/media/image52.png)
+![Снимок экрана со стрелкой, указывающей на поле выполнения в 3-м столбце окна редактирования фильтров](02-1/media/image52.png)
 
-3.  Remove **Assigned** and **New** values form the filter.
+3. Удалите из фильтра значения **Назначено** и **Новое**.
 
-4.  Select **Completed**.
+4. Выберите **Завершено**.
 
-![A Screenshot with an arrow pointing to the completed button from the drop down in the 3rd column](02-1/media/image53.png)
+![Снимок экрана со стрелкой, указывающей на завершенную кнопку из раскрывающегося списка в 3-м столбце](02-1/media/image53.png)
 
-5.  Add **Won’t Fix** and **Inactive** values to filter.
+5. Добавьте значения **Не исправлять** и **Неактивно** для фильтрации.
 
-6.  The filter should now look like the image below. Click **OK**.
+6. Теперь фильтр должен выглядеть как на изображении ниже. Нажмите **ОК**.
 
-![A screenshot of the edit filters window with the following; status reason equals, completed, won't fix, inactive](02-1/media/image54.png)
+![Скриншот окна редактирования фильтров со следующим: причина статуса равно, завершено, не будет исправлено, неактивно](02-1/media/image54.png)
 
-7.  Click on the chevron button next to the save button and select **Save As**.
+7. Нажмите кнопку с шевроном рядом с кнопкой сохранения и выберите **Сохранить как**.
 
-![A Screenshot with an arrow pointing to the save drop down chevron icon and a border around the save as button](02-1/media/image55.png)
+![Снимок экрана со стрелкой, указывающей на значок шеврона в раскрывающемся списке «Сохранить», и рамкой вокруг кнопки «Сохранить как»](02-1/media/image55.png)
 
-8.  Enter **Resolved Problems** for **Name** and click **Save**.
+8. Введите **Решенные проблемы** в поле **Имя** и нажмите **Сохранить**.
 
-![A screenshot of the save as window](02-1/media/image56.png)
+![Скриншот окна сохранения как](02-1/media/image56.png)
 
-9.  Click on the **Back Button** of your browser to go back to the solution.
+9. Нажмите **кнопку "Назад"** в вашем браузере, чтобы вернуться к решению.
 
-![A Screenshot with an arrow pointing to the back button](02-1/media/image57.png)
+![Снимок экрана со стрелкой, указывающей на кнопку назад](02-1/media/image57.png)
 
-10. Go to the solution by clicking on the solution name.
+10. Перейдите к решению, щелкнув имя решения.
 
-![A Screenshot with an arrow pointing to the solution name company 311](02-1/media/image58.png)
+![Снимок экрана со стрелкой, указывающей на решение, название компании 311](02-1/media/image58.png)
 
-11. Click **Publish all customizations** and wait for the publishing to complete.
+11. Щелкните **Опубликовать все настройки** и дождитесь завершения публикации.
 
-![A screenshot of a border around the publish all customizations button](02-1/media/image59.png)
+![Снимок экрана с рамкой вокруг кнопки публикации всех настроек](02-1/media/image59.png)
 
-### Exercise 4: Compose model-driven application
+### Упражнение 4: Создание приложения на основе модели
 
-In this exercise, you will create model-driven application.
+В этом упражнении вы создадите приложение на основе модели.
 
-#### Task 1: Create new model-driven application
+#### Задача 1. Создание нового приложения на основе модели
 
-1.  Navigate to the [Power Apps maker portal](https://make.powerapps.com/) and make sure you are in the correct environment.
+1. Перейдите на [портал разработчика Power Apps](https://make.powerapps.com/) и убедитесь, что вы находитесь в правильной среде.
 
-2.  Select Solutions and click to open the **Company 311** solution.
+2. Выберите Решения и щелкните, чтобы открыть решение **Компания 311**.
 
-3.  Click **+ New | App | Model-driven app**.
+3. Щелкните **+ Создать | Приложение | Приложение на основе модели**.
 
-![A screenshot of a border around the Model-driven app button](02-1/media/image60.png)
+![Снимок экрана с рамкой вокруг кнопки приложения на основе модели](02-1/media/image60.png)
 
-4.  Select **Modern app designer** and click **Create**.
+4. Выберите **Современный дизайнер приложений** и нажмите **Создать**.
 
-5.  Enter **Company 311 Admin** for name and click **Create**.
+5. Введите **Администратор Компании 311** в качестве имени и нажмите **Создать**.
 
-![A screenshot of the New model-driven app window](02-1/media/image61.png)
+![Скриншот окна приложения на основе новой модели](02-1/media/image61.png)
 
-6. Select **Navigation** from left menu.
+6. Выберите **Навигация** в левом меню.
 
-   ![A screenshot of the Pages selection pane with a red arrow pointing to the tree icon in the navigation pane](02-1/media/image102.png)
+ ![Снимок экрана панели выбора страниц с красной стрелкой, указывающей на значок дерева в панели навигации](02-1/media/image102.png)
 
-7. Select the **Area1**.
+7. Выберите **Область1**.
 
-![A Screenshot with an arrow pointing to area 1 selected](02-1/media/image63.png)
+![Снимок экрана со стрелкой, указывающей на выделенную область 1](02-1/media/image63.png)
 
-8. Go to the **Properties** pane, enter **Manage Problems** for **Title**, and enter **area\_manage\_problems** for **ID**.
+8. Перейдите на панель **Свойства**, введите **Управление проблемами** для **Заголовок** и введите **area\_manage\_problems** для **ID**.
 
-![A screenshot of the properties pane with the title and ID changed](02-1/media/image64.png)
+![Снимок экрана панели свойств с измененными заголовком и идентификатором](02-1/media/image64.png)
 
-9. Select the **Group1**.
+9. Выберите **Группа1**.
 
-![A screenshot of group 1 selected](02-1/media/image65.png)
+![Выбран снимок экрана группы 1](02-1/media/image65.png)
 
-10. Go to the **Properties**, enter **Problems** for **Title**, and enter **group\_problems** for **ID**.
-11. Select the **Subarea1**.
-12. Go to the **Properties** pane, select **Table** for **Content Type**, and select **Problem Report** for **Table**, and enter **Problem reports** for **Title**.
+10. Перейдите в **Свойства**, введите **Проблемы** для **Заголовок** и введите **группа \ _проблемы** для **ID**.
+11. Выберите **Подрайон1**.
+12. Перейдите на панель **Свойства**, выберите **Таблица** для **Тип содержимого**, выберите **Отчет о проблемах** для **Таблица** и введите **Отчеты о проблемах** для **Заголовок**.
 
-![A screenshot of the properties pane and the content type, table, and title changed](02-1/media/image68.png)
+![Снимок экрана панели свойств и изменен тип содержимого, таблица и заголовок](02-1/media/image68.png)
 
-> [!NOTE]
-> The new app designer doesn't provide a way to add new sitemap area yet.
+> [!ПРИМЕЧАНИЕ]
+> В новом конструкторе приложений пока нет возможности добавить новую область карты сайта.
 
-13. Click **Save**.
-14. Click **Switch to classic**
+13. Нажмите **Сохранить**.
+14. Нажмите **Перейти к классической версии**.
 
-![A Screenshot with an arrow pointing to the Switch to classic link](02-1/media/image69.png)
+![Скриншот со стрелкой, указывающей на ссылку "Перейти к классической версии"](02-1/media/image69.png)
 
-15. Select **Save and Continue**.
+15. Выберите **Сохранить и продолжить**.
 
-> [!NOTE] 
-> If the pop-ups are not enabled on the browser, the classic view will not open. Make sure that you have enabled open popups and redirects on the browser tab. 
+> [!ПРИМЕЧАНИЕ] 
+> Если в браузере не включены всплывающие окна, классический вид не откроется. Убедитесь, что вы разрешили открывать всплывающие окна и перенаправления на вкладке браузера.
 
-![Select Save and continue - screenshot](02-1/media/image103.png)
+![Выберите Сохранить и продолжить - снимок экрана](02-1/media/image103.png)
 
-16. Click **Edit** on the Site Map.
+16. Щелкните **Изменить** на карте сайта.
 
-![A Screenshot with an arrow pointing to the pencil icon to edit the site map](02-1/media/image70.png)
+![Снимок экрана со стрелкой, указывающей на значок карандаша для редактирования карты сайта](02-1 / media / image70.png)
 
-17.   Click **+ Add** and select **Area**.
+17. Нажмите **+ Добавить** и выберите **Область**.
 
-![A Screenshot with an arrow pointing to the add button and a border around the area button](02-1/media/image96.png)
+![Снимок экрана со стрелкой, указывающей на кнопку добавления, и рамкой вокруг кнопки области](02-1/media/image96.png)
 
-18.   Select the **New Area** you just added.
+18. Выберите **новую область**, которую вы только что добавили.
 
-19. Go to the **Properties** pane, enter **Settings** for **Title**, and enter **area\_settings** for **ID**.
+19. Перейдите на панель **Свойства**, введите **Настройки** для **Заголовок** и введите **область \ _настройки** для **ID**.
 
-![A screenshot of the properties pane with the title and ID changed](02-1/media/image97.png)
+![Снимок экрана панели свойств с измененными заголовком и идентификатором](02-1/media/image97.png)
 
-20.  Click **Save and close** to close the sitemap editor.
+20. Нажмите **Сохранить и закрыть**, чтобы закрыть редактор карты сайта.
 
-21.  Click **Save and close** again to close the classic app designer.
+21. Еще раз нажмите **Сохранить и закрыть**, чтобы закрыть классический конструктор приложений.
 
-22. You should now be back to the new app designer. **Refresh** the browser. Switch to **Navigation** menu.
+22. Теперь вы должны вернуться к новому дизайнеру приложений. **Обновите** браузер. Перейдите в меню **Навигация**.
 
-23.  The new **Settings** area should now be visible in the new app designer. Select the **Setting** area.
+23. Новая область **Настройки** теперь должна быть видна в новом конструкторе приложений. Выберите область **Настройка**.
 
-24. Click **+ Add** and select **Group**.
+24. Нажмите **+ Добавить** и выберите **Группа**.
 
-![A Screenshot with an arrow pointing to the add drop down menu and a border around the group button](02-1/media/image98.png)
+![Снимок экрана со стрелкой, указывающей на раскрывающееся меню добавления, и рамкой вокруг кнопки группы](02-1/media/image98.png)
 
-25.  Select the **New Group** you just added.
+25. Выберите **новую группу**, которую вы только что добавили.
 
-26.  Go to the **Properties** pane, enter **Taxonomy** for **Title**, and enter **group\_taxonomy** for **ID**.
+26. Перейдите на панель **Свойства**, введите **Таксономия** для **Заголовок** и введите **группа \ _таксономия** для **ID**.
 
-![A screenshot of the properties pane with the title and ID changed](02-1/media/image72.png)
+![Снимок экрана панели свойств с измененными заголовком и идентификатором](02-1/media/image72.png)
 
-27.  Select the **Taxonomy** group you just added, click **+ Add** and select **Subarea**
+27. Выберите группу **Таксономия**, которую вы только что добавили, нажмите **+ Добавить** и выберите **Подрайон**.
 
-![A Screenshot with an arrow pointing to the subarea button](02-1/media/image73.png)
+![Снимок экрана со стрелкой, указывающей на кнопку подобласти](02-1/media/image73.png)
 
-28.   Select **Table** for **Content type**, **Building** for **Table** and click **Add**.
+28. Выберите **Таблица** для **Тип контента**, **Здание** для **Таблица** и нажмите **Добавить**.
 
-![A screenshot of the New Subarea window and the content type changed](02-1/media/image74.png)
+![Снимок экрана окна Новый Подрайон и измененный тип контента](02-1/media/image74.png)
 
-29.  Select the **Taxonomy** group, click **+ Add** and select **Subarea** again.
+29. Выберите группу **Таксономия**, нажмите **+ Добавить** и снова выберите **Подрайон**.
 
-30.  Select **Table** for **Content type**, select **Department** for **Table**, and click **Add**.
+30. Выберите **Таблица** для **Тип контента**, выберите **Отдел** для **Таблица** и нажмите **Добавить**.
 
-31. The sitemap should now look like the image below. Click **Save** to save the sitemap.
+31. Карта сайта теперь должна выглядеть как на изображении ниже. Нажмите **Сохранить**, чтобы сохранить карту сайта.
 
-![A Screenshot with an arrow pointing to the save button on your site map which should have active departments with a name column below](02-1/media/image76.png)
+![Снимок экрана со стрелкой, указывающей на кнопку сохранения на карте вашего сайта, где должны быть активные отделы со столбцом с названием ниже](02-1/media/image76.png)
 
-32. Click **Publish** to publish the sitemap and wait for the publishing to complete.
-33. **Close** the browser tab. 
-34. Open a new tab and navigate to the [Power Apps maker portal](https://make.powerapps.com/) and make sure you are in the correct environment.
-35. Select Solutions and click to open the **Company 311** solution.
-36. Click **Publish all customizations** and wait for the publishing to complete.
+32. Нажмите **Опубликовать**, чтобы опубликовать карту сайта, и дождитесь завершения публикации.
+33. **Закройте** вкладку браузера. 
+34. Откройте новую вкладку и перейдите на [портал разработчика Power Apps](https://make.powerapps.com/) и убедитесь, что вы находитесь в правильной среде.
+35. Выберите Решения и щелкните, чтобы открыть решение **Компания 311**.
+36. Щелкните **Опубликовать все настройки** и дождитесь завершения публикации.
 
-![A Screenshot with an arrow pointing to the publish all customizations button](02-1/media/image77.png)
+![Снимок экрана со стрелкой, указывающей на кнопку публикации всех настроек](02-1/media/image77.png)
 
-### Exercise 5: Input data
+### Упражнение 5: Входные данные
 
-In this exercise, you will input data to the Dataverse tables.
+В этом упражнении вы введете данные в таблицы Dataverse.
 
-#### Task 1: Input data
+#### Задача 1: Входные данные
 
-1.  Navigate to the [Power Apps maker portal](https://make.powerapps.com/) and make sure you are in the correct environment.
+1. Перейдите на [портал разработчика Power Apps](https://make.powerapps.com/) и убедитесь, что вы находитесь в правильной среде.
 
-2.  Select **Apps** and click to open the **Company 311 Admin** application you created.
+2. Выберите **Приложения** и щелкните, чтобы открыть приложение **Администратор компании 311**, которое вы создали.
 
-![A Screenshot with an arrow pointing to the company 311 admin app](02-1/media/image80.png)
+![Снимок экрана со стрелкой, указывающей на приложение администратора компании 311](02-1/media/image80.png)
 
-3.  Click **Change area**.
+3. Щелкните **Изменить область**.
 
-![A Screenshot with an arrow pointing to chevron icon next to manage problems](02-1/media/image81.png)
+![Снимок экрана со стрелкой, указывающей на значок шеврона рядом с управлением проблемами](02-1/media/image81.png)
 
-4.  Select **Settings** area.
+4. Выберите область **Настройки**.
 
-5.  Select **Departments** and click **+ New**.
+5. Выберите **Отделы** и нажмите **+ Создать**.
 
-![A Screenshot with an arrow pointing to the new button at the top of the window](02-1/media/image82.png)
+![Снимок экрана со стрелкой, указывающей на новую кнопку в верхней части окна](02-1/media/image82.png)
 
-6.  Enter **Facility Maintenance** for **Name** and click **Save**.
+6. Введите **Техническое обслуживание объекта** для **Имя** и нажмите **Сохранить**.
 
-![A screenshot showing the change in name to facility maintenance](02-1/media/image83.png)
+![Снимок экрана, показывающий изменение названия на техническое обслуживание](02-1/media/image83.png)
 
-7.  Click **+ New** again.
+7. Снова нажмите **+ Создать**.
 
-8.  Enter **Human Resources** for **Name** and click **Save**.
+8. Введите **Человеческие ресурсы** в поле **Имя** и нажмите **Сохранить**.
 
-9.  Click **+ New** one more time.
+9. Еще раз нажмите **+ Создать**.
 
-10. Enter **Marketing** for **Name** and click **Save**.
+10. Введите **Маркетинг** в поле **Имя** и нажмите **Сохранить**.
 
-11. Select **Departments**.
+11. Выберите **Отделы**.
 
-12. You should now have three department Rows. Select **Buildings**.
+12. Теперь у вас должно быть три ряда отделов. Выберите **Здания**.
 
-![A Screenshot with an arrow pointing to the buildings button under taxonomy](02-1/media/image84.png)
+![Снимок экрана со стрелкой, указывающей на кнопку зданий в разделе таксономии](02-1/media/image84.png)
 
-13. Click **+ New**.
+13. Нажмите **+ Создать**.
 
-14. Enter **San Francisco Main Campus** for **Name** and click **Save & Close**.
+14. Введите **Главный кампус Сан-Франциско** в поле **Имя** и нажмите **Сохранить и закрыть**.
 
-15. Click **+ New** again.
+15. Снова нажмите **+ Создать**.
 
-16. Enter **London Paddington** for **Name** and click **Save & Close**.
+16. Введите **Лондонский Паддингтон** в поле **Имя** и нажмите **Сохранить и закрыть**.
 
-17. You should now have two building Rows. Click **Change area**.
+17. Теперь у вас должно быть два ряда зданий. Щелкните **Изменить область**.
 
-![A Screenshot with an arrow pointing to the chevron icon next to settings in the bottom left corner of the window](02-1/media/image85.png)
+![Снимок экрана со стрелкой, указывающей на значок шеврона рядом с настройками в левом нижнем углу окна](02-1/media/image85.png)
 
-18. Select **Manage Problems**.
+18. Выберите **Управление проблемами**.
 
-19. Click **+ New**.
+19. Нажмите **+ Создать**.
 
-![A screenshot of the active problem reports page](02-1/media/image86.png)
+![Снимок экрана с активной страницей отчетов о проблемах](02-1/media/image86.png)
 
-20. Enter **Broken door** for **Title**, select **San Francisco Main Campus** for **Building**, enter **The main entrance door will not open all the way** for **Details**, and click **Save**
+20. Введите **Сломанная дверь** для **Заголовка**, выберите **Главный кампус Сан-Франциско** для **Здание**, введите **Главная входная дверь не будет полностью открываться** для **Подробности** и нажмите **Сохранить**.
 
-![A screenshot of the new problem report window with all relevant text in each field](02-1/media/image87.png)
+![Снимок экрана нового окна отчета о проблеме со всем соответствующим текстом в каждом поле](02-1/media/image87.png)
 
-21. Click on the **Photo** Column.
+21. Щелкните столбец **Фото**.
 
-![A Screenshot with an arrow pointing to the upload an image button](02-1/media/image88.png)
+![Снимок экрана со стрелкой, указывающей на кнопку загрузки изображения](02-1/media/image88.png)
 
-22. Select an image from your device. The sample image displayed below can be found [here](02-1/media/image89.png).
+22. Выберите изображение на вашем устройстве. Образец изображения, показанный ниже, можно найти [здесь](02-1 / media / image89.png).
 
-23. The image should now show on the form.
+23. Изображение должно появиться в форме.
 
-![A screenshot of a vector image of a door which should appear](02-1/media/image89.png)
+![Скриншот векторного изображения двери, которая должна появиться](02-1/media/image89.png)
 
-24. Click **Save & Close**.
+24. Нажмите **Сохранить и закрыть**.
 
-25. Close the browser tab.
+25. Закройте вкладку браузера.
 
-### Exercise 6: Import data
+### Упражнение 6: Импорт данных
 
-In this exercise, you will import sample data into the environment. Rows are imported by a Power Automate cloud flow that you will first import using a solution.
+В этом упражнении вы импортируете образцы данных в среду. Строки импортируются облачным потоком Power Automate, который вы сначала импортируете с помощью решения.
 
-#### Task 1: Import solution
+#### Задача 1: Импортировать решение
 
-1.  Navigate to the [Power Apps maker portal](https://make.powerapps.com/) and make sure you are in the correct environment.
-2.  Select **Solutions** and click **Import**.
-3.  Click **Browse**.
-4.  Select the **DataImport.zip** solution file located in the lab resources folder and click **Open**.
-5.  Click **Next**.
-6.  Click **Next** again.
-7.  Expand **Select a connection** dropdown and click **+ New connection**.
-8.  New tab will open with a prompt to create **Microsoft Dataverse** connection. 
-9.  Click **Create**, authenticate if required, wait until new connection is created. Close the browser tab.
-10.  Click **Refresh**. Make sure new connection is selected in the dropdown. 
-11.  Click **Import** and wait for the message **Solution "Data Import" imported successfully** to appear.
-12.  Click **Publish all customizations** and wait for the publishing to complete. 
+1. Перейдите на [портал разработчика Power Apps](https://make.powerapps.com/) и убедитесь, что вы находитесь в правильной среде.
+2. Выберите **Решения** и нажмите **Импорт**.
+3. Щелкните **Обзор**.
+4. Выберите файл решения **DataImport.zip**, расположенный в папке ресурсов лаборатории, и нажмите **Открыть**.
+5. Щелкните **Далее**.
+6. Еще раз нажмите **Далее**.
+7. Разверните раскрывающийся список **Выбрать подключение** и нажмите **+ Новое подключение**.
+8. Откроется новая вкладка с предложением создать соединение **Microsoft Dataverse**. 
+9. Нажмите **Создать**, при необходимости авторизуйтесь, дождитесь создания нового соединения. Закройте вкладку браузера.
+10. Щелкните **Обновить**. Убедитесь, что в раскрывающемся списке выбрано новое соединение.
+11. Щелкните **Импорт** и дождитесь появления сообщения **Решение «Импорт данных успешно импортирован» **.
+12. Щелкните **Опубликовать все настройки** и дождитесь завершения публикации. 
 
-#### Task 2: Review and run flow
+#### Задача 2. Просмотрите и выполните последовательность действий.
 
-1. Navigate to the [Power Apps maker portal](https://make.powerapps.com/) and make sure you are in the correct environment.
+1. Перейдите на [портал разработчика Power Apps](https://make.powerapps.com/) и убедитесь, что вы находитесь в правильной среде.
 
-2. Select **Solutions** and click to open the **Data Import** solution you imported.
+2. Выберите **Решения** и щелкните, чтобы открыть импортированное вами решение **Импорт данных**.
 
-3.  Click to open the **Import Data** flow. Click the **Get Started** button on the **Welcome to Power Automate** window.
+3. Щелкните, чтобы открыть поток **Импорт данных**. Нажмите кнопку **Начать** в окне **Добро пожаловать в Power Automate**.
 
-> [!NOTE]
-> If the flow is not opened after clicking on Get Started, then close the current tab, go back to your previous window, click Done and reopen the flow.
+> [!ПРИМЕЧАНИЕ]
+> Если поток не открывается после нажатия кнопки «Начать», закройте текущую вкладку, вернитесь в предыдущее окно, нажмите «Готово» и снова откройте поток.
 
-![A Screenshot with an arrow pointing to the import data button](02-1/media/image90.png)
+![Снимок экрана со стрелкой, указывающей на кнопку импорта данных](02-1/media/image90.png)
 
-4.  Click **Edit**.
+4. Щелкните **Изменить**.
 
-5.  Click **Continue**.
+5. Щелкните **Продолжить**.
 
-6.  Click to expand the **Input** **Data** step.
+6. Щелкните, чтобы развернуть шаг **Ввод** **данные**.
 
-7.  Review the JSON text in the value Column. This is the data that will be imported into your environment. Note the image data encoded as a text.
+7. Просмотрите текст JSON в столбце значений. Это данные, которые будут импортированы в вашу среду. Обратите внимание на данные изображения, закодированные как текст.
 
-8.  Expand the **Each Department** for each control
+8. Разверните **Каждый отдел** для каждого элемента управления.
 
-9.  Expand and review the **Upsert Department** step.
+9. Разверните и просмотрите шаг **Upsert Department**.
 
-10. Expand and review the rest of the steps.
+10. Разверните и просмотрите остальные шаги.
 
-11. Click **Save** to save the flow.
+11. Нажмите **Сохранить**, чтобы сохранить последовательность.
 
-12. Click on the button and go back to the flow details page.
+12. Нажмите кнопку и вернитесь на страницу сведений о потоке.
 
-![A Screenshot with an arrow pointing to the arrow icon to go back](02-1/media/image92.png)
+![Снимок экрана со стрелкой, указывающей на значок стрелки для возврата](02-1/media/image92.png)
 
-13. Click **Run**.
+13. Щелкните **Выполнить**.
 
-14. Click **Run flow**.
+14. Щелкните **Выполнить поток**.
 
-15. Click **Done**.
+15. Нажмите **Готово**.
 
-16. Wait for the flow run to complete. Click on the **Refresh** button to check if the flow run completed successfully.
+16. Дождитесь завершения потока. Нажмите кнопку **Обновить**, чтобы проверить, успешно ли завершился поток.
 
-![A Screenshot with an arrow pointing to the refresh button in the top right corner and a border around the status showing it has succeeded](02-1/media/image93.png)
+![Снимок экрана со стрелкой, указывающей на кнопку обновления в правом верхнем углу, и рамкой вокруг статуса, показывающей, что процесс успешно завершен](02-1/media/image93.png)
 
-17. Close the flow editor browser window or tab.
+17. Закройте окно или вкладку браузера редактора потоков.
 
-18. Click **Done** on the popup
+18. Нажмите **Готово** во всплывающем окне.
 
-#### Task 3: Review imported data
+#### Задача 3. Просмотр импортированных данных.
 
-1.  Navigate to the [Power Apps maker portal](https://make.powerapps.com/) and make sure you are in the correct environment.
+1. Перейдите на [портал разработчика Power Apps](https://make.powerapps.com/) и убедитесь, что вы находитесь в правильной среде.
 
-2.  Select **Apps** and click to open the **Company 311 Admin** application.
+2. Выберите **Приложения** и щелкните, чтобы открыть приложение **Администратор компании 311**.
 
-3.  Select Problem Reports. You should see at least three new Rows.
+3. Выберите Отчеты о проблемах. Вы должны увидеть как минимум три новых строки.
 
-![A screenshot with a border around your reports, there are three new rows at the bottom](02-1/media/image104.png)
+![Снимок экрана с рамкой вокруг ваших отчетов, внизу три новых строки](02-1/media/image104.png)
 
-4.  Click to open one of the **Problem Report** Rows.
+4. Щелкните, чтобы открыть одну из строк **Отчет о проблеме**.
 
-5.  Click on the **Search** icon of the **Building** lookup and make sure building Rows were imported.
+5. Щелкните значок **Поиск** в справочнике **Здание** и убедитесь, что ряды зданий были импортированы.
 
-![A screenshot of a border around the building lookup with the building rows imported](02-1/media/image95.png)
+![Снимок экрана с рамкой вокруг обзора зданий с импортированными рядами зданий](02-1/media/image95.png)
 
-6.  Scroll down and click on the **Department** lookup.
+6. Прокрутите вниз и щелкните поиск **Отдел**.
 
-7.  Make sure the department Rows got imported.
+7. Убедитесь, что строки отдела были импортированы.
 
-### **Bonus exercise**
+### **Бонусное упражнение**
 
-  - Deal with problem report assignment within a department.
+ - Займитесь составлением отчетов о проблемах внутри отдела.
